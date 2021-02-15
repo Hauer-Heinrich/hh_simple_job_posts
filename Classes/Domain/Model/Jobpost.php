@@ -87,6 +87,27 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $profile = '';
 
     /**
+     * educationRequirements
+     *
+     * @var string
+     */
+    protected $educationRequirements = '';
+
+    /**
+     * experienceRequirements
+     *
+     * @var string
+     */
+    protected $experienceRequirements = '';
+
+    /**
+     * skills
+     *
+     * @var string
+     */
+    protected $skills = '';
+
+    /**
      * weprovide
      *
      * @var string
@@ -131,9 +152,46 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * baseSalaryValue
      *
-     * @var int
+     * @var double
      */
     protected $baseSalaryValue;
+
+    /**
+     * contactPointEmail
+     *
+     * @var string
+     */
+    protected $contactPointEmail = '';
+
+    /**
+     * contactPointTelephone
+     *
+     * @var string
+     */
+    protected $contactPointTelephone = '';
+
+    /**
+     * contactPointAddress
+     *
+     * @var \FriendsOfTYPO3\TtAddress\Domain\Model\Address
+     */
+    protected $contactPointAddress = null;
+
+    /**
+     * images
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $images;
+
+    /**
+     * Initialize categories and media relation
+     */
+    public function __construct()
+    {
+        $this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
 
     /**
      * Get creation date
@@ -354,6 +412,69 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
     /**
+     * Returns the educationRequirements
+     *
+     * @return string educationRequirements
+     */
+    public function getEducationRequirements()
+    {
+        return $this->educationRequirements;
+    }
+
+    /**
+     * Sets the educationRequirements
+     *
+     * @param string $educationRequirements
+     * @return void
+     */
+    public function setEducationRequirements($educationRequirements)
+    {
+        $this->educationRequirements = $educationRequirements;
+    }
+
+    /**
+     * Returns the experienceRequirements
+     *
+     * @return string experienceRequirements
+     */
+    public function getExperienceRequirements()
+    {
+        return $this->experienceRequirements;
+    }
+
+    /**
+     * Sets the experienceRequirements
+     *
+     * @param string $experienceRequirements
+     * @return void
+     */
+    public function setExperienceRequirements($experienceRequirements)
+    {
+        $this->experienceRequirements = $experienceRequirements;
+    }
+
+    /**
+     * Returns the skills
+     *
+     * @return string skills
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Sets the skills
+     *
+     * @param string $skills
+     * @return void
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+    }
+
+    /**
      * Returns the weprovide
      *
      * @return string weprovide
@@ -483,21 +604,125 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Returns the baseSalaryValue
      *
-     * @return int baseSalaryValue
+     * @return double baseSalaryValue
      */
     public function getBaseSalaryValue()
     {
-        return $this->baseSalaryValue;
+        return number_format($this->baseSalaryValue, 2, '.', '');
     }
 
     /**
      * Sets the baseSalaryValue
      *
-     * @param int $baseSalaryValue
+     * @param double $baseSalaryValue
      * @return void
      */
     public function setBaseSalaryValue($baseSalaryValue)
     {
-        $this->baseSalaryValue = $baseSalaryValue;
+        $this->baseSalaryValue = number_format($baseSalaryValue, 2, '.', '');
+    }
+
+    /**
+     * Returns the contactPointEmail
+     *
+     * @return string contactPointEmail
+     */
+    public function getContactPointEmail()
+    {
+        return $this->contactPointEmail;
+    }
+
+    /**
+     * Sets the contactPointEmail
+     *
+     * @param string $contactPointEmail
+     * @return void
+     */
+    public function setContactPointEmail($contactPointEmail)
+    {
+        $this->contactPointEmail = $contactPointEmail;
+    }
+
+    /**
+     * Returns the contactPointTelephone
+     *
+     * @return string contactPointTelephone
+     */
+    public function getContactPointTelephone()
+    {
+        return $this->contactPointTelephone;
+    }
+
+    /**
+     * Sets the contactPointTelephone
+     *
+     * @param string $contactPointTelephone
+     * @return void
+     */
+    public function setContactPointTelephone($contactPointTelephone)
+    {
+        $this->contactPointTelephone = $contactPointTelephone;
+    }
+
+    /**
+     * Returns the contactPointAddress
+     *
+     * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
+     */
+    public function getContactPointAddress()
+    {
+        return $this->contactPointAddress;
+    }
+
+    /**
+     * Sets the contactPointAddress
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
+     * @return void
+     */
+    public function setContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress)
+    {
+        $this->contactPointAddress = $contactPointAddress;
+    }
+
+    /**
+     * Returns the images
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Sets the images
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
+     * @return void
+     */
+    public function setImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * Adds a Images
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
+     * @return void
+     */
+    public function addImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images) {
+        $this->images->attach($images);
+    }
+
+    /**
+     * Removes a Images
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The Images to be removed
+     * @return void
+     */
+    public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+        $this->images->detach($imagesFileToRemove);
     }
 }

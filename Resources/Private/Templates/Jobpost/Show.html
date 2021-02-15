@@ -24,18 +24,18 @@
 
                         "title" : "{jobpost.title}",
                         "description" : "{jobpost.description -> f:format.html()}",
-
                         "datePosted" : "{datePosted}",
                         "validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",
-
                         "employmentType": "{jobpost.employmentType}",
 
-                        "hiringOrganization" : {<f:comment></f:comment>
-                            "@type" : "Organization",
-                            "name" : "{jobpost.hiringOrganization.company}",
-                            "sameAs" : "{jobpost.hiringOrganization.www}",
-                            "logo" : "<f:if condition='{jobpost.hiringOrganization.image}'>{f:uri.image(src: '{jobpost.hiringOrganization.image.0.uid}', treatIdAsReference: 1)}</f:if>"
-                        },
+                        <f:if condition="{jobpost.hiringOrganization.company}">
+                            "hiringOrganization" : {<f:comment></f:comment>
+                                "@type" : "Organization",
+                                "name" : "{jobpost.hiringOrganization.company}",
+                                "sameAs" : "{jobpost.hiringOrganization.www}",
+                                "logo" : "<f:if condition='{jobpost.hiringOrganization.image}'>{f:uri.image(src: '{jobpost.hiringOrganization.image.0.uid}', treatIdAsReference: 1)}</f:if>"
+                            },
+                        </f:if>
 
                         <f:if condition="{jobpost.baseSalaryValue}">
                             "baseSalary": {
@@ -47,12 +47,22 @@
 
                         "applicationContact": {
                             "@type": "ContactPoint",
-                            "email": "info@example.com"
+                            "email": "{contactPoint.contactPointEmail}",
+                            "telephone": "{contactPoint.contactPointTelephone}"
                         }
 
-                        "educationRequirements": "",
-                        "experienceRequirements": "",
-                        "jobBenefits": "{jobpost.weprovide -> f:format.html()}",
+                        <f:if condition="{jobpost.educationRequirements}">
+                            "educationRequirements": "{jobpost.educationRequirements -> f:format.html()}",
+                        </f:if>
+                        <f:if condition="{jobpost.experienceRequirements}">
+                            "experienceRequirements": "{jobpost.experienceRequirements -> f:format.html()}",
+                        </f:if>
+                        <f:if condition="{jobpost.skills}">
+                            "skills": "{jobpost.skills -> f:format.html()}",
+                        </f:if>
+                        <f:if condition="{jobpost.weprovide}">
+                            "jobBenefits": "{jobpost.weprovide -> f:format.html()}",
+                        </f:if>
 
                         <f:if condition="{jobpost.workHours}">
                             "workHours": "{jobpost.workHours}",
@@ -66,8 +76,6 @@
                     }
                 </f:asset.script>
 
-                <f:debug title="jobpost" inline="0">{_all}</f:debug>
-
                 <h1>{jobpost.title}</h1>
 
                 <f:if condition="{jobpost.description}">
@@ -78,21 +86,28 @@
 
                 <f:if condition="{jobpost.maintasks}">
                     <div class="frame frame-default maintasks">
-                        <p><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.maintasks" /></p>
+                        <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.maintasks" /></h5>
                         <f:format.html>{jobpost.maintasks}</f:format.html>
                     </div>
                 </f:if>
 
                 <f:if condition="{jobpost.profile}">
                     <div class="frame frame-default profile">
-                        <p><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.profile" /></p>
+                        <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.profile" /></h5>
                         <f:format.html>{jobpost.profile}</f:format.html>
+                    </div>
+                </f:if>
+
+                <f:if condition="{jobpost.skills}">
+                    <div class="frame frame-default skills">
+                        <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.skills" /></h5>
+                        <f:format.html>{jobpost.skills}</f:format.html>
                     </div>
                 </f:if>
 
                 <f:if condition="{jobpost.weprovide}">
                     <div class="frame frame-default weprovide">
-                        <p><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.weprovide" /></p>
+                        <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.weprovide" /></h5>
                         <f:format.html>{jobpost.weprovide}</f:format.html>
                     </div>
                 </f:if>
@@ -103,8 +118,46 @@
                     </div>
                 </f:if>
 
+                <f:if condition="{jobpost.contactPointAddress}">
+                    <f:then>
+                        <div class="frame frame-default contactpoint">
+                            <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.contactPoint" /></h5>
+                            <f:for each="{jobpost.contactPointAddress.image}" as="image">
+                                <f:image src="{image.uid}" treatIdAsReference="1" />
+                            </f:for>
+                            <p>
+                                {jobpost.contactPointAddress.name}<br />
+                                <f:if condition="{jobpost.contactPointAddress.position}">
+                                    {jobpost.contactPointAddress.position}<br />
+                                </f:if>
+                                <f:if condition="{jobpost.contactPointAddress.phone}">
+                                    Tel.: <a href="tel:{jobpost.contactPointAddress.phone -> ttaddr:removeSpaces()}">{jobpost.contactPointAddress.phone}</a><br />
+                                </f:if>
+                                <f:link.email email="{jobpost.contactPointAddress.email}"></f:link.email>
+                            </p>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{jobpost.contactPointEmail} || {contactPoint.contactPointTelephone}">
+                            <div class="frame frame-default contactpoint">
+                                <f:if condition="{jobpost.contactPointEmail}">
+                                    <p>Ihre Bewerbung schicken Sie bitte an:
+                                        <f:link.email email="{jobpost.contactPointEmail}"></f:link.email>
+                                    </p>
+                                </f:if>
+                                <f:if condition="{contactPoint.contactPointTelephone}">
+                                    <p>
+                                        Sollten Sie noch Fragen haben, können Sie uns außerdem unter <a href="tel:{contactPoint.contactPointTelephone -> ttaddr:removeSpaces()}">{contactPoint.contactPointTelephone}</a> erreichen.
+                                    </p>
+                                </f:if>
+                            </div>
+                        </f:if>
+                    </f:else>
+                </f:if>
+
                 <f:if condition="{jobpost.hiringOrganization}">
-                    <div itemscope itemtype="https://schema.org/LocalBusiness" class="hiringOrganization">
+                    <div class="frame frame-default hiringOrganization" itemscope itemtype="https://schema.org/LocalBusiness">
+                        <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.hiringOrganization" /></h5>
                         <f:if condition="{jobpost.hiringOrganization.www}">
                             <f:then>
                                 <a itemprop="url" href="{jobpost.hiringOrganization.www}">
@@ -117,7 +170,7 @@
                         </f:if>
 
                         <f:if condition="{jobpost.hiringOrganization.description}">
-                            <span itemprop="description">{jobpost.hiringOrganization.description}</span>
+                            <div itemprop="description"><f:format.html>{jobpost.hiringOrganization.description}</f:format.html></div>
                         </f:if>
 
                         <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -131,7 +184,7 @@
                             <f:if condition="{jobpost.hiringOrganization.zip} || {jobpost.hiringOrganization.city}">
                                 <span class="city">
                                     <f:if condition="{jobpost.hiringOrganization.zip}">
-                                        <span itemprop="postalCode">{jobpost.hiringOrganization.zip}</span>
+                                        <span itemprop="postalCode">{jobpost.hiringOrganization.zip}</span>&nbsp;
                                     </f:if>
                                     <f:if condition="{jobpost.hiringOrganization.city}">
                                         <span itemprop="addressLocality">{jobpost.hiringOrganization.city}</span>
@@ -160,7 +213,7 @@
         </f:else>
     </f:if>
 
-    <f:link.action action="list">Back to list</f:link.action>
+    <f:comment><f:link.action action="list">Back to list</f:link.action></f:comment>
 </f:section>
 
 </html>

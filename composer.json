@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "^10.4"
+        "typo3/cms-core": "^10.4",
+        "friendsoftypo3/tt-address": ""
     },
     "autoload": {
         "psr-4": {

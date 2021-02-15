@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Controller;
 
-use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  *
@@ -88,8 +89,6 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction(): void {
         $jobposts = $this->jobpostRepository->findAll();
-        DebuggerUtility::var_dump($jobposts);
-        DebuggerUtility::var_dump($this->settings, 'settings');
         $this->view->assign('jobposts', $jobposts);
     }
 
@@ -100,6 +99,32 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @return void
      */
     public function showAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost): void {
-        $this->view->assign('jobpost', $jobpost);
+        $typoLinkCodec = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Service\TypoLinkCodecService::class);
+
+        if(empty($jobpost->getContactPointAddress())) {
+            if (!empty($jobpost->getContactPointEmail())) {
+                $contactPointEmailArray = $typoLinkCodec->decode($jobpost->getContactPointEmail());
+                $emailLinkHandler = GeneralUtility::makeInstance(\TYPO3\CMS\Core\LinkHandling\EmailLinkHandler::class);
+                $contactPointEmail = $emailLinkHandler->resolveHandlerData(['email' => $contactPointEmailArray['url']])['email'];
+            }
+
+            if(!empty($jobpost->getContactPointTelephone())) {
+                $contactPointTelephoneArray = $typoLinkCodec->decode($jobpost->getContactPointTelephone());
+                $telephoneLinkHandler = GeneralUtility::makeInstance(\TYPO3\CMS\Core\LinkHandling\TelephoneLinkHandler::class);
+                $contactPointTelephone = $telephoneLinkHandler->resolveHandlerData(['telephone' => $contactPointTelephoneArray['url']])['telephone'];
+            }
+        } else {
+            $contactPointAddress = $jobpost->getContactPointAddress();
+            $contactPointEmail = $contactPointAddress->getEmail();
+            $contactPointTelephone = $contactPointAddress->getPhone();
+        }
+
+        $this->view->assignMultiple([
+            'jobpost' => $jobpost,
+            'contactPoint' => [
+                'contactPointEmail' => $contactPointEmail,
+                'contactPointTelephone' => $contactPointTelephone
+            ]
+        ]);
     }
 }

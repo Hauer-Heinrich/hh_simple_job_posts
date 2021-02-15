@@ -11,8 +11,11 @@ plugin.tx_hhsimplejobposts_jobslist {
         # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID
         storagePid =
 
-        # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID of Organizations (tt_address)
-        storagePidOrganizations =
+        # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID of organizations (tt_address)
+        storagePidOrganizations = 0
+
+        # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID of contact points (tt_address)
+        storagePidContactPointAddresses = 0
     }
 }
 

@@ -19,9 +19,15 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.div.salary">
                 <source>Salary</source>
             </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.div.contact_point">
+                <source>Contact point</source>
+            </trans-unit>
 
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost" resname="tx_hhsimplejobposts_domain_model_jobpost">
                 <source>Jobpost</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.images" resname="tx_hhsimplejobposts_domain_model_jobpost.images">
+                <source>Job images</source>
             </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
                 <source>Title</source>
@@ -34,6 +40,15 @@
             </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.profile" resname="tx_hhsimplejobposts_domain_model_jobpost.profile">
                 <source>Profile</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.education_requirements">
+                <source>Education requirements</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.experience_requirements">
+                <source>Experience requirements</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.skills" resname="tx_hhsimplejobposts_domain_model_jobpost.skills">
+                <source>Skills</source>
             </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.weprovide" resname="tx_hhsimplejobposts_domain_model_jobpost.weprovide">
                 <source>Weprovide</source>
@@ -68,6 +83,25 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value.description">
                 <source>Use '.' rather than ',' to indicate a decimal point.</source>
             </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_email">
+                <source>Contact email</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_email.description">
+                <source></source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone">
+                <source>Contact telephone</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone.description">
+                <source>You should use international phone numbers (E.123) e. g. +49 851 8750 7183</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_address">
+                <source>Contact Address (person)</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -23,6 +23,7 @@ $EM_CONF['hh_simple_job_posts'] = [
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-10.4.99',
+            'tt_address' => ''
         ],
         'conflicts' => [],
         'suggests' => [],

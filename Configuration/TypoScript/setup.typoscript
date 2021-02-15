@@ -18,6 +18,7 @@ plugin.tx_hhsimplejobposts_jobslist {
         #recursive = 1
 
         storagePidOrganizations = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePidOrganizations}
+        storagePidContactPointAddresses = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePidContactPointAddresses}
     }
     features {
         #skipDefaultArguments = 1

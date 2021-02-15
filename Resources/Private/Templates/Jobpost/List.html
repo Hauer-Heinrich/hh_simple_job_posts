@@ -9,7 +9,7 @@
         <f:for each="{jobposts}" as="jobpost">
             <article class="job job-post">
                 <h3>
-                    <f:link.action action="show" arguments="{jobpost : jobpost}">{jobpost.title}</f:link.action>
+                    <f:link.action action="show" arguments="{jobpost : jobpost}" pageUid="{settings.jobsDetailView}">{jobpost.title}</f:link.action>
                 </h3>
 
                 <f:if condition="{jobpost.hiringOrganization.city}">

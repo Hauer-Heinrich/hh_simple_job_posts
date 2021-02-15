@@ -3,6 +3,7 @@ $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CM
 $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
 $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
 $storagePidOrganizations = $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations'];
+$storagePidContactPointAddresses = $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses'];
 
 return [
     'ctrl' => [
@@ -27,8 +28,11 @@ return [
     ],
     'palettes' => [
         'salary' => [
-            'showitem' => 'base_salary_currency, base_salary_value',
+            'showitem' => 'base_salary_currency, base_salary_value'
         ],
+        'contactPoint' => [
+            'showitem' => 'contact_point_email, contact_point_telephone'
+        ]
     ],
     'interface' => [
         'showRecordFieldList' => '
@@ -40,11 +44,18 @@ return [
             description,
             maintasks,
             profile,
+            education_requirements,
+            experience_requirements,
+            skills,
             weprovide,
             others,
             employment_type,
             work_hours,
             hiring_organization,
+            base_salary_currency,
+            base_salary_value,
+            contact_point_email,
+            contact_point_telephone,
             slug
         ',
     ],
@@ -59,6 +70,9 @@ return [
                 description,
                 maintasks,
                 profile,
+                education_requirements,
+                experience_requirements,
+                skills,
                 weprovide,
                 others,
                 employment_type,
@@ -67,6 +81,11 @@ return [
                 slug,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.salary,
                     --palette--;;salary,
+                --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.contact_point,
+                    contact_point_address,
+                    --palette--;Used if no "Contact Address" is given;contactPoint,
+                --div--;Media,
+                    images,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                     starttime,
                     endtime
@@ -227,7 +246,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
                         'disabled' => false,
@@ -237,7 +255,6 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-
         ],
         'maintasks' => [
             'exclude' => true,
@@ -245,7 +262,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
                         'disabled' => false,
@@ -263,7 +279,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
                         'disabled' => false,
@@ -273,7 +288,54 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-
+        ],
+        'education_requirements' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.education_requirements',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+        ],
+        'experience_requirements' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.experience_requirements',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+        ],
+        'skills' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.skills',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
         ],
         'weprovide' => [
             'exclude' => true,
@@ -281,7 +343,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
                         'disabled' => false,
@@ -291,7 +352,6 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-
         ],
         'others' => [
             'exclude' => true,
@@ -299,7 +359,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default',
                 'fieldControl' => [
                     'fullScreenRichtext' => [
                         'disabled' => false,
@@ -309,7 +368,6 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-
         ],
         'employment_type' => [
             'exclude' => true,
@@ -347,15 +405,12 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    '0' => [
-                        '0' => 'not selected',
-                        '1' => 0,
-                    ],
-                ],
                 // 'foreign_table' => 'tt_address',
                 // 'foreign_table_where' => 'AND tt_address.pid = '.intval($storagePidOrganizations),
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
+                'parameters' => [
+                    'storagePidOrganizations' => $storagePidOrganizations
+                ],
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -379,8 +434,89 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,int',
+                'eval' => 'double2,trim',
             ],
+        ],
+
+        'contact_point_email' => [
+            'displayCond' => 'FIELD:contact_point_address:=:0',
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_email',
+            'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_email.description',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'size' => 30,
+                'eval' => 'trim',
+                'fieldControl' => [
+                    'linkPopup' => [
+                        'options' => [
+                            'blindLinkOptions' => 'file, folder, page, spec, telephone, url'
+                        ]
+                    ]
+                ]
+            ],
+        ],
+        'contact_point_telephone' => [
+            'displayCond' => 'FIELD:contact_point_address:=:0',
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone',
+            'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone.description',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'size' => 30,
+                'eval' => 'trim',
+                'default' => 'EUR',
+                'fieldControl' => [
+                    'linkPopup' => [
+                        'options' => [
+                            'blindLinkOptions' => 'file, folder, mail, page, spec, url'
+                        ]
+                    ]
+                ]
+            ],
+        ],
+        'contact_point_address' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_address',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->contactAddressItems',
+                'parameters' => [
+                    'storagePidContactPointAddresses' => $storagePidContactPointAddresses
+                ],
+                'default' => 0,
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
+
+        'images' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.images',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'fal_media',
+                [
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true,
+                    ],
+                    'appearance' => [
+                        'showPossibleLocalizationRecords' => true,
+                        'showRemovedLocalizationRecords' => true,
+                        'showAllLocalizationLink' => true,
+                        'showSynchronizationLink' => true
+                    ],
+                    // 'foreign_match_fields' => [
+                    //     'fieldname' => 'fal_media',
+                    //     'tablenames' => 'tx_news_domain_model_news',
+                    //     'table_local' => 'sys_file',
+                    // ],
+                ],
+                // $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext']
+                'jpeg,jpg,png,gif,svg'
+            )
         ],
     ],
 ];

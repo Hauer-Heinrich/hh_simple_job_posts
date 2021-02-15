@@ -16,9 +16,22 @@
                 <source>Your profile</source>
             </trans-unit>
 
+            <trans-unit id="detail.skills">
+                <source>Skills</source>
+            </trans-unit>
+
             <trans-unit id="detail.weprovide">
                 <source>We provide</source>
             </trans-unit>
+
+            <trans-unit id="detail.contactPoint">
+                <source>Contact Point</source>
+            </trans-unit>
+
+            <trans-unit id="detail.hiringOrganization">
+                <source>Hiring organization</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
