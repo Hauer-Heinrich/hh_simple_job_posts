@@ -1,0 +1,27 @@
+{
+    "name": "hauer-heinrich/hh-simple-job-posts",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "authors": [
+        {
+            "name": "Christian Hackl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HauerHeinrich\\HhSimpleJobPosts\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HauerHeinrich\\HhSimpleJobPosts\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "typo3-ter/hh-simple-job-posts": "self.version"
+    }
+}

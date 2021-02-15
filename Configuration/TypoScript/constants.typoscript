@@ -1,0 +1,32 @@
+plugin.tx_hhsimplejobposts_jobslist {
+    view {
+        # cat=plugin.tx_hhsimplejobposts_jobslist/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:hh_simple_job_posts/Resources/Private/Templates/
+        # cat=plugin.tx_hhsimplejobposts_jobslist/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:hh_simple_job_posts/Resources/Private/Partials/
+        # cat=plugin.tx_hhsimplejobposts_jobslist/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:hh_simple_job_posts/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID
+        storagePid =
+
+        # cat=plugin.tx_hhsimplejobposts_jobslist//a; type=string; label=Default storage PID of Organizations (tt_address)
+        storagePidOrganizations =
+    }
+}
+
+plugin.tx_hhsimplejobposts_jobsdetail {
+    view {
+        # cat=plugin.tx_hhsimplejobposts_jobsdetail/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:hh_simple_job_posts/Resources/Private/Templates/
+        # cat=plugin.tx_hhsimplejobposts_jobsdetail/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:hh_simple_job_posts/Resources/Private/Partials/
+        # cat=plugin.tx_hhsimplejobposts_jobsdetail/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:hh_simple_job_posts/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_hhsimplejobposts_jobsdetail//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

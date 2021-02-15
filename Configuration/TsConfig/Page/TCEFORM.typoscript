@@ -1,0 +1,9 @@
+TCEFORM {
+    tt_address {
+        birthday {
+            types {
+                ttAddress_location.disabled = 1
+            }
+        }
+    }
+}

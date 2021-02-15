@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+            <trans-unit id="tx_hh_simple_job_posts_jobslist.name" resname="tx_hh_simple_job_posts_jobslist.name">
+                <source>Jobs List</source>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobslist.description" resname="tx_hh_simple_job_posts_jobslist.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobsdetail.name" resname="tx_hh_simple_job_posts_jobsdetail.name">
+                <source>Jobs Detail</source>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobsdetail.description">
+                <source></source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.div.salary">
+                <source>Salary</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost" resname="tx_hhsimplejobposts_domain_model_jobpost">
+                <source>Jobpost</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.description" resname="tx_hhsimplejobposts_domain_model_jobpost.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.maintasks" resname="tx_hhsimplejobposts_domain_model_jobpost.maintasks">
+                <source>Maintasks</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.profile" resname="tx_hhsimplejobposts_domain_model_jobpost.profile">
+                <source>Profile</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.weprovide" resname="tx_hhsimplejobposts_domain_model_jobpost.weprovide">
+                <source>Weprovide</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.others" resname="tx_hhsimplejobposts_domain_model_jobpost.others">
+                <source>Others</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.employment_type" resname="tx_hhsimplejobposts_domain_model_jobpost.employment_type">
+                <source>Employment Type</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
+                <source>Hiring Organization</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.work_hours">
+                <source>Work hours</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.work_hours.description">
+                <source>The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm)</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_currency">
+                <source>Base salary currency</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_currency.description">
+                <source>(ISO 4217 e. g. EUR, USD, ...)</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value">
+                <source>Base salary value</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value.description">
+                <source>Use '.' rather than ',' to indicate a decimal point.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

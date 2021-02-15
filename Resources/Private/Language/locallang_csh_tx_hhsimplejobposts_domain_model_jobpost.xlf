@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang_csh" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+		<header/>
+		<body>
+			<trans-unit id="title.description" resname="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="description.description" resname="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="maintasks.description" resname="maintasks.description">
+				<source>maintasks</source>
+			</trans-unit>
+			<trans-unit id="profile.description" resname="profile.description">
+				<source>profile</source>
+			</trans-unit>
+			<trans-unit id="weprovide.description" resname="weprovide.description">
+				<source>weprovide</source>
+			</trans-unit>
+			<trans-unit id="others.description" resname="others.description">
+				<source>others</source>
+			</trans-unit>
+			<trans-unit id="employment_type.description" resname="employment_type.description">
+				<source>employmentType</source>
+			</trans-unit>
+			<trans-unit id="hiring_organization.description" resname="hiring_organization.description">
+				<source>hiringOrganization</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

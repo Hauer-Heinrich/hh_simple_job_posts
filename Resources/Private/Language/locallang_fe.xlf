@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+            <trans-unit id="list.location.uppercase">
+                <source>Location</source>
+            </trans-unit>
+
+
+            <trans-unit id="detail.maintasks">
+                <source>Main tasks</source>
+            </trans-unit>
+
+            <trans-unit id="detail.profile">
+                <source>Your profile</source>
+            </trans-unit>
+
+            <trans-unit id="detail.weprovide">
+                <source>We provide</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
