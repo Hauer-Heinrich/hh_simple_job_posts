@@ -32,7 +32,15 @@ return [
         ],
         'contactPoint' => [
             'showitem' => 'contact_point_email, contact_point_telephone'
-        ]
+        ],
+        'opengraph' => [
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.palettes.opengraph',
+            'showitem' => 'og_title, --linebreak--, og_description, --linebreak--, og_image',
+        ],
+        'twittercards' => [
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.palettes.twittercards',
+            'showitem' => 'twitter_title, --linebreak--, twitter_description, --linebreak--, twitter_image, --linebreak--, twitter_card',
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => '
@@ -90,6 +98,9 @@ return [
                     --palette--;Used if no "Contact Address" is given;contactPoint,
                 --div--;Media,
                     images,
+                --div--;SEO,
+                    --palette--;;opengraph,
+                    --palette--;;twittercards,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                     starttime,
                     endtime
@@ -592,6 +603,125 @@ return [
                 // $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext']
                 'jpeg,jpg,png,gif,svg'
             )
+        ],
+
+
+        'og_title' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.og_title',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'max' => 255,
+                'eval' => 'trim'
+            ]
+        ],
+        'og_description' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.og_description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 3
+            ]
+        ],
+        'og_image' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.og_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'og_image',
+                [
+                    // Use the imageoverlayPalette instead of the basicoverlayPalette
+                    'overrideChildTca' => [
+                        'types' => [
+                            '0' => [
+                                'showitem' => '
+                                    --palette--;;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    --palette--;;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ]
+                        ],
+                        'columns' => [
+                            'crop' => $openGraphCropConfiguration
+                        ]
+                    ],
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true
+                    ]
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            )
+        ],
+        'twitter_title' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_title',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'max' => 255,
+                'eval' => 'trim'
+            ]
+        ],
+        'twitter_description' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 3
+            ]
+        ],
+        'twitter_image' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'twitter_image',
+                [
+                    // Use the imageoverlayPalette instead of the basicoverlayPalette
+                    'overrideChildTca' => [
+                        'types' => [
+                            '0' => [
+                                'showitem' => '
+                                    --palette--;;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    --palette--;;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ]
+                        ],
+                        'columns' => [
+                            'crop' => $openGraphCropConfiguration
+                        ]
+                    ],
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true
+                    ]
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            )
+        ],
+        'twitter_card' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_card',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'default' => 'summary',
+                'items' => [
+                    ['LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_card.summary', 'summary'],
+                    ['LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_card.summary_large_image', 'summary_large_image'],
+                ]
+            ]
         ],
     ],
 ];

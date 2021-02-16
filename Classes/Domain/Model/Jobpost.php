@@ -215,11 +215,64 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $images;
 
     /**
+     * ogTitle
+     *
+     * @var string
+     */
+    protected $ogTitle = '';
+
+    /**
+     * ogDescription
+     *
+     * @var string
+     */
+    protected $ogDescription = '';
+
+    /**
+     * ogImage
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $ogImage;
+
+    /**
+     * twitterTitle
+     *
+     * @var string
+     */
+    protected $twitterTitle = '';
+
+    /**
+     * twitterDescription
+     *
+     * @var string
+     */
+    protected $twitterDescription = '';
+
+    /**
+     * twitterCard
+     *
+     * @var string
+     */
+    protected $twitterCard = '';
+
+    /**
+     * twitterImage
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $twitterImage;
+
+    /**
      * Initialize categories and media relation
      */
     public function __construct()
     {
         $this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->ogImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -836,5 +889,192 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
         $this->images->detach($imagesFileToRemove);
+    }
+
+    /**
+     * Returns the ogTitle
+     *
+     * @return string ogTitle
+     */
+    public function getOgTitle()
+    {
+        return $this->ogTitle;
+    }
+
+    /**
+     * Sets the ogTitle
+     *
+     * @param string $ogTitle
+     * @return void
+     */
+    public function setOgTitle($ogTitle)
+    {
+        $this->ogTitle = $ogTitle;
+    }
+
+    /**
+     * Returns the ogDescription
+     *
+     * @return string ogDescription
+     */
+    public function getOgDescription()
+    {
+        return $this->ogDescription;
+    }
+
+    /**
+     * Sets the ogDescription
+     *
+     * @param string $ogDescription
+     * @return void
+     */
+    public function setOgDescription($ogDescription)
+    {
+        $this->ogDescription = $ogDescription;
+    }
+
+    /**
+     * Returns the ogImage
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
+     */
+    public function getOgImage()
+    {
+        return $this->ogImage;
+    }
+
+    /**
+     * Sets the ogImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
+     * @return void
+     */
+    public function setOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage)
+    {
+        $this->ogImage = $ogImage;
+    }
+
+    /**
+     * Adds a ogImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
+     * @return void
+     */
+    public function addOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage) {
+        $this->ogImage->attach($ogImage);
+    }
+
+    /**
+     * Removes a ogImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The ogImage to be removed
+     * @return void
+     */
+    public function removeOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+        $this->ogImage->detach($imagesFileToRemove);
+    }
+
+    /**
+     * Returns the twitterTitle
+     *
+     * @return string twitterTitle
+     */
+    public function getTwitterTitle()
+    {
+        return $this->twitterTitle;
+    }
+
+    /**
+     * Sets the twitterTitle
+     *
+     * @param string $twitterTitle
+     * @return void
+     */
+    public function setTwitterTitle($twitterTitle)
+    {
+        $this->twitterTitle = $twitterTitle;
+    }
+
+    /**
+     * Returns the twitterDescription
+     *
+     * @return string twitterDescription
+     */
+    public function getTwitterDescription()
+    {
+        return $this->twitterDescription;
+    }
+
+    /**
+     * Sets the twitterDescription
+     *
+     * @param string $twitterDescription
+     * @return void
+     */
+    public function setTwitterDescription($twitterDescription)
+    {
+        $this->twitterDescription = $twitterDescription;
+    }
+
+    /**
+     * Returns the twitterCard
+     *
+     * @return string twitterCard
+     */
+    public function getTwitterCard()
+    {
+        return $this->twitterCard;
+    }
+
+    /**
+     * Sets the twitterCard
+     *
+     * @param string $twitterCard
+     * @return void
+     */
+    public function setTwitterCard($twitterCard)
+    {
+        $this->twitterCard = $twitterCard;
+    }
+
+    /**
+     * Returns the twitterImage
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
+     */
+    public function getTwitterImage()
+    {
+        return $this->twitterImage;
+    }
+
+    /**
+     * Sets the twitterImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
+     * @return void
+     */
+    public function setTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage)
+    {
+        $this->twitterImage = $twitterImage;
+    }
+
+    /**
+     * Adds a twitterImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
+     * @return void
+     */
+    public function addTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage) {
+        $this->twitterImage->attach($twitterImage);
+    }
+
+    /**
+     * Removes a twitterImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The twitterImage to be removed
+     * @return void
+     */
+    public function removeTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+        $this->twitterImage->detach($imagesFileToRemove);
     }
 }
