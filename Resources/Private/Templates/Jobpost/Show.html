@@ -5,7 +5,7 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-    <f:flashMessages />
+    <f:flashMessages /><f:debug>{_all}</f:debug><f:debug>{jobpost.employmentTypeArray}</f:debug>
 
     <f:if condition="{jobpost}">
         <f:then>
@@ -26,7 +26,9 @@
                         "description" : "{jobpost.description -> f:format.html()}",
                         "datePosted" : "{datePosted}",
                         "validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",
-                        "employmentType": "{jobpost.employmentType}",
+                        "employmentType": [
+                            <f:for each='{jobpost.employmentTypeArray}' as='type' iteration='i'>"{type}"<f:if condition='{i.isLast}'><f:then></f:then><f:else>,</f:else></f:if></f:for>
+                        ],
 
                         <f:if condition="{jobpost.hiringOrganization.company}">
                             "hiringOrganization" : {<f:comment></f:comment>

@@ -377,16 +377,40 @@ return [
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.employment_type',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectSingle',
+                'renderType' => 'selectCheckBox',
                 'items' => [
-                    ['FULL_TIME', 'FULL_TIME'],
-                    ['PART_TIME', 'PART_TIME'],
-                    ['CONTRACTOR', 'CONTRACTOR'],
-                    ['TEMPORARY', 'TEMPORARY'],
-                    ['INTERN', 'INTERN'],
-                    ['VOLUNTEER', 'VOLUNTEER'],
-                    ['PER_DIEM', 'PER_DIEM'],
-                    ['OTHER', 'OTHER'],
+                    '0' => [
+                        '0' => 'FULL_TIME',
+                        '1' => 'FULL_TIME',
+                    ],
+                    '1' => [
+                        '0' => 'PART_TIME',
+                        '1' => 'PART_TIME',
+                    ],
+                    '2' => [
+                        '0' => 'CONTRACTOR',
+                        '1' => 'CONTRACTOR',
+                    ],
+                    '3' => [
+                        '0' => 'TEMPORARY',
+                        '1' => 'TEMPORARY',
+                    ],
+                    '4' => [
+                        '0' => 'INTERN',
+                        '1' => 'INTERN',
+                    ],
+                    '5' => [
+                        '0' => 'VOLUNTEER',
+                        '1' => 'VOLUNTEER',
+                    ],
+                    '6' => [
+                        '0' => 'PER_DIEM',
+                        '1' => 'PER_DIEM',
+                    ],
+                    '7' => [
+                        '0' => 'OTHER',
+                        '1' => 'OTHER',
+                    ],
                 ],
                 'size' => 1,
                 'eval' => '',

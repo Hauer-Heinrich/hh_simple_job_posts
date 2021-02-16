@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Model;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -127,6 +128,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @var string
      */
     protected $employmentType = '';
+
+    /**
+     * employmentTypeArray
+     *
+     * @var array
+     */
+    protected $employmentTypeArray = [];
 
     /**
      * workHours
@@ -549,6 +557,27 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function setEmploymentType($employmentType)
     {
         $this->employmentType = $employmentType;
+    }
+
+    /**
+     * Returns the employmentType as array
+     *
+     * @return array employmentType
+     */
+    public function getEmploymentTypeArray()
+    {
+        return GeneralUtility::trimExplode(',', $this->employmentType, true);
+    }
+
+    /**
+     * Sets the employmentTypeArray
+     *
+     * @param string $employmentType
+     * @return void
+     */
+    public function setEmploymentTypeArray($employmentType)
+    {
+        $this->employmentTypeArray = GeneralUtility::trimExplode(',', $employmentType, true);
     }
 
     /**
