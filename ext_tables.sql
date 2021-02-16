@@ -9,8 +9,10 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     weprovide text,
     others text,
     employment_type varchar(255) DEFAULT '' NOT NULL,
-    hiring_organization int(11) unsigned DEFAULT '0',
     work_hours varchar(255) DEFAULT '' NOT NULL,
+
+    hiring_organization int(11) unsigned DEFAULT '0',
+    job_location int(11) unsigned DEFAULT '0',
 
     base_salary_currency varchar(255) DEFAULT '' NOT NULL,
     base_salary_value double(10,2) unsigned DEFAULT '0' NOT NULL,

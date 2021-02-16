@@ -32,6 +32,10 @@
                 <source>Hiring organization</source>
             </trans-unit>
 
+            <trans-unit id="detail.jobLocation">
+                <source>Job location</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

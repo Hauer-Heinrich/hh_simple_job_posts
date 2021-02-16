@@ -62,6 +62,9 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
                 <source>Hiring Organization</source>
             </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_location" resname="tx_hhsimplejobposts_domain_model_jobpost.job_location">
+                <source>Job location</source>
+            </trans-unit>
 
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.work_hours">
                 <source>Work hours</source>

@@ -25,10 +25,13 @@
 				<source>Others</source>
 			</trans-unit>
 			<trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.employment_type" resname="tx_hhsimplejobposts_domain_model_jobpost.employment_type">
-				<source>Employment Type</source>
+				<source>Employment type</source>
 			</trans-unit>
 			<trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
-				<source>Hiring Organization</source>
+				<source>Hiring organization</source>
+			</trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_location" resname="tx_hhsimplejobposts_domain_model_jobpost.job_location">
+				<source>Job location</source>
 			</trans-unit>
 		</body>
 	</file>

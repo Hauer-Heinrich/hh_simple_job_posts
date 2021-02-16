@@ -151,6 +151,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $hiringOrganization = null;
 
     /**
+     * jobLocation
+     *
+     * @var \FriendsOfTYPO3\TtAddress\Domain\Model\Address
+     */
+    protected $jobLocation = null;
+
+    /**
      * baseSalaryCurrency
      *
      * @var string
@@ -622,6 +629,26 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->hiringOrganization = $hiringOrganization;
     }
 
+    /**
+     * Returns the jobLocation
+     *
+     * @return \FriendsOfTYPO3\TtAddress\Domain\Model\AdJobLocation
+     */
+    public function getJobLocation()
+    {
+        return $this->jobLocation;
+    }
+
+    /**
+     * Sets the jobLocation
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation
+     * @return void
+     */
+    public function setJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation)
+    {
+        $this->jobLocation = $jobLocation;
+    }
 
     /**
      * Returns the baseSalaryCurrency

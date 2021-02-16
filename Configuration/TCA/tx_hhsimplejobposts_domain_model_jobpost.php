@@ -52,6 +52,7 @@ return [
             employment_type,
             work_hours,
             hiring_organization,
+            job_location,
             base_salary_currency,
             base_salary_value,
             base_salary_value_max,
@@ -80,6 +81,7 @@ return [
                 employment_type,
                 work_hours,
                 hiring_organization,
+                job_location,
                 slug,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.salary,
                     --palette--;;salary,
@@ -435,6 +437,21 @@ return [
                 'renderType' => 'selectSingle',
                 // 'foreign_table' => 'tt_address',
                 // 'foreign_table_where' => 'AND tt_address.pid = '.intval($storagePidOrganizations),
+                'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
+                'parameters' => [
+                    'storagePidOrganizations' => $storagePidOrganizations
+                ],
+                'default' => 0,
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
+        'job_location' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.job_location',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
                 'parameters' => [
                     'storagePidOrganizations' => $storagePidOrganizations
