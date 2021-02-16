@@ -39,7 +39,7 @@
                         </f:if>
 
                         <f:if condition="{jobpost.baseSalaryValue} > 0">
-                            "baseSalary": {
+                            "baseSalary": {<f:comment></f:comment>
                                 "@type": "MonetaryAmount",
                                 "currency": "{jobpost.baseSalaryCurrency}",
                                 "value": {
