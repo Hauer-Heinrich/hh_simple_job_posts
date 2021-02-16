@@ -14,6 +14,8 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
 
     base_salary_currency varchar(255) DEFAULT '' NOT NULL,
     base_salary_value double(10,2) unsigned DEFAULT '0' NOT NULL,
+    base_salary_value_max double(10,2) unsigned DEFAULT '0' NOT NULL,
+    base_salary_unit_text varchar(255) DEFAULT '' NOT NULL,
 
     contact_point_email varchar(255) DEFAULT '' NOT NULL,
     contact_point_telephone varchar(255) DEFAULT '' NOT NULL,

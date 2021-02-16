@@ -35,3 +35,5 @@ plugin.tx_hhsimplejobposts_jobslist {
 plugin.tx_hhsimplejobposts_jobsdetail =< plugin.tx_hhsimplejobposts_jobslist
 plugin.tx_hhsimplejobposts_jobsdetail {
 }
+
+<INCLUDE_TYPOSCRIPT: source="DIR: ./Templates" extensions="typoscript">

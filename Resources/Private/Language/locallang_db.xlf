@@ -84,6 +84,20 @@
                 <source>Use '.' rather than ',' to indicate a decimal point.</source>
             </trans-unit>
 
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max">
+                <source>Max base salary value</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max.description">
+                <source>Use '.' rather than ',' to indicate a decimal point. (is used when you want to specify a salary range) </source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text">
+                <source>Unit text</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text.description">
+                <source></source>
+            </trans-unit>
+
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_email">
                 <source>Contact email</source>
             </trans-unit>

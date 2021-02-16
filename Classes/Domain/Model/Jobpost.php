@@ -157,6 +157,20 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $baseSalaryValue;
 
     /**
+     * baseSalaryValueMax
+     *
+     * @var double
+     */
+    protected $baseSalaryValueMax;
+
+    /**
+     * baseSalaryUnitText
+     *
+     * @var string
+     */
+    protected $baseSalaryUnitText;
+
+    /**
      * contactPointEmail
      *
      * @var string
@@ -620,6 +634,48 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function setBaseSalaryValue($baseSalaryValue)
     {
         $this->baseSalaryValue = number_format($baseSalaryValue, 2, '.', '');
+    }
+
+    /**
+     * Returns the baseSalaryValueMax
+     *
+     * @return double baseSalaryValueMax
+     */
+    public function getBaseSalaryValueMax()
+    {
+        return number_format($this->baseSalaryValueMax, 2, '.', '');
+    }
+
+    /**
+     * Sets the baseSalaryValueMax
+     *
+     * @param double $baseSalaryValueMax
+     * @return void
+     */
+    public function setBaseSalaryValueMax($baseSalaryValueMax)
+    {
+        $this->baseSalaryValueMax = number_format($baseSalaryValueMax, 2, '.', '');
+    }
+
+    /**
+     * Returns the baseSalaryUnitText
+     *
+     * @return string baseSalaryUnitText
+     */
+    public function getBaseSalaryUnitText()
+    {
+        return $this->baseSalaryUnitText;
+    }
+
+    /**
+     * Sets the baseSalaryUnitText
+     *
+     * @param string $baseSalaryUnitText
+     * @return void
+     */
+    public function setBaseSalaryUnitText($baseSalaryUnitText)
+    {
+        $this->baseSalaryUnitText = $baseSalaryUnitText;
     }
 
     /**

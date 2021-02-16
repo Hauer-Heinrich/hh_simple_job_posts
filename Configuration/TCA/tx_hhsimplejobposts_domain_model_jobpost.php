@@ -28,7 +28,7 @@ return [
     ],
     'palettes' => [
         'salary' => [
-            'showitem' => 'base_salary_currency, base_salary_value'
+            'showitem' => 'base_salary_currency, base_salary_value, base_salary_value_max, base_salary_unit_text'
         ],
         'contactPoint' => [
             'showitem' => 'contact_point_email, contact_point_telephone'
@@ -54,6 +54,8 @@ return [
             hiring_organization,
             base_salary_currency,
             base_salary_value,
+            base_salary_value_max,
+            base_salary_unit_text,
             contact_point_email,
             contact_point_telephone,
             slug
@@ -377,17 +379,18 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['full-time', 'full-time'],
-                    ['part-time', 'part-time'],
-                    ['contract', 'contract'],
-                    ['temporary', 'temporary'],
-                    ['seasonal', 'seasonal'],
-                    ['internship', 'internship'],
+                    ['FULL_TIME', 'FULL_TIME'],
+                    ['PART_TIME', 'PART_TIME'],
+                    ['CONTRACTOR', 'CONTRACTOR'],
+                    ['TEMPORARY', 'TEMPORARY'],
+                    ['INTERN', 'INTERN'],
+                    ['VOLUNTEER', 'VOLUNTEER'],
+                    ['PER_DIEM', 'PER_DIEM'],
+                    ['OTHER', 'OTHER'],
                 ],
                 'size' => 1,
-                'maxitems' => 1,
                 'eval' => '',
-                'default' => 'full-time',
+                'default' => 'FULL_TIME',
             ],
         ],
         'work_hours' => [
@@ -436,6 +439,36 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'double2,trim',
+            ],
+        ],
+        'base_salary_value_max' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max',
+            'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max.description',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'double2,trim',
+            ],
+        ],
+        'base_salary_unit_text' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text',
+            'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text.description',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['HOUR', 'HOUR'],
+                    ['DAY', 'DAY'],
+                    ['WEEK', 'WEEK'],
+                    ['MONTH', 'MONTH'],
+                    ['YEAR', 'YEAR'],
+                ],
+                'size' => 1,
+                'maxitems' => 1,
+                'eval' => 'trim',
+                'default' => 'MONTH',
             ],
         ],
 

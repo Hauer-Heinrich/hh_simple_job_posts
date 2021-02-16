@@ -41,7 +41,19 @@
                             "baseSalary": {
                                 "@type": "MonetaryAmount",
                                 "currency": "{jobpost.baseSalaryCurrency}",
-                                "value": "{jobpost.baseSalaryValue}"
+                                "value": {
+                                    "@type": "QuantitativeValue",
+                                    <f:if condition="{jobpost.baseSalaryValue} && {jobpost.baseSalaryValueMax}">
+                                        <f:then>
+                                            "minValue": {jobpost.baseSalaryValue},
+                                            "maxValue": {jobpost.baseSalaryValueMax},
+                                        </f:then>
+                                        <f:else>
+                                            "value": {jobpost.baseSalaryValue},
+                                        </f:else>
+                                    </f:if>
+                                    "unitText": "{jobpost.baseSalaryUnitText}"
+                                }
                             },
                         </f:if>
 
