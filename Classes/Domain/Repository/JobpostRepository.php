@@ -3,10 +3,7 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Repository;
 
-use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use \Doctrine\DBAL\Connection;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Core\Database\ConnectionPool;
+// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 
 /**
