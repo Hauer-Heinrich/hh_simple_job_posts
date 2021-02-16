@@ -14,6 +14,7 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### Features
 - automatically generates config for sitemap (EXT:seo)
 - compatible with EXT:hh_seo
+- shippes default config for nice-urls
 
 
 ### Todos
