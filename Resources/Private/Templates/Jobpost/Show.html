@@ -9,23 +9,9 @@
 
     <f:if condition="{jobpost}">
         <f:then>
-            <hhseo:metaTag order="10">
-                [{
-                    <f:comment></f:comment>
-                    "title": "{jobpost.title}",
-                    "description": "{jobpost.description}",
-                    "last-modified": "{f:format.date(date: '{jobpost.tstamp}', format: 'r')}",
-
-                    "og:title": "{jobpost.ogTitle}",
-                    "og:description": "{jobpost.ogDescription}",
-                    "og:image": "<f:if condition="{jobpost.ogImage.0}">{f:uri.image(src: '{jobpost.ogImage.0.uid}', treatIdAsReference: 1)}</f:if>",
-
-                    "twitter:card": "{jobpost.twitterCard}",
-                    "twitter:title": "{jobpost.twitterTitle}",
-                    "twitter:description": "{jobpost.twitterDescription}",
-                    "twitter:image": "<f:if condition="{jobpost.twitterImage.0}">{f:uri.image(src: '{jobpost.twitterImage.0.uid}', treatIdAsReference: 1)}</f:if>"
-                }]
-            </hhseo:metaTag>
+            <f:if condition="{settings.loaded.hh_seo}">
+                <f:render partial="MetaTags" arguments="{_all}" />
+            </f:if>
 
             <div class="jobpost job-offer">
                 <f:variable name="datePosted"><f:spaceless>

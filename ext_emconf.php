@@ -26,6 +26,8 @@ $EM_CONF['hh_simple_job_posts'] = [
             'tt_address' => ''
         ],
         'conflicts' => [],
-        'suggests' => [],
+        'suggests' => [
+            'hh_seo' => ''
+        ],
     ],
 ];

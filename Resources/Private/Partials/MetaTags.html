@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ttaddr="http://typo3.org/ns/FriendsOfTYPO3/TtAddress/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<hhseo:metaTag order="10">
+    [{
+        <f:comment></f:comment>
+        "title": "{jobpost.title}",
+        "description": "{jobpost.description}",
+        "last-modified": "{f:format.date(date: '{jobpost.tstamp}', format: 'r')}",
+
+        "og:title": "{jobpost.ogTitle}",
+        "og:description": "{jobpost.ogDescription}",
+        "og:image": "<f:if condition="{jobpost.ogImage.0}">{f:uri.image(src: '{jobpost.ogImage.0.uid}', treatIdAsReference: 1)}</f:if>",
+
+        "twitter:card": "{jobpost.twitterCard}",
+        "twitter:title": "{jobpost.twitterTitle}",
+        "twitter:description": "{jobpost.twitterDescription}",
+        "twitter:image": "<f:if condition="{jobpost.twitterImage.0}">{f:uri.image(src: '{jobpost.twitterImage.0.uid}', treatIdAsReference: 1)}</f:if>"
+    }]
+</hhseo:metaTag>
+
+</html>

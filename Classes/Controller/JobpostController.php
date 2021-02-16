@@ -5,6 +5,7 @@ namespace HauerHeinrich\HhSimpleJobPosts\Controller;
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  *
@@ -73,6 +74,8 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         );
 
         $this->settings = $settings;
+
+        $this->settings['loaded']['hh_seo'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('hh_seo');
 
         $this->view->assignMultiple([
             'settings' => $this->settings,
