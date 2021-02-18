@@ -7,7 +7,7 @@ call_user_func(function() {
             'HhSimpleJobPosts',
             'Jobslist',
             [
-                \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController::class => 'list, show'
+                \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController::class => 'list, show, switch'
             ],
             // non-cacheable actions
             [
@@ -19,7 +19,7 @@ call_user_func(function() {
             'HhSimpleJobPosts',
             'Jobsdetail',
             [
-                \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController::class => 'show'
+                \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController::class => 'show, switch'
             ],
             // non-cacheable actions
             [

@@ -80,6 +80,15 @@
                             </config>
                         </TCEforms>
                     </settings.jobsDetailView>
+
+                    <settings.showDetailView>
+                        <TCEforms>
+                            <label>Show detail-view</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.showDetailView>
                 </el>
             </ROOT>
         </sDEF>

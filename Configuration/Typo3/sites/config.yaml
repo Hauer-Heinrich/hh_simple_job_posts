@@ -1,5 +1,20 @@
 routeEnhancers:
-  JobPlugin:
+  JobPluginDetail:
+    type: Extbase
+    extension: HhSimpleJobPosts
+    plugin: jobsdetail
+    defaultController: 'Jobpost::switch'
+    routes:
+      - routePath: '/{job_slug}'
+        _controller: 'Jobpost::switch'
+        _arguments:
+          job_slug: jobpost
+    aspects:
+      job_slug:
+        type: PersistedAliasMapper
+        tableName: tx_hhsimplejobposts_domain_model_jobpost
+        routeFieldName: slug
+  JobPluginList:
     type: Extbase
     extension: HhSimpleJobPosts
     plugin: jobslist
