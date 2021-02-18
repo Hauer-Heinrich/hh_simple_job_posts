@@ -205,8 +205,8 @@
                         </f:if>
 
                         <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                            <f:if condition="{jobpost.hiringOrganization.description}">
-                                <span itemprop="addressRegion">{jobpost.hiringOrganization.description}</span>
+                            <f:if condition="{jobpost.hiringOrganization.region}">
+                                <span itemprop="addressRegion">{jobpost.hiringOrganization.region}</span>
                             </f:if>
                             <f:if condition="{jobpost.hiringOrganization.address}">
                                 <span itemprop="streetAddress">{jobpost.hiringOrganization.address}</span><br />
