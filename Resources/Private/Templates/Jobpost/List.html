@@ -12,10 +12,13 @@
                     <f:link.action pluginName="{f:if(condition: '{settings.jobsDetailView}', then: 'Jobsdetail', else: 'Jobslist')}" action="switch" arguments="{jobpost : jobpost}" pageUid="{settings.jobsDetailView}">{jobpost.title}</f:link.action>
                 </h3>
 
-                <f:if condition="{jobpost.hiringOrganization.city}">
+                <f:if condition="{jobpost.jobLocation.city} || {jobpost.hiringOrganization.city}">
                     <p>
                         <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" />
-                        {jobpost.hiringOrganization.city}
+                        <f:if condition="{jobpost.jobLocation.city}">
+                            <f:then>{jobpost.jobLocation.city}</f:then>
+                            <f:else>{jobpost.hiringOrganization.city}</f:else>
+                        </f:if>
                     </p>
                 </f:if>
             </article>
