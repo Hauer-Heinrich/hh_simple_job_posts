@@ -34,17 +34,16 @@ if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
 
 /* inherit and extend the show items from the parent class */
 if (isset($GLOBALS['TCA']['tt_address']['types']['0']['showitem'])) {
-    // $GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = 'HauerHeinrich\\HhExtJobsdahoam\\Userfuncs\\TcaTtAddress->companyTitle';
     $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = $GLOBALS['TCA']['tt_address']['types']['0']['showitem'];
 } elseif(is_array($GLOBALS['TCA']['tt_address']['types'])) {
     // use first entry in types array
     $tt_address_type_definition = reset($GLOBALS['TCA']['tt_address']['types']);
-    // $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = $tt_address_type_definition['showitem'];
+    $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = $tt_address_type_definition['showitem'];
 } else {
     $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = '';
 }
 
-$GLOBALS['TCA']['tt_address']['ctrl']['label_alt'] = 'company';
+$GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = \HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaTtAddress::class . '->label';
 $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = '
     --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.organization;organization,
     image, description,

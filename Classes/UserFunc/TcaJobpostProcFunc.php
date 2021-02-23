@@ -16,10 +16,15 @@ class TcaJobpostProcFunc {
      * @return array
      */
     public function contactAddressItems(array $config): array {
-        $storagePidContactPointAddresses = intval($config['parameters']['storagePidContactPointAddresses']);
+        $storagePidContactPointAddresses = intval($config['config']['parameters']['storagePidContactPointAddresses']);
         $itemList = [];
         $rows = $this->getContactPoints($storagePidContactPointAddresses);
         foreach ($rows as $row) {
+            if($row['tx_extbase_type'] === 'ttAddress_location') {
+                $itemList[] = [$row['company'].' ('.$row['city'] . ' - id: ' . $row['uid'].')', $row['uid']];
+                continue;
+            }
+
             $itemList[] = [$row['name'].' ('.$row['uid'].')', $row['uid']];
         }
         $itemList[] = ['not selected', 0];
@@ -63,7 +68,7 @@ class TcaJobpostProcFunc {
         }
 
         $queryBuilder
-            ->select('uid', 'name')
+            ->select('uid', 'name', 'company', 'city', 'tx_extbase_type')
             ->from('tt_address');
         if(!empty($whereExpressions)) {
             $queryBuilder->where(...$whereExpressions);
