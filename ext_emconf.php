@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF['hh_simple_job_posts'] = [
-    'title' => 'Job posts - simple',
-    'description' => '',
+    'title' => 'Hauer-Heinrich - Job posts - simple',
+    'description' => 'Adds plugins for list / show job postings with meta-data and schema.org stuff. Uses tt_address for job-contacts and job-location.',
     'category' => 'plugin',
     'author' => 'Christian Hackl',
     'author_email' => 'chackl@hauer-heinrich.de',

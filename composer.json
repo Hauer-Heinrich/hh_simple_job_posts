@@ -1,7 +1,7 @@
 {
     "name": "hauer-heinrich/hh-simple-job-posts",
     "type": "typo3-cms-extension",
-    "description": "",
+    "description": "Adds plugins for list / show job postings with meta-data and schema.org stuff. Uses tt_address for job-contacts and job-location.",
     "authors": [
         {
             "name": "Christian Hackl",
