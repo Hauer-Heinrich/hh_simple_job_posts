@@ -1,18 +1,21 @@
-plugin.tx_hhsimplejobposts_jobslist {
+plugin.tx_hhsimplejobposts {
     view {
         templateRootPaths {
             0 = EXT:hh_simple_job_posts/Resources/Private/Templates/
-            1 = {$plugin.tx_hhsimplejobposts_jobslist.view.templateRootPath}
+            10 = {$plugin.tx_hhsimplejobposts.view.templateRootPath}
         }
-        partialRootPaths  {
+        partialRootPaths {
             0 = EXT:hh_simple_job_posts/Resources/Private/Partials/
-            1 = {$plugin.tx_hhsimplejobposts_jobslist.view.partialRootPath}
+            10 = {$plugin.tx_hhsimplejobposts.view.partialRootPath}
         }
-        layoutRootPath{
+        layoutRootPath {
             0 = EXT:hh_simple_job_posts/Resources/Private/Layouts/
-            1 = {$plugin.tx_hhsimplejobposts_jobslist.view.layoutRootPath}
+            10 = {$plugin.tx_hhsimplejobposts.view.layoutRootPath}
         }
     }
+}
+
+plugin.tx_hhsimplejobposts_jobslist {
     persistence {
         storagePid = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePid}
         #recursive = 1

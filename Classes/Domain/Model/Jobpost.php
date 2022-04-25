@@ -67,6 +67,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $title = '';
 
     /**
+     * shortDescription
+     *
+     * @var string
+     */
+    protected $shortDescription = '';
+
+    /**
      * description
      *
      * @var string
@@ -428,6 +435,27 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Returns the shortDescription
+     *
+     * @return string shortDescription
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Sets the shortDescription
+     *
+     * @param string $shortDescription
+     * @return void
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
     }
 
     /**

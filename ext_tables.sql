@@ -1,5 +1,6 @@
 CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     title varchar(255) DEFAULT '' NOT NULL,
+    short_description text,
     description text,
     maintasks text,
     profile text,

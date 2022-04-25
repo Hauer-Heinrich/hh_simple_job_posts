@@ -32,6 +32,9 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
                 <source>Title</source>
             </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.short_description" resname="tx_hhsimplejobposts_domain_model_jobpost.short_description">
+                <source>Short description</source>
+            </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.description" resname="tx_hhsimplejobposts_domain_model_jobpost.description">
                 <source>Description</source>
             </trans-unit>
@@ -51,7 +54,7 @@
                 <source>Skills</source>
             </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.weprovide" resname="tx_hhsimplejobposts_domain_model_jobpost.weprovide">
-                <source>Weprovide</source>
+                <source>We provide</source>
             </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.others" resname="tx_hhsimplejobposts_domain_model_jobpost.others">
                 <source>Others</source>

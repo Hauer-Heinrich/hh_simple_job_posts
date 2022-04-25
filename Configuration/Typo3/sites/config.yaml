@@ -24,6 +24,10 @@ routeEnhancers:
         _controller: 'Jobpost::show'
         _arguments:
           job_slug: jobpost
+      - routePath: '/detail/{job_slug}'
+        _controller: 'Jobpost::switch'
+        _arguments:
+          job_slug: jobpost
       - routePath: '/'
         _controller: 'Jobpost::list'
     aspects:

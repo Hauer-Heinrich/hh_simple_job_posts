@@ -90,9 +90,17 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null) {
         $showDetailView = intval($this->settings['showDetailView']);
-        if ($showDetailView === 1 && !empty($jobpost)) {
+        if ($showDetailView > 0 && !empty($jobpost)) {
             $this->forward('show');
         }
+
+        // $this->addFlashMessage(
+        //     'No detail view selected! Check plugin settings.',
+        //     'Error',
+        //     \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+        // );
+        //
+        // $this->forward('list');
 
         $this->forward('show');
     }
@@ -105,7 +113,10 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction(): void {
         $jobposts = $this->jobpostRepository->findAll();
-        $this->view->assign('jobposts', $jobposts);
+        $this->view->assignMultiple([
+            'view' => 'list',
+            'jobposts' => $jobposts
+        ]);
     }
 
     /**
@@ -137,6 +148,7 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             }
 
             $this->view->assignMultiple([
+                'view' => 'detail',
                 'jobpost' => $jobpost,
                 'contactPoint' => [
                     'contactPointEmail' => $contactPointEmail,

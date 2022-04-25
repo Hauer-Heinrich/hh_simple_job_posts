@@ -49,6 +49,7 @@ return [
             l10n_diffsource,
             hidden,
             title,
+            short_description,
             description,
             maintasks,
             profile,
@@ -78,6 +79,7 @@ return [
                 l10n_diffsource,
                 hidden,
                 title,
+                short_description,
                 description,
                 maintasks,
                 profile,
@@ -254,6 +256,22 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
+            ],
+        ],
+        'short_description' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.short_description',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -553,7 +571,8 @@ return [
                 'renderType' => 'inputLink',
                 'size' => 30,
                 'eval' => 'trim',
-                'default' => 'EUR',
+                'default' => '',
+                'placeholder' => '+49 851 654 754 33',
                 'fieldControl' => [
                     'linkPopup' => [
                         'options' => [
