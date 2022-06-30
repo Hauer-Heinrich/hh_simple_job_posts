@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost" resname="tx_hhsimplejobposts_domain_model_jobpost">
+                <source>Jobpost</source>
+                <target state="translated">Stellenausschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
+                <source>Title</source>
+                <target state="translated">Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.description" resname="tx_hhsimplejobposts_domain_model_jobpost.description">
+                <source>Description</source>
+                <target state="translated">Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.maintasks" resname="tx_hhsimplejobposts_domain_model_jobpost.maintasks">
+                <source>Maintasks</source>
+                <target state="translated">Hauptaufgaben</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.profile" resname="tx_hhsimplejobposts_domain_model_jobpost.profile">
+                <source>Profile</source>
+                <target state="translated">Profil</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.weprovide" resname="tx_hhsimplejobposts_domain_model_jobpost.weprovide">
+                <source>We provide</source>
+                <target state="translated">Wir bieten</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.others" resname="tx_hhsimplejobposts_domain_model_jobpost.others">
+                <source>Others</source>
+                <target state="translated">Sonstiges</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.employment_type" resname="tx_hhsimplejobposts_domain_model_jobpost.employment_type">
+                <source>Employment type</source>
+                <target state="translated">Anstellungsart</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
+                <source>Hiring organization</source>
+                <target state="translated">Arbeitgeberfirma</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_location" resname="tx_hhsimplejobposts_domain_model_jobpost.job_location">
+                <source>Job location</source>
+                <target state="translated">Standort</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

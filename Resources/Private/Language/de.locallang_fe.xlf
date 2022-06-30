@@ -5,44 +5,55 @@
         <body>
             <trans-unit id="list.location.uppercase">
                 <source>Location</source>
+                <target state="translated">Standort</target>
             </trans-unit>
 
 
             <trans-unit id="detail.maintasks">
                 <source>Main tasks</source>
+                <target state="translated">Hauptaufgaben</target>
             </trans-unit>
 
             <trans-unit id="detail.profile">
                 <source>Your profile</source>
+                <target state="translated">Ihr Profil</target>
             </trans-unit>
 
             <trans-unit id="detail.skills">
                 <source>Skills</source>
+                <target state="translated">Fähigkeiten</target>
             </trans-unit>
 
             <trans-unit id="detail.weprovide">
                 <source>We provide</source>
+                <target state="translated">Wir bieten</target>
             </trans-unit>
 
             <trans-unit id="detail.contactPoint">
                 <source>Contact Point</source>
+                <target state="translated">Kontakt</target>
             </trans-unit>
 
             <trans-unit id="detail.hiringOrganization">
                 <source>Hiring organization</source>
+                <target state="translated">Arbeitgeberfirma</target>
             </trans-unit>
 
             <trans-unit id="detail.jobLocation">
                 <source>Job location</source>
+                <target state="translated">Standort</target>
             </trans-unit>
+
 
 
             <trans-unit id="detail.noJob">
                 <source>No job found!</source>
+                <target state="translated">Keinen Job gefunden!</target>
             </trans-unit>
 
             <trans-unit id="detail.backToList">
                 <source>Back to list</source>
+                <target state="translated">Zurück zur Liste</target>
             </trans-unit>
 
         </body>

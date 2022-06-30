@@ -327,32 +327,34 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.education_requirements',
             'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
-                'fieldControl' => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['', ''],
+                    ['Gymnasium', 'high school'],
+                    ['Associate Abschluss', 'associate degree'],
+                    ['Bachelor-Abschluss', 'bachelor degree'],
+                    ['Postgraduiertenabschluss', 'postgraduate degree'],
+                    ['Berufsabschluss', 'professional certificate'],
                 ],
-                'cols' => 40,
-                'rows' => 15,
+                'size' => 1,
+                'maxitems' => 1,
                 'eval' => 'trim',
+                'default' => '',
             ],
         ],
         'experience_requirements' => [
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.experience_requirements',
             'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
-                'fieldControl' => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,int',
+                'range' => [
+                    'lower' => 0,
+                    'upper' => 999,
                 ],
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
+                'default' => 0
             ],
         ],
         'skills' => [

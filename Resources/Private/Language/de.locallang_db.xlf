@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+            <trans-unit id="tx_hh_simple_job_posts_jobslist.name" resname="tx_hh_simple_job_posts_jobslist.name">
+                <source>Jobs List</source>
+                <target state="translated">Job Liste</target>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobslist.description" resname="tx_hh_simple_job_posts_jobslist.description">
+                <source></source>
+                <target state="translated"></target>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobsdetail.name" resname="tx_hh_simple_job_posts_jobsdetail.name">
+                <source>Jobs Detail</source>
+                <target state="translated">Job Details</target>
+            </trans-unit>
+            <trans-unit id="tx_hh_simple_job_posts_jobsdetail.description">
+                <source></source>
+                <target state="translated"></target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.div.salary">
+                <source>Salary</source>
+                <target state="translated">Gehalt</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.div.contact_point">
+                <source>Contact point</source>
+                <target state="translated">Ansprechpartner</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost" resname="tx_hhsimplejobposts_domain_model_jobpost">
+                <source>Jobpost</source>
+                <target state="translated">Stellenanzeige</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.images" resname="tx_hhsimplejobposts_domain_model_jobpost.images">
+                <source>Job images</source>
+                <target state="translated">Job Bilder</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
+                <source>Title</source>
+                <target state="translated">Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.short_description" resname="tx_hhsimplejobposts_domain_model_jobpost.short_description">
+                <source>Short description</source>
+                <target state="translated">Kurzbeschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.description" resname="tx_hhsimplejobposts_domain_model_jobpost.description">
+                <source>Description</source>
+                <target state="translated">Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.maintasks" resname="tx_hhsimplejobposts_domain_model_jobpost.maintasks">
+                <source>Maintasks</source>
+                <target state="translated">Hauptaufgaben</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.profile" resname="tx_hhsimplejobposts_domain_model_jobpost.profile">
+                <source>Profile</source>
+                <target state="translated">Profil</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.education_requirements">
+                <source>Education requirements</source>
+                <target state="translated">benötigter Schulabschluss</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.experience_requirements">
+                <source>Experience requirements (in months)</source>
+                <target state="translated">benötigte Berufserfahrung (in Monaten)</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.skills" resname="tx_hhsimplejobposts_domain_model_jobpost.skills">
+                <source>Skills</source>
+                <target state="translated">Deine Fähigkeiten</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.weprovide" resname="tx_hhsimplejobposts_domain_model_jobpost.weprovide">
+                <source>We provide</source>
+                <target state="translated">Was wir bieten</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.others" resname="tx_hhsimplejobposts_domain_model_jobpost.others">
+                <source>Others</source>
+                <target state="translated">Sonstiges</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.employment_type" resname="tx_hhsimplejobposts_domain_model_jobpost.employment_type">
+                <source>Employment Type</source>
+                <target state="translated">Art der Anstellung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
+                <source>Hiring Organization</source>
+                <target state="translated"></target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_location" resname="tx_hhsimplejobposts_domain_model_jobpost.job_location">
+                <source>Job location</source>
+                <target state="translated"></target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.work_hours">
+                <source>Work hours</source>
+                <target state="translated">Arbeitszeiten</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.work_hours.description">
+                <source>The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm)</source>
+                <target state="translated">Die normalen Arbeitszeiten für diesen Job (8-17Uhr, erste Schicht, Nachtschicht, etc.)</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_currency">
+                <source>Base salary currency</source>
+                <target state="translated">Gehaltswährung</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_currency.description">
+                <source>(ISO 4217 e. g. EUR, USD, ...)</source>
+                <target state="translated">(ISO 4217 z.B.: EUR, USD, ...)</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value">
+                <source>Base salary value</source>
+                <target state="translated">Durchschnittsgehalt</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value.description">
+                <source>Use '.' rather than ',' to indicate a decimal point.</source>
+                <target state="translated">Dezimalstellen mit "." (Punkt) statt "," (Komma) angeben</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max">
+                <source>Max base salary value</source>
+                <target state="translated">Maximales Gehalt</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_value_max.description">
+                <source>Use '.' rather than ',' to indicate a decimal point. (is used when you want to specify a salary range) </source>
+                <target state="translated">Dezimalstellen mit "." (Punkt) statt "," (Komma) angeben</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text">
+                <source>Unit text</source>
+                <target state="translated">Einheit</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.base_salary_unit_text.description">
+                <source></source>
+                <target state="translated"></target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_email">
+                <source>Contact email</source>
+                <target state="translated">E-Mail zur Kontaktaufnahme</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_email.description">
+                <source></source>
+                <target state="translated"></target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone">
+                <source>Contact telephone</source>
+                <target state="translated">Telefonnummer zur Kontaktaufnahme</target>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone.description">
+                <source>You should use international phone numbers (E.123) e. g. +49 851 8750 7183</source>
+                <target state="translated">Internationale Telefonnummern angeben (E.123) z.B.: +49 190 3512 4253</target>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_address">
+                <source>Contact Address (person)</source>
+                <target state="translated">Kontaktadresse (Person)</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
