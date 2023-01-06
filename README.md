@@ -5,7 +5,6 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### optional
 
 * [hh_seo] - works well with: https://github.com/Hauer-Heinrich/hh_seo - required if you want use Partial/MetaTags.html
-* Can be used with the simple API of https://www.talentstorm-bewerbermanagement.de/ [see constants for options]
 
 ### Installation
 ... like any other TYPO3 extension
