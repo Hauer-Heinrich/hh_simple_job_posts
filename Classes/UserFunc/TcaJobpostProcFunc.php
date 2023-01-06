@@ -3,6 +3,15 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\UserFunc;
 
+/**
+ * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
+ */
+
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;

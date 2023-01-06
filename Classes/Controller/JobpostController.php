@@ -4,11 +4,15 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhSimpleJobPosts\Controller;
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Log\Logger;
+use \TYPO3\CMS\Core\Log\LogLevel;
+use \TYPO3\CMS\Core\Messaging\AbstractMessage;
+use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository;
 
 /**
- *
- * This file is part of the "Job posts - simple" Extension for TYPO3 CMS.
+ * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
@@ -17,48 +21,19 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 
 /**
- * This file is part of the "Job posts - simple" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- * (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
- * This file is part of the "Job offers - simple" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- * (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  * JobpostController
  */
-class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class JobpostController extends ActionController {
 
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     */
-    protected $configurationManager;
+    protected Logger $logger;
 
     /**
      * jobpostRepository
-     *
-     * @var \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository
      */
-    protected $jobpostRepository = null;
+    protected JobpostRepository $jobpostRepository;
 
-    /**
-     * injectConfigurationManager
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-     * @return void
-     */
-    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager): void {
-        $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * @param \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository $JobpostRepository
-     */
-    public function injectJobpostRepository(\HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository $jobpostRepository) {
+    public function __construct(\TYPO3\CMS\Core\Log\LogManager $logger, JobpostRepository $jobpostRepository) {
+        $this->logger = $logger->getLogger(__CLASS__);
         $this->jobpostRepository = $jobpostRepository;
     }
 
@@ -68,12 +43,6 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @return void
      */
     public function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view): void {
-        $settings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
-        );
-
-        $this->settings = $settings;
-
         $this->settings['loaded']['hh_seo'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('hh_seo');
 
         $this->view->assignMultiple([
@@ -89,20 +58,21 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @return void
      */
     public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null) {
-        $showDetailView = intval($this->settings['showDetailView']);
-        if ($showDetailView > 0 && !empty($jobpost)) {
-            $this->forward('show');
+        // $showDetailView = intval($this->settings['showDetailView']);
+
+        if (empty($jobpost)) {
+            $this->forward('list');
+            // TYPO3 >= 11 return new ForwardResponse('list');
         }
 
         // $this->addFlashMessage(
         //     'No detail view selected! Check plugin settings.',
         //     'Error',
-        //     \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+        //     AbstractMessage::ERROR
         // );
-        //
-        // $this->forward('list');
 
         $this->forward('show');
+        // TYPO3 >= 11 return new ForwardResponse('show');
     }
 
     /**
@@ -112,11 +82,150 @@ class JobpostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @return void
      */
     public function listAction(): void {
-        $jobposts = $this->jobpostRepository->findAll();
         $this->view->assignMultiple([
-            'view' => 'list',
-            'jobposts' => $jobposts
+            'view' => 'list'
         ]);
+
+        if(isset($this->settings['useExternalApi'])) {
+            $jobposts = [];
+
+            // default way - jobs created at the TYPO3 Backend - no API is used
+            if($this->settings['useExternalApi'] === 'default') {
+                $jobposts = $this->jobpostRepository->findByPid(intval($this->settings['jobsStorage']));
+
+                $this->view->assignMultiple([
+                    'jobposts' => $jobposts
+                ]);
+
+                return;
+            }
+
+            $cacheUtility = GeneralUtility::makeInstance(\HauerHeinrich\HhSimpleJobPosts\Utility\CacheUtility::class);
+            $cacheIdentifier = sha1("externalData-".$this->settings['useExternalApi']."-".$this->settings['jobsStorage']);
+            $cacheEntry = $cacheUtility->getCachedValue($cacheIdentifier);
+
+            $assignedValues = [];
+            $assignedValues['jobsStorage'] = \intval($this->settings['jobsStorage']);
+            $assignedValues['apiCacheDuration'] = 86400; // 1 Day
+            $assignedValues['jobposts'] = [];
+            $assignedValues['error'] = [
+                // custom like below or GuzzleHttp\Exception\ClientException
+                /* [
+                    'title' => '',
+                    'message' => '',
+                    'code' => '',
+                    'file' => '',
+                    'line' => ''
+                ] */
+            ];
+
+            if(empty($cacheEntry)) {
+                $requestEvent = $this->eventDispatcher->dispatch(new \HauerHeinrich\HhSimpleJobPosts\Event\JobpostsListEvent($this, $this->settings, $assignedValues, $this->request));
+                $assignedValues = $requestEvent->getAssignedValues();
+
+                // Erros given, write to logger and set FlashMessages
+                if(!empty($assignedValues['error'])) {
+                    foreach ($assignedValues['error'] as $error) {
+                        if($error instanceof \GuzzleHttp\Exception\ClientException) {
+                            if($this->settings['flashMessages'] === 1) {
+                                $this->addFlashMessage(
+                                    $error->getMessage(),
+                                    'Error',
+                                    AbstractMessage::ERROR,
+                                    false
+                                );
+                            }
+
+                            $this->logger->log(
+                                LogLevel::ERROR,
+                                $error->getMessage(),
+                                [
+                                    'code' => $error->getCode(),
+                                    'file' => $error->getFile(),
+                                    'line' => $error->getLine()
+                                ]
+                            );
+
+                            continue;
+                        }
+
+                        if($this->settings['flashMessages'] === 1) {
+                            $this->addFlashMessage(
+                                $error['message'],
+                                'Error',
+                                AbstractMessage::ERROR,
+                                false
+                            );
+                        }
+
+                        $this->logger->log(
+                            LogLevel::ERROR,
+                            $error['message'],
+                            [
+                                'code' => $error['code'],
+                                'file' => $error['file'],
+                                'line' => $error['line']
+                            ]
+                        );
+                    }
+                }
+
+                $jobposts = $assignedValues['jobposts'];
+                if(!empty($jobposts)) {
+                    if(\is_array($jobposts)) {
+                        /** @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
+                        $persistenceManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
+
+                        // Delete old entries
+                        $oldEntries = $this->jobpostRepository->findAllByPid($assignedValues['jobsStorage']);
+                        foreach ($oldEntries as $key => $oldEntry) {
+                            $this->jobpostRepository->deleteReally($oldEntry['uid']);
+                        }
+
+                        // Save new entries to database
+                        foreach ($jobposts as $key => $job) {
+                            $this->jobpostRepository->add($job);
+                        }
+                        $persistenceManager->persistAll();
+
+                        // write to cache
+                        $cacheUtility->setCacheValue(
+                            $cacheIdentifier,
+                            [$this->settings['useExternalApi']],
+                            [ $this->settings['useExternalApi'], 'pid' => $assignedValues['jobsStorage'] ],
+                            \intval($assignedValues['apiCacheDuration'])
+                        );
+                        $jobposts = $this->jobpostRepository->findAll();
+
+                        $this->view->assignMultiple([
+                            'jobposts' => $jobposts
+                        ]);
+
+                        return;
+                    }
+
+                    $this->addFlashMessage(
+                        '$assignedValues["jobposts"] is not an array!',
+                        'ERROR',
+                        AbstractMessage::ERROR,
+                        false
+                    );
+
+                    return;
+                }
+            }
+
+            // for example if JobpostsListEvent returns error then look if old jobposts are available
+            $jobposts = $this->jobpostRepository->findByPid(intval($assignedValues['jobsStorage']));
+
+            $this->view->assignMultiple([
+                'jobposts' => $jobposts
+            ]);
+
+            return;
+        }
+
+        return;
     }
 
     /**

@@ -5,7 +5,7 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### optional
 
 * [hh_seo] - works well with: https://github.com/Hauer-Heinrich/hh_seo - required if you want use Partial/MetaTags.html
-
+* Can be used with the simple API of https://www.talentstorm-bewerbermanagement.de/ [see constants for options]
 
 ### Installation
 ... like any other TYPO3 extension
@@ -14,16 +14,62 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### Features
 - automatically generates config for sitemap (EXT:seo)
 - compatible with EXT:hh_seo
-- shippes default config for nice-urls
+- shippes default config for nice-urls see example: Configuration/Typo3/sites/config.yaml
+- provides psr-14 events
 
+### Available events
+When register to an event you can always access the class where the event is fired. For additional items see column "Access to" in the table below.
+
+| Event class | Fired in class | Access to |
+| ------------- | ------------- | ------------- |
+| JobpostsListEvent | JobpostController | getAssignedValues(), getSettings() |
+
+#### Event description
+- JobpostsListEvent: You can set your own Jobposts, for example from external API
+  Example Usage see extension https://github.com/Hauer-Heinrich/hh_talentstorm_job_posts
+  Add your own "useExternalApi" setting, see: Configuration\TsConfig\Page\TCEFORM.typoscript
+
+#### Connect to event
+To connect to an event, you need to register an event listener in your custom extension. All what it needs is an entry in your Configuration/Services.yaml file:
+
+```yaml
+services:
+  Vendor\Extension\EventListener\YourListener:
+    tags:
+      - name: event.listener
+        identifier: 'your-self-choosen-identifier'
+        method: 'yourMethodToConnectToEvent'
+        event: HauerHeinrich\HhSimpleJobPosts\Event\JobpostsListEvent
+```
+
+#### Write your EventListener
+An example event listener can look like this:
+
+```php
+<?php
+declare(strict_types=1);
+namespace Vendor\Extension\EventListener;
+use HauerHeinrich\HhSimpleJobPosts\Event\JobpostsListEvent;
+
+/**
+ * Use JobpostsListEvent from ext:hh_simple_job_posts
+ */
+class YourListener {
+    /**
+     * Do what you want...
+     */
+    public function yourMethodToConnectToEvent(JobpostsListEvent $event): void {
+        $values = $event->getAssignedValues();
+
+        // Do some stuff
+
+        $event->setAssignedValues($values);
+    }
+}
+```
 
 ### Todos
 - improve readme
-
-
-### Deprecated
-- currently nothing
-
 
 ##### Copyright notice
 

@@ -9,7 +9,7 @@
         <f:for each="{jobposts}" as="jobpost">
             <article class="job job-post">
                 <h3>
-                    <f:link.action pluginName="{f:if(condition: '{settings.jobsDetailView}', then: 'Jobsdetail', else: 'Jobslist')}" action="switch" arguments="{jobpost : jobpost}" pageUid="{settings.jobsDetailView}">{jobpost.title}</f:link.action>
+                    <f:link.action pluginName="{f:if(condition: '{settings.jobsDetailView}', then: 'Jobsdetail', else: 'Jobslist')}" action="switch" arguments="{jobpost: '{jobpost}'}" pageUid="{settings.jobsDetailView}">{jobpost.title}</f:link.action>
                 </h3>
 
                 <f:if condition="{jobpost.jobLocation.city} || {jobpost.hiringOrganization.city}">

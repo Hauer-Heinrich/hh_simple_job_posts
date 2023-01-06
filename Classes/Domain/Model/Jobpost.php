@@ -6,31 +6,19 @@ namespace HauerHeinrich\HhSimpleJobPosts\Domain\Model;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- *
- * This file is part of the "Job posts - simple" Extension for TYPO3 CMS.
+ * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
-
-/**
- * This file is part of the "Job posts - simple" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- * (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
- * This file is part of the "Job offers - simple" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- * (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
- * This file is part of the "Job offers - simple" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- * (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
- * Joboffer
- */
 class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+
+    /**
+     * @var int
+     */
+    protected $apiUid;
 
     /**
      * @var \DateTime
@@ -273,13 +261,38 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $twitterImage;
 
     /**
+     * applicationForm
+     *
+     * @var string url
+     */
+    protected $applicationForm = '';
+
+    /**
      * Initialize categories and media relation
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->ogImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Get apiUid
+     *
+     * @return int
+     */
+    public function getApiUid(): int {
+        return $this->apiUid;
+    }
+
+    /**
+     * set apiUid
+     *
+     * @param int
+     * @return void
+     */
+    public function setApiUid(int $apiUid): void {
+        $this->apiUid = $apiUid;
     }
 
     /**
@@ -287,8 +300,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \DateTime
      */
-    public function getCrdate()
-    {
+    public function getCrdate(): \DateTime {
         return $this->crdate;
     }
 
@@ -298,8 +310,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \DateTime $crdate
      * @return void
      */
-    public function setCrdate($crdate)
-    {
+    public function setCrdate(\DateTime $crdate): void {
         $this->crdate = $crdate;
     }
 
@@ -308,8 +319,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string
      */
-    public function getYearOfCrdate()
-    {
+    public function getYearOfCrdate(): string {
         return $this->getCrdate()->format('Y');
     }
 
@@ -318,8 +328,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string
      */
-    public function getMonthOfCrdate()
-    {
+    public function getMonthOfCrdate(): string {
         return $this->getCrdate()->format('m');
     }
 
@@ -328,8 +337,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return int
      */
-    public function getDayOfCrdate()
-    {
+    public function getDayOfCrdate(): int {
         return (int)$this->crdate->format('d');
     }
 
@@ -338,8 +346,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \DateTime
      */
-    public function getTstamp()
-    {
+    public function getTstamp() {
         return $this->tstamp;
     }
 
@@ -349,8 +356,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \DateTime $tstamp time stamp
      * @return void
      */
-    public function setTstamp($tstamp)
-    {
+    public function setTstamp($tstamp): void {
         $this->tstamp = $tstamp;
     }
 
@@ -359,8 +365,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \DateTime
      */
-    public function getStarttime()
-    {
+    public function getStarttime() {
         return $this->starttime;
     }
 
@@ -370,8 +375,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \DateTime $starttime
      * @return void
      */
-    public function setStarttime($starttime)
-    {
+    public function setStarttime($starttime) {
         $this->starttime = $starttime;
     }
 
@@ -380,8 +384,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \DateTime
      */
-    public function getEndtime()
-    {
+    public function getEndtime() {
         return $this->endtime;
     }
 
@@ -391,8 +394,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \DateTime $endtime
      * @return void
      */
-    public function setEndtime($endtime)
-    {
+    public function setEndtime($endtime) {
         $this->endtime = $endtime;
     }
 
@@ -401,8 +403,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @param string $slug
      */
-    public function setSlug($slug)
-    {
+    public function setSlug(string $slug): void {
         $this->slug = $slug;
     }
 
@@ -411,8 +412,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string
      */
-    public function getSlug()
-    {
+    public function getSlug(): string {
         return $this->slug;
     }
 
@@ -421,8 +421,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string title
      */
-    public function getTitle()
-    {
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -432,8 +431,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
-    {
+    public function setTitle(string $title): void {
         $this->title = $title;
     }
 
@@ -442,8 +440,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string shortDescription
      */
-    public function getShortDescription()
-    {
+    public function getShortDescription(): string {
         return $this->shortDescription;
     }
 
@@ -453,8 +450,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $shortDescription
      * @return void
      */
-    public function setShortDescription($shortDescription)
-    {
+    public function setShortDescription(string $shortDescription): void {
         $this->shortDescription = $shortDescription;
     }
 
@@ -463,8 +459,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string description
      */
-    public function getDescription()
-    {
+    public function getDescription(): string {
         return $this->description;
     }
 
@@ -474,8 +469,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
-    {
+    public function setDescription(string $description): void {
         $this->description = $description;
     }
 
@@ -484,8 +478,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string maintasks
      */
-    public function getMaintasks()
-    {
+    public function getMaintasks(): string {
         return $this->maintasks;
     }
 
@@ -495,8 +488,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $maintasks
      * @return void
      */
-    public function setMaintasks($maintasks)
-    {
+    public function setMaintasks(string $maintasks): void {
         $this->maintasks = $maintasks;
     }
 
@@ -505,8 +497,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string profile
      */
-    public function getProfile()
-    {
+    public function getProfile(): string {
         return $this->profile;
     }
 
@@ -516,8 +507,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $profile
      * @return void
      */
-    public function setProfile($profile)
-    {
+    public function setProfile(string $profile): void {
         $this->profile = $profile;
     }
 
@@ -526,8 +516,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string educationRequirements
      */
-    public function getEducationRequirements()
-    {
+    public function getEducationRequirements(): string {
         return $this->educationRequirements;
     }
 
@@ -537,8 +526,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $educationRequirements
      * @return void
      */
-    public function setEducationRequirements($educationRequirements)
-    {
+    public function setEducationRequirements(string $educationRequirements): void {
         $this->educationRequirements = $educationRequirements;
     }
 
@@ -547,8 +535,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string experienceRequirements
      */
-    public function getExperienceRequirements()
-    {
+    public function getExperienceRequirements(): string {
         return $this->experienceRequirements;
     }
 
@@ -558,8 +545,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $experienceRequirements
      * @return void
      */
-    public function setExperienceRequirements($experienceRequirements)
-    {
+    public function setExperienceRequirements(string $experienceRequirements): void {
         $this->experienceRequirements = $experienceRequirements;
     }
 
@@ -568,8 +554,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string skills
      */
-    public function getSkills()
-    {
+    public function getSkills(): string {
         return $this->skills;
     }
 
@@ -579,8 +564,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $skills
      * @return void
      */
-    public function setSkills($skills)
-    {
+    public function setSkills(string $skills): void {
         $this->skills = $skills;
     }
 
@@ -589,8 +573,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string weprovide
      */
-    public function getWeprovide()
-    {
+    public function getWeprovide(): string {
         return $this->weprovide;
     }
 
@@ -600,8 +583,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $weprovide
      * @return void
      */
-    public function setWeprovide($weprovide)
-    {
+    public function setWeprovide(string $weprovide): void {
         $this->weprovide = $weprovide;
     }
 
@@ -610,8 +592,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string others
      */
-    public function getOthers()
-    {
+    public function getOthers(): string {
         return $this->others;
     }
 
@@ -621,8 +602,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $others
      * @return void
      */
-    public function setOthers($others)
-    {
+    public function setOthers(string $others): void {
         $this->others = $others;
     }
 
@@ -631,8 +611,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string employmentType
      */
-    public function getEmploymentType()
-    {
+    public function getEmploymentType(): string {
         return $this->employmentType;
     }
 
@@ -642,8 +621,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $employmentType
      * @return void
      */
-    public function setEmploymentType($employmentType)
-    {
+    public function setEmploymentType(string $employmentType): void {
         $this->employmentType = $employmentType;
     }
 
@@ -652,8 +630,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return array employmentType
      */
-    public function getEmploymentTypeArray()
-    {
+    public function getEmploymentTypeArray(): array {
         return GeneralUtility::trimExplode(',', $this->employmentType, true);
     }
 
@@ -663,8 +640,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $employmentType
      * @return void
      */
-    public function setEmploymentTypeArray($employmentType)
-    {
+    public function setEmploymentTypeArray(string $employmentType): void {
         $this->employmentTypeArray = GeneralUtility::trimExplode(',', $employmentType, true);
     }
 
@@ -673,8 +649,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string workHours
      */
-    public function getWorkHours()
-    {
+    public function getWorkHours(): string {
         return $this->workHours;
     }
 
@@ -684,8 +659,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $workHours
      * @return void
      */
-    public function setWorkHours($workHours)
-    {
+    public function setWorkHours(string $workHours): void {
         $this->workHours = $workHours;
     }
 
@@ -694,8 +668,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address $hiringOrganization
      */
-    public function getHiringOrganization()
-    {
+    public function getHiringOrganization(): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address {
         return $this->hiringOrganization;
     }
 
@@ -705,18 +678,16 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $hiringOrganization
      * @return void
      */
-    public function setHiringOrganization(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $hiringOrganization)
-    {
+    public function setHiringOrganization(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $hiringOrganization): void {
         $this->hiringOrganization = $hiringOrganization;
     }
 
     /**
      * Returns the jobLocation
      *
-     * @return \FriendsOfTYPO3\TtAddress\Domain\Model\AdJobLocation
+     * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      */
-    public function getJobLocation()
-    {
+    public function getJobLocation(): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address {
         return $this->jobLocation;
     }
 
@@ -726,8 +697,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation
      * @return void
      */
-    public function setJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation)
-    {
+    public function setJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation): void {
         $this->jobLocation = $jobLocation;
     }
 
@@ -736,8 +706,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string baseSalaryCurrency
      */
-    public function getBaseSalaryCurrency()
-    {
+    public function getBaseSalaryCurrency(): string {
         return $this->baseSalaryCurrency;
     }
 
@@ -747,8 +716,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $baseSalaryCurrency
      * @return void
      */
-    public function setBaseSalaryCurrency($baseSalaryCurrency)
-    {
+    public function setBaseSalaryCurrency(string $baseSalaryCurrency): void {
         $this->baseSalaryCurrency = $baseSalaryCurrency;
     }
 
@@ -757,8 +725,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return double baseSalaryValue
      */
-    public function getBaseSalaryValue()
-    {
+    public function getBaseSalaryValue() {
         return number_format($this->baseSalaryValue, 2, '.', '');
     }
 
@@ -768,8 +735,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param double $baseSalaryValue
      * @return void
      */
-    public function setBaseSalaryValue($baseSalaryValue)
-    {
+    public function setBaseSalaryValue($baseSalaryValue): void {
         $this->baseSalaryValue = number_format($baseSalaryValue, 2, '.', '');
     }
 
@@ -778,8 +744,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return double baseSalaryValueMax
      */
-    public function getBaseSalaryValueMax()
-    {
+    public function getBaseSalaryValueMax() {
         return number_format($this->baseSalaryValueMax, 2, '.', '');
     }
 
@@ -789,8 +754,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param double $baseSalaryValueMax
      * @return void
      */
-    public function setBaseSalaryValueMax($baseSalaryValueMax)
-    {
+    public function setBaseSalaryValueMax($baseSalaryValueMax): void {
         $this->baseSalaryValueMax = number_format($baseSalaryValueMax, 2, '.', '');
     }
 
@@ -799,8 +763,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string baseSalaryUnitText
      */
-    public function getBaseSalaryUnitText()
-    {
+    public function getBaseSalaryUnitText(): string {
         return $this->baseSalaryUnitText;
     }
 
@@ -810,8 +773,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $baseSalaryUnitText
      * @return void
      */
-    public function setBaseSalaryUnitText($baseSalaryUnitText)
-    {
+    public function setBaseSalaryUnitText(string $baseSalaryUnitText): void {
         $this->baseSalaryUnitText = $baseSalaryUnitText;
     }
 
@@ -820,8 +782,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string contactPointEmail
      */
-    public function getContactPointEmail()
-    {
+    public function getContactPointEmail(): string {
         return $this->contactPointEmail;
     }
 
@@ -831,8 +792,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $contactPointEmail
      * @return void
      */
-    public function setContactPointEmail($contactPointEmail)
-    {
+    public function setContactPointEmail(string $contactPointEmail): void {
         $this->contactPointEmail = $contactPointEmail;
     }
 
@@ -841,8 +801,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string contactPointTelephone
      */
-    public function getContactPointTelephone()
-    {
+    public function getContactPointTelephone(): string {
         return $this->contactPointTelephone;
     }
 
@@ -852,8 +811,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $contactPointTelephone
      * @return void
      */
-    public function setContactPointTelephone($contactPointTelephone)
-    {
+    public function setContactPointTelephone(string $contactPointTelephone): void {
         $this->contactPointTelephone = $contactPointTelephone;
     }
 
@@ -862,8 +820,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
      */
-    public function getContactPointAddress()
-    {
+    public function getContactPointAddress(): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address {
         return $this->contactPointAddress;
     }
 
@@ -873,8 +830,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
      * @return void
      */
-    public function setContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress)
-    {
+    public function setContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress): void {
         $this->contactPointAddress = $contactPointAddress;
     }
 
@@ -883,8 +839,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
      */
-    public function getImages()
-    {
+    public function getImages() {
         return $this->images;
     }
 
@@ -894,8 +849,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
      * @return void
      */
-    public function setImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images)
-    {
+    public function setImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images): void {
         $this->images = $images;
     }
 
@@ -905,7 +859,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
      * @return void
      */
-    public function addImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images) {
+    public function addImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images): void {
         $this->images->attach($images);
     }
 
@@ -915,7 +869,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The Images to be removed
      * @return void
      */
-    public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+    public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove): void {
         $this->images->detach($imagesFileToRemove);
     }
 
@@ -924,8 +878,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string ogTitle
      */
-    public function getOgTitle()
-    {
+    public function getOgTitle(): string {
         return $this->ogTitle;
     }
 
@@ -935,8 +888,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $ogTitle
      * @return void
      */
-    public function setOgTitle($ogTitle)
-    {
+    public function setOgTitle(string $ogTitle): void {
         $this->ogTitle = $ogTitle;
     }
 
@@ -945,8 +897,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string ogDescription
      */
-    public function getOgDescription()
-    {
+    public function getOgDescription(): string {
         return $this->ogDescription;
     }
 
@@ -956,8 +907,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $ogDescription
      * @return void
      */
-    public function setOgDescription($ogDescription)
-    {
+    public function setOgDescription(string $ogDescription): void {
         $this->ogDescription = $ogDescription;
     }
 
@@ -966,8 +916,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
      */
-    public function getOgImage()
-    {
+    public function getOgImage() {
         return $this->ogImage;
     }
 
@@ -977,8 +926,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
      * @return void
      */
-    public function setOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage)
-    {
+    public function setOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage): void {
         $this->ogImage = $ogImage;
     }
 
@@ -988,7 +936,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage
      * @return void
      */
-    public function addOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage) {
+    public function addOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $ogImage): void {
         $this->ogImage->attach($ogImage);
     }
 
@@ -998,7 +946,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The ogImage to be removed
      * @return void
      */
-    public function removeOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+    public function removeOgImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove): void {
         $this->ogImage->detach($imagesFileToRemove);
     }
 
@@ -1007,8 +955,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string twitterTitle
      */
-    public function getTwitterTitle()
-    {
+    public function getTwitterTitle(): string {
         return $this->twitterTitle;
     }
 
@@ -1018,8 +965,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $twitterTitle
      * @return void
      */
-    public function setTwitterTitle($twitterTitle)
-    {
+    public function setTwitterTitle(string $twitterTitle): void {
         $this->twitterTitle = $twitterTitle;
     }
 
@@ -1028,8 +974,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string twitterDescription
      */
-    public function getTwitterDescription()
-    {
+    public function getTwitterDescription(): string {
         return $this->twitterDescription;
     }
 
@@ -1039,8 +984,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $twitterDescription
      * @return void
      */
-    public function setTwitterDescription($twitterDescription)
-    {
+    public function setTwitterDescription(string $twitterDescription): void {
         $this->twitterDescription = $twitterDescription;
     }
 
@@ -1049,8 +993,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return string twitterCard
      */
-    public function getTwitterCard()
-    {
+    public function getTwitterCard(): string {
         return $this->twitterCard;
     }
 
@@ -1060,8 +1003,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param string $twitterCard
      * @return void
      */
-    public function setTwitterCard($twitterCard)
-    {
+    public function setTwitterCard(string $twitterCard): void {
         $this->twitterCard = $twitterCard;
     }
 
@@ -1070,8 +1012,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
      */
-    public function getTwitterImage()
-    {
+    public function getTwitterImage() {
         return $this->twitterImage;
     }
 
@@ -1081,8 +1022,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
      * @return void
      */
-    public function setTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage)
-    {
+    public function setTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage): void {
         $this->twitterImage = $twitterImage;
     }
 
@@ -1092,7 +1032,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage
      * @return void
      */
-    public function addTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage) {
+    public function addTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $twitterImage): void {
         $this->twitterImage->attach($twitterImage);
     }
 
@@ -1102,7 +1042,25 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove The twitterImage to be removed
      * @return void
      */
-    public function removeTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove) {
+    public function removeTwitterImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove): void {
         $this->twitterImage->detach($imagesFileToRemove);
+    }
+
+    /**
+     * getApplicationForm
+     *
+     * @return string
+     */
+    public function getApplicationForm(): string {
+        return $this->applicationForm;
+    }
+
+    /**
+     * setApplicationForm
+     *
+     * @param string
+     */
+    public function setApplicationForm(string $url): void {
+        $this->applicationForm = $url;
     }
 }

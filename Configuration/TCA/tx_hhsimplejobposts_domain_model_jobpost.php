@@ -248,6 +248,15 @@ return [
                 'default' => ''
             ]
         ],
+        'pid' => [
+            'exclude' => 0,
+            'label' => '',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
 
         'title' => [
             'exclude' => true,

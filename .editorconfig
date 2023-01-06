@@ -80,6 +80,10 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+[*.yaml]
+indent_style = space
+indent_size = 2
+
 # SQL-Files
 [*.sql]
 indent_style = space

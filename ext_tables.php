@@ -19,5 +19,4 @@ call_user_func(static function() {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_hhsimplejobposts_domain_model_jobpost', 'EXT:hh_simple_job_posts/Resources/Private/Language/locallang_csh_tx_hhsimplejobposts_domain_model_jobpost.xlf');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_hhsimplejobposts_domain_model_jobpost');
-
 });

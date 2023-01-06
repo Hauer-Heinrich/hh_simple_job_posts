@@ -29,6 +29,25 @@
                         </TCEforms>
                     </settings.companiesStorage> -->
 
+                    <settings.useExternalApi>
+                        <TCEforms>
+                            <label>
+                                Use external API?
+                            </label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Default (keine externe API)</numIndex>
+                                        <numIndex index="1">default</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.useExternalApi>
+
                     <settings.jobsStorage>
                         <TCEforms>
                             <label>

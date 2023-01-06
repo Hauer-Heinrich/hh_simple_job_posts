@@ -1,0 +1,23 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  HauerHeinrich\HhSimpleJobPosts\:
+    resource: '../Classes/*'
+    #exclude: '../Classes/Domain/Model/*'
+
+  HauerHeinrich\HhSimpleJobPosts\Http\TalentstormRequester:
+    public: true
+
+  cache.hhsimplejobposts_jobsFromApi:
+    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
+    factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
+    arguments: ['hhsimplejobposts_jobsFromApi']
+
+  HauerHeinrich\HhSimpleJobPosts\Utility\CacheUtility:
+    public: true
+    arguments:
+      $cache: '@cache.hhsimplejobposts_jobsFromApi'
+

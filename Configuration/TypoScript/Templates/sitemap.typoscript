@@ -10,10 +10,10 @@ plugin.tx_seo {
                         lastModifiedField = tstamp
                         recursive = 1
                         ### Speicherort der Beiträge
-                        # pid =
+                        pid = {$plugin.tx_hhsimplejobposts.persistence.storagePid}
                         url {
                             ### PageID der Detailseite
-                            # pageId =
+                            # pageId = TODO:
                             fieldToParameterMap {
                                 uid = tx_hhsimplejobposts_jobslist[jobpost]
                             }

@@ -37,6 +37,9 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     twitter_description text,
     twitter_image int(11) unsigned DEFAULT '0' NOT NULL,
     twitter_card varchar(255) DEFAULT '' NOT NULL,
+
+    apiUid int(11) unsigned DEFAULT '0' NOT NULL,
+    application_form varchar(255) DEFAULT '' NOT NULL,
 );
 
 CREATE TABLE tt_address (

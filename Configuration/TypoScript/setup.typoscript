@@ -13,16 +13,18 @@ plugin.tx_hhsimplejobposts {
             10 = {$plugin.tx_hhsimplejobposts.view.layoutRootPath}
         }
     }
-}
 
-plugin.tx_hhsimplejobposts_jobslist {
-    persistence {
-        storagePid = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePid}
-        #recursive = 1
-
-        storagePidOrganizations = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePidOrganizations}
-        storagePidContactPointAddresses = {$plugin.tx_hhsimplejobposts_jobslist.persistence.storagePidContactPointAddresses}
+    settings {
+        flashMessages = {$plugin.tx_hhsimplejobposts.settings.flashMessages}
     }
+
+    persistence {
+        storagePid = {$plugin.tx_hhsimplejobposts.persistence.storagePid}
+        #recursive = 1
+        storagePidOrganizations = {$plugin.tx_hhsimplejobposts.persistence.storagePidOrganizations}
+        storagePidContactPointAddresses = {$plugin.tx_hhsimplejobposts.persistence.storagePidContactPointAddresses}
+    }
+
     features {
         #skipDefaultArguments = 1
         ### if set to 1, the enable fields are ignored in BE context
@@ -30,13 +32,10 @@ plugin.tx_hhsimplejobposts_jobslist {
         ### Should be on by default, but can be disabled if all action in the plugin are uncached
         requireCHashArgumentForActionArguments = 1
     }
+
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
     }
-}
-
-plugin.tx_hhsimplejobposts_jobsdetail =< plugin.tx_hhsimplejobposts_jobslist
-plugin.tx_hhsimplejobposts_jobsdetail {
 }
 
 <INCLUDE_TYPOSCRIPT: source="DIR: ./Templates" extensions="typoscript">

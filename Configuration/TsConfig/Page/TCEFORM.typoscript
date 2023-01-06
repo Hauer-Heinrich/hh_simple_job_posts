@@ -1,4 +1,16 @@
 TCEFORM {
+    // tt_content.pi_flexform {
+    //     hhsimplejobposts_jobslist {
+    //         sDEF {
+    //             settings\.useExternalApi {
+    //                 addItems {
+    //                     example = Example
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
     tt_address {
         birthday {
             types {
