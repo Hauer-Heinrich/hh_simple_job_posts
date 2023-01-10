@@ -2,8 +2,8 @@
 $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\Extbase\\Object\\ObjectManager');
 $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
 $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-$storagePidOrganizations = $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations'];
-$storagePidContactPointAddresses = $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses'];
+$storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations']) ? $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations'] : 0;
+$storagePidContactPointAddresses = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses']) ? $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses'] : 0;
 
 return [
     'ctrl' => [
@@ -676,7 +676,7 @@ return [
                             ]
                         ],
                         'columns' => [
-                            'crop' => $openGraphCropConfiguration
+                            // TODO: 'crop' => $openGraphCropConfiguration
                         ]
                     ],
                     'behaviour' => [
@@ -728,7 +728,7 @@ return [
                             ]
                         ],
                         'columns' => [
-                            'crop' => $openGraphCropConfiguration
+                            // TODO: 'crop' => $openGraphCropConfiguration
                         ]
                     ],
                     'behaviour' => [
