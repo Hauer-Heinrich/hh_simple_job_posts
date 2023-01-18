@@ -171,6 +171,8 @@ class JobpostController extends ActionController {
                 }
 
                 $jobposts = $assignedValues['jobposts'];
+                // TODO: save jobLocations to database! tt_address
+                // TODO: save hiringOrganization to database! tt_address
                 if(!empty($jobposts)) {
                     if(\is_array($jobposts)) {
                         /** @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
@@ -195,6 +197,7 @@ class JobpostController extends ActionController {
                             [ $this->settings['useExternalApi'], 'pid' => $assignedValues['jobsStorage'] ],
                             \intval($assignedValues['apiCacheDuration'])
                         );
+
                         $jobposts = $this->jobpostRepository->findAll();
 
                         $this->view->assignMultiple([

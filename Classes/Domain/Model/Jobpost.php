@@ -153,6 +153,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $jobLocation = null;
 
     /**
+     * jobLocations
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address>
+     */
+    protected $jobLocations = null;
+
+    /**
      * baseSalaryCurrency
      *
      * @var string
@@ -274,6 +281,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->ogImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->jobLocations = $this->jobLocations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -699,6 +707,45 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation): void {
         $this->jobLocation = $jobLocation;
+    }
+
+    /**
+     * Adds a Address
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation
+     * @return void
+     */
+    public function addJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation): void {
+        $this->jobLocations->attach($jobLocation);
+    }
+
+    /**
+     * Removes a Address
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocationToRemove The Address to be removed
+     * @return void
+     */
+    public function removeJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocationToRemove): void {
+        $this->jobLocations->detach($jobLocationToRemove);
+    }
+
+    /**
+     * Returns the jobLocations
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address>
+     */
+    public function getJobLocations(): \TYPO3\CMS\Extbase\Persistence\ObjectStorage {
+        return $this->jobLocations;
+    }
+
+    /**
+     * Sets the jobLocations
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address> $jobLocations
+     * @return void
+     */
+    public function setJobLocations(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $jobLocations): void {
+        $this->jobLocations = $jobLocations;
     }
 
     /**

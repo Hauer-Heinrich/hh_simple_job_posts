@@ -14,6 +14,7 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
 
     hiring_organization int(11) unsigned DEFAULT '0',
     job_location int(11) unsigned DEFAULT '0',
+    job_locations text NOT NULL,
 
     base_salary_currency varchar(255) DEFAULT '' NOT NULL,
     base_salary_value double(10,2) unsigned DEFAULT '0' NOT NULL,

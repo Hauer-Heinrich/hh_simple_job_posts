@@ -20,4 +20,3 @@ services:
     public: true
     arguments:
       $cache: '@cache.hhsimplejobposts_jobsFromApi'
-

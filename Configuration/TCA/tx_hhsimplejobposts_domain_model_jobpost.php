@@ -2,8 +2,8 @@
 $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\Extbase\\Object\\ObjectManager');
 $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
 $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-$storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations']) ? $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidOrganizations'] : 0;
-$storagePidContactPointAddresses = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses']) ? $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts_jobslist.']['persistence.']['storagePidContactPointAddresses'] : 0;
+$storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) : 0;
+$storagePidContactPointAddresses = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) : 0;
 
 return [
     'ctrl' => [
@@ -61,7 +61,7 @@ return [
             employment_type,
             work_hours,
             hiring_organization,
-            job_location,
+            job_locations,
             base_salary_currency,
             base_salary_value,
             base_salary_value_max,
@@ -92,6 +92,7 @@ return [
                 work_hours,
                 hiring_organization,
                 job_location,
+                job_locations,
                 slug,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.salary,
                     --palette--;;salary,
@@ -497,6 +498,35 @@ return [
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
+            ],
+        ],
+        'job_locations' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.job_locations',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'itemsProcFunc' => 'HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaJobpostProcFunc->getJobLocationsTcaItems',
+                'itemsProcConfig' => [
+                    'storagePidOrganizations' => $storagePidOrganizations
+                ],
+                'default' => 0,
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'multiple' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => true,
+                    ],
+                    'addRecord' => [
+                        'disabled' => true,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
             ],
         ],
         'base_salary_currency' => [

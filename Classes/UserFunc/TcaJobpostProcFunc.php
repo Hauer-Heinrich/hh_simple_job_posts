@@ -62,6 +62,31 @@ class TcaJobpostProcFunc {
     }
 
     /**
+     * getJobLocationsTcaItems
+     *
+     * @param array $configuration Current field configuration
+     * @throws \UnexpectedValueException
+     * @internal
+     */
+    public function getJobLocationsTcaItems(array &$configuration): void {
+        $pid = 0;
+        if(isset($configuration['config']['itemsProcConfig']['storagePidOrganizations'])) {
+            $pid = \intval($configuration['config']['itemsProcConfig']['storagePidOrganizations']);
+        }
+
+        $locations = $this->getContactPoints($pid);
+
+        if(!empty($locations)) {
+            foreach ($locations as $key => $location) {
+                if($location['tx_extbase_type'] === 'ttAddress_location') {
+                    $itemLabel = $location['company'] . " (" . $location['city'] . " Uid: " . \strval($location['uid']) . ")";
+                    $configuration['items'][] = [$itemLabel, $location['uid']];
+                }
+            }
+        }
+    }
+
+    /**
      * getContactPoints
      * Gets addresses from tt_address - if pid = 0 then all Address are returned
      *

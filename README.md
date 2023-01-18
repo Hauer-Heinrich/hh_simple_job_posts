@@ -9,6 +9,12 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### Installation
 ... like any other TYPO3 extension
 
+#### Optional
+- create a folder at the TYPO3 backend tree in which addresses of hiring-organisations are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidOrganizations])
+- create a folder at the TYPO3 backend tree in which addresses of contact-point-addresses are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidContactPointAddresses])
+- both folders can be the same
+- for addresses at this 2 folder it is required that the field 'tx_extbase_type' ist set to 'ttAddress_location'!
+
 
 ### Features
 - automatically generates config for sitemap (EXT:seo)
