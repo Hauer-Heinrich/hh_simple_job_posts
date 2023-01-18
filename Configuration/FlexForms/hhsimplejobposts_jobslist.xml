@@ -48,10 +48,44 @@
                         </TCEforms>
                     </settings.useExternalApi>
 
+                    <settings.orderJobsDefaultToApi>
+                        <TCEforms>
+                            <label>Show default jobs before API-jobs (order)?</label>
+                            <description>Default: first show jobs from API then jobs from TYPO3 backend (default-jobs).</description>
+                            <displayCond>FIELD:settings.useExternalApi:!=:default</displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.orderJobsDefaultToApi>
+
+                    <settings.jobsStorageApi>
+                        <TCEforms>
+                            <label>
+                                Wo sind / sollen die Jobs aus der API gespeichert werden?
+                            </label>
+                            <displayCond>FIELD:settings.useExternalApi:!=:default</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>3</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.jobsStorageApi>
+
                     <settings.jobsStorage>
                         <TCEforms>
                             <label>
-                                Wo sind die Jobs gespeichert?
+                                Wo sind die Jobs (default) gespeichert?
                             </label>
                             <config>
                                 <type>group</type>

@@ -101,11 +101,11 @@ class JobpostController extends ActionController {
             }
 
             $cacheUtility = GeneralUtility::makeInstance(\HauerHeinrich\HhSimpleJobPosts\Utility\CacheUtility::class);
-            $cacheIdentifier = sha1("externalData-".$this->settings['useExternalApi']."-".$this->settings['jobsStorage']);
+            $cacheIdentifier = sha1("externalData-".$this->settings['useExternalApi']."-".$this->settings['jobsStorageApi']);
             $cacheEntry = $cacheUtility->getCachedValue($cacheIdentifier);
 
             $assignedValues = [];
-            $assignedValues['jobsStorage'] = \intval($this->settings['jobsStorage']);
+            $assignedValues['jobsStorageApi'] = \intval($this->settings['jobsStorageApi']);
             $assignedValues['apiCacheDuration'] = 86400; // 1 Day
             $assignedValues['jobposts'] = [];
             $assignedValues['error'] = [
@@ -179,13 +179,13 @@ class JobpostController extends ActionController {
                         $persistenceManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
 
                         // Delete old entries
-                        $oldEntries = $this->jobpostRepository->findAllByPid($assignedValues['jobsStorage']);
-                        foreach ($oldEntries as $key => $oldEntry) {
+                        $oldEntries = $this->jobpostRepository->findAllByPid(intval($assignedValues['jobsStorageApi']));
+                        foreach ($oldEntries as $oldEntry) {
                             $this->jobpostRepository->deleteReally($oldEntry['uid']);
                         }
 
                         // Save new entries to database
-                        foreach ($jobposts as $key => $job) {
+                        foreach ($jobposts as $job) {
                             $this->jobpostRepository->add($job);
                         }
                         $persistenceManager->persistAll();
@@ -194,17 +194,9 @@ class JobpostController extends ActionController {
                         $cacheUtility->setCacheValue(
                             $cacheIdentifier,
                             [$this->settings['useExternalApi']],
-                            [ $this->settings['useExternalApi'], 'pid' => $assignedValues['jobsStorage'] ],
+                            [ $this->settings['useExternalApi'], 'pid' => $assignedValues['jobsStorageApi'] ],
                             \intval($assignedValues['apiCacheDuration'])
                         );
-
-                        $jobposts = $this->jobpostRepository->findAll();
-
-                        $this->view->assignMultiple([
-                            'jobposts' => $jobposts
-                        ]);
-
-                        return;
                     }
 
                     $this->addFlashMessage(
@@ -213,19 +205,38 @@ class JobpostController extends ActionController {
                         AbstractMessage::ERROR,
                         false
                     );
-
-                    return;
                 }
             }
 
-            // for example if JobpostsListEvent returns error then look if old jobposts are available
-            $jobposts = $this->jobpostRepository->findByPid(intval($assignedValues['jobsStorage']));
+            $jobsPidList = [];
+            // set ordering of result jobslist
+            if($this->settings['orderJobsDefaultToApi']) {
+                // Default jobs
+                if (!empty($this->settings['jobsStorage'])) {
+                    array_push($jobsPidList, intval($this->settings['jobsStorage']));
+                }
+                // Jobs from event / API
+                if (!empty($assignedValues['jobsStorageApi'])) {
+                    array_push($jobsPidList, intval($assignedValues['jobsStorageApi']));
+                }
+            } else {
+                // Jobs from event / API
+                if (!empty($assignedValues['jobsStorageApi'])) {
+                    array_push($jobsPidList, intval($assignedValues['jobsStorageApi']));
+                }
+                // Default jobs
+                if (!empty($this->settings['jobsStorage'])) {
+                    array_push($jobsPidList, intval($this->settings['jobsStorage']));
+                }
+            }
 
-            $this->view->assignMultiple([
-                'jobposts' => $jobposts
-            ]);
+            if(!empty($jobsPidList)) {
+                $jobposts = $this->jobpostRepository->findAllByPids($jobsPidList);
 
-            return;
+                $this->view->assignMultiple([
+                    'jobposts' => $jobposts
+                ]);
+            }
         }
 
         return;

@@ -74,6 +74,30 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $queryBuilder->execute()->fetchAll();
     }
 
+    public function findAllByPids(array $pids) {
+        // TODO: better implode - intExplode stuff
+        // $pidList = implode(', ', $pids);
+        // $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_hhsimplejobposts_domain_model_jobpost')->createQueryBuilder();
+        // $queryBuilder
+        //     ->select('*')
+        //     ->from('tx_hhsimplejobposts_domain_model_jobpost')
+        //     ->where(
+        //         $queryBuilder->expr()->in('pid', $queryBuilder->createNamedParameter(
+        //             GeneralUtility::intExplode(',', $pidList, true),
+        //             \TYPO3\CMS\Core\Database\Connection::PARAM_INT_ARRAY
+        //         ))
+        //     );
+
+        // return $queryBuilder->execute()->fetchAll();
+
+        $query = $this->createQuery();
+        $query->matching(
+            $query->in('pid', $pids)
+        );
+
+        return $query->execute();
+    }
+
     public function deleteReally(int $uid) {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
         $queryBuilder
