@@ -1,6 +1,9 @@
 <?php
 defined('TYPO3') || die();
 
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaTtAddress;
+
 $generalLanguageFilePrefix = 'LLL:EXT:core/Resources/Private/Language/';
 
 if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
@@ -22,10 +25,10 @@ if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
             'maxitems' => 1,
         ]
     ];
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address', $tempColumns_tt_address);
+    ExtensionManagementUtility::addTCAcolumns('tt_address', $tempColumns_tt_address);
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addToAllTCAtypes(
     'tt_address',
     $GLOBALS['TCA']['tt_address']['ctrl']['type'],
     '',
