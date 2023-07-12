@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die();
 
 $generalLanguageFilePrefix = 'LLL:EXT:core/Resources/Private/Language/';
 
