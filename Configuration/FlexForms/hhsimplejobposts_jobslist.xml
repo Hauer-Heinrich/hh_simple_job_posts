@@ -29,6 +29,23 @@
                         </TCEforms>
                     </settings.companiesStorage> -->
 
+                    <settings.layout>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>Layout</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">default</numIndex>
+                                        <numIndex index="1">default</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.layout>
+
                     <settings.useExternalApi>
                         <TCEforms>
                             <label>
