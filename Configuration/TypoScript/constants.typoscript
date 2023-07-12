@@ -9,16 +9,18 @@ plugin.tx_hhsimplejobposts {
     }
 
     settings {
-        # cat=plugin.tx_hhsimplejobposts//a; type=boolean; label=Output flashMessages?
+        # cat=plugin.tx_hhsimplejobposts/settings/010; type=boolean; label=Output flashMessages?
         flashMessages = 0
     }
 
     persistence {
-        # cat=plugin.tx_hhsimplejobposts//a; type=string; label=Default storage PID
-        storagePid =
-        # cat=plugin.tx_hhsimplejobposts//a; type=string; label=Default storage PID of organizations (tt_address)
+        # cat=plugin.tx_hhsimplejobposts/persistence/010; type=int; label=Default storage PID
+        storagePid = 0
+
+        # cat=plugin.tx_hhsimplejobposts/persistence/020; type=int; label=Default storage PID of organizations (tt_address)
         storagePidOrganizations = 0
-        # cat=plugin.tx_hhsimplejobposts//a; type=string; label=Default storage PID of contact points (tt_address)
+
+        # cat=plugin.tx_hhsimplejobposts/persistence/030; type=int; label=Default storage PID of contact points (tt_address)
         storagePidContactPointAddresses = 0
     }
 }
