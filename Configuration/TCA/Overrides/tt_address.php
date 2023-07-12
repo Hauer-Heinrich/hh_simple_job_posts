@@ -46,7 +46,9 @@ if (isset($GLOBALS['TCA']['tt_address']['types']['0']['showitem'])) {
     $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = '';
 }
 
-$GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = \HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaTtAddress::class . '->label';
+$GLOBALS['TCA']['tt_address']['ctrl']['label_alt'] = 'last_name,first_name,email,pid,company';
+// TODO: is this needed anymore?
+// $GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = TcaTtAddress::class . '->label';
 $GLOBALS['TCA']['tt_address']['types']['ttAddress_location']['showitem'] = '
     --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.organization;organization,
     image, description,
