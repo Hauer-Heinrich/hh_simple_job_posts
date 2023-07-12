@@ -106,6 +106,42 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
             );
 
-        return $queryBuilder->execute();
+        return $queryBuilder->executeQuery()->fetchAllAssociative();;
+    }
+
+    function getJobArray(int $jobUid) {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder
+            ->select('*')
+            ->from('tx_hhsimplejobposts_domain_model_jobpost')
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($jobUid, \PDO::PARAM_INT))
+            );
+
+        return $queryBuilder->executeQuery()->fetchAssociative();
+    }
+
+    function getJobLocationsArray(string $jobLocationsUidList) {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder
+            ->select('*')
+            ->from('tt_address')
+            ->where(
+                $queryBuilder->expr()->in('uid', $jobLocationsUidList)
+            );
+
+        return $queryBuilder->executeQuery()->fetchAllAssociative();
+    }
+
+    function getContactPointAddress(int $addressUid) {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder
+            ->select('*')
+            ->from('tt_address')
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($addressUid, \PDO::PARAM_INT))
+            );
+
+        return $queryBuilder->executeQuery()->fetchAssociative();
     }
 }
