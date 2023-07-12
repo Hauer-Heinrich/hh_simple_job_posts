@@ -1,9 +1,4 @@
 <?php
-$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\Extbase\\Object\\ObjectManager');
-$configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-$storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) : 0;
-$storagePidContactPointAddresses = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) : 0;
 
 return [
     'ctrl' => [
@@ -42,35 +37,6 @@ return [
             'showitem' => 'twitter_title, --linebreak--, twitter_description, --linebreak--, twitter_image, --linebreak--, twitter_card',
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => '
-            sys_language_uid,
-            l10n_parent,
-            l10n_diffsource,
-            hidden,
-            title,
-            short_description,
-            description,
-            maintasks,
-            profile,
-            education_requirements,
-            experience_requirements,
-            skills,
-            weprovide,
-            others,
-            employment_type,
-            work_hours,
-            hiring_organization,
-            job_locations,
-            base_salary_currency,
-            base_salary_value,
-            base_salary_value_max,
-            base_salary_unit_text,
-            contact_point_email,
-            contact_point_telephone,
-            slug
-        ',
-    ],
     'types' => [
         '1' => [
             'showitem' => '
@@ -94,6 +60,7 @@ return [
                 job_location,
                 job_locations,
                 slug,
+                categories,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.salary,
                     --palette--;;salary,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.contact_point,
@@ -256,6 +223,11 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
+            ],
+        ],
+        'categories' => [
+            'config' => [
+                'type' => 'category'
             ],
         ],
 
@@ -477,9 +449,6 @@ return [
                 // 'foreign_table' => 'tt_address',
                 // 'foreign_table_where' => 'AND tt_address.pid = '.intval($storagePidOrganizations),
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
-                'parameters' => [
-                    'storagePidOrganizations' => $storagePidOrganizations
-                ],
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -492,9 +461,6 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
-                'parameters' => [
-                    'storagePidOrganizations' => $storagePidOrganizations
-                ],
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -507,9 +473,6 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'itemsProcFunc' => 'HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaJobpostProcFunc->getJobLocationsTcaItems',
-                'itemsProcConfig' => [
-                    'storagePidOrganizations' => $storagePidOrganizations
-                ],
                 'default' => 0,
                 'size' => 10,
                 'autoSizeMax' => 30,
@@ -628,9 +591,6 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->contactAddressItems',
-                'parameters' => [
-                    'storagePidContactPointAddresses' => $storagePidContactPointAddresses
-                ],
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -640,29 +600,11 @@ return [
         'images' => [
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.images',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'fal_media',
-                [
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true,
-                    ],
-                    'appearance' => [
-                        'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
-                        'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true
-                    ],
-                    // 'foreign_match_fields' => [
-                    //     'fieldname' => 'fal_media',
-                    //     'tablenames' => 'tx_news_domain_model_news',
-                    //     'table_local' => 'sys_file',
-                    // ],
-                ],
-                // $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext']
-                'jpeg,jpg,png,gif,svg'
-            )
+            'config' => [
+                'type' => 'file',
+                'allowed' => ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+            ],
         ],
-
 
         'og_title' => [
             'exclude' => true,
@@ -688,33 +630,10 @@ return [
         'og_image' => [
             'exclude' => true,
             'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.og_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'og_image',
-                [
-                    // Use the imageoverlayPalette instead of the basicoverlayPalette
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                    --palette--;;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ]
-                        ],
-                        'columns' => [
-                            // TODO: 'crop' => $openGraphCropConfiguration
-                        ]
-                    ],
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            )
+            'config' => [
+                'type' => 'file',
+                'allowed' => ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+            ],
         ],
         'twitter_title' => [
             'exclude' => true,
@@ -740,33 +659,10 @@ return [
         'twitter_image' => [
             'exclude' => true,
             'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.twitter_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'twitter_image',
-                [
-                    // Use the imageoverlayPalette instead of the basicoverlayPalette
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-                                    --palette--;;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ]
-                        ],
-                        'columns' => [
-                            // TODO: 'crop' => $openGraphCropConfiguration
-                        ]
-                    ],
-                    'behaviour' => [
-                        'allowLanguageSynchronization' => true
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            )
+            'config' => [
+                'type' => 'file',
+                'allowed' => ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+            ],
         ],
         'twitter_card' => [
             'exclude' => true,
