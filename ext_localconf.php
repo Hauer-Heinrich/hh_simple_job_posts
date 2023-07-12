@@ -70,5 +70,5 @@ call_user_func(function() {
         ['source' => 'EXT:hh_simple_job_posts/Resources/Public/Icons/user_plugin_jobsdetail.svg']
     );
 
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['hhsimplejobposts_jobsFromApi'] ??= [];
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['hhsimplejobposts_jobsfromapi'] ??= [];
 });

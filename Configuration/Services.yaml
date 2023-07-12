@@ -11,12 +11,12 @@ services:
   HauerHeinrich\HhSimpleJobPosts\Http\TalentstormRequester:
     public: true
 
-  cache.hhsimplejobposts_jobsFromApi:
+  cache.hhsimplejobposts_jobsfromapi:
     class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
     factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
-    arguments: ['hhsimplejobposts_jobsFromApi']
+    arguments: ['hhsimplejobposts_jobsfromapi']
 
   HauerHeinrich\HhSimpleJobPosts\Utility\CacheUtility:
     public: true
     arguments:
-      $cache: '@cache.hhsimplejobposts_jobsFromApi'
+      $cache: '@cache.hhsimplejobposts_jobsfromapi'
