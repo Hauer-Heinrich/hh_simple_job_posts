@@ -38,4 +38,27 @@ plugin.tx_hhsimplejobposts {
     }
 }
 
+jobDetailJsonView = PAGE
+jobDetailJsonView {
+    typeNum = 587951
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        debug = 0
+        no_cache = 1
+        admPanel = 0
+    }
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = HhSimpleJobPosts
+        pluginName = Jobslist
+        vendorName = HauerHeinrich
+        controller = Jobpost
+    }
+}
+
 <INCLUDE_TYPOSCRIPT: source="DIR: ./Templates" extensions="typoscript">

@@ -3,13 +3,18 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Controller;
 
+use \Psr\Http\Message\ResponseInterface;
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use \TYPO3\CMS\Extbase\Http\ForwardResponse;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use \TYPO3\CMS\Core\Log\Logger;
 use \TYPO3\CMS\Core\Log\LogLevel;
-use \TYPO3\CMS\Core\Messaging\AbstractMessage;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost;
 use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
@@ -39,11 +44,10 @@ class JobpostController extends ActionController {
 
     /**
      * Settings aus dem ConfigurationManager ziehen und zuweisen
-     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      * @return void
      */
-    public function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view): void {
-        $this->settings['loaded']['hh_seo'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('hh_seo');
+    public function initializeView(): void {
+        $this->settings['loaded']['hh_seo'] = ExtensionManagementUtility::isLoaded('hh_seo');
 
         $this->view->assignMultiple([
             'settings' => $this->settings,
@@ -55,14 +59,12 @@ class JobpostController extends ActionController {
      * switchAction
      *
      * @param \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost
-     * @return void
+     * @return ResponseInterface
      */
-    public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null) {
+    public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null): ResponseInterface {
         // $showDetailView = intval($this->settings['showDetailView']);
-
         if (empty($jobpost)) {
-            $this->forward('list');
-            // TYPO3 >= 11 return new ForwardResponse('list');
+            return (new ForwardResponse('list'));
         }
 
         // $this->addFlashMessage(
@@ -71,17 +73,16 @@ class JobpostController extends ActionController {
         //     AbstractMessage::ERROR
         // );
 
-        $this->forward('show');
-        // TYPO3 >= 11 return new ForwardResponse('show');
+        return (new ForwardResponse('show'));
     }
 
     /**
      * action list
      *
      * @param HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost
-     * @return void
+     * @return ResponseInterface
      */
-    public function listAction(): void {
+    public function listAction(): ResponseInterface {
         $this->view->assignMultiple([
             'view' => 'list'
         ]);
@@ -97,7 +98,7 @@ class JobpostController extends ActionController {
                     'jobposts' => $jobposts
                 ]);
 
-                return;
+                return $this->htmlResponse();
             }
 
             $cacheUtility = GeneralUtility::makeInstance(\HauerHeinrich\HhSimpleJobPosts\Utility\CacheUtility::class);
@@ -131,7 +132,7 @@ class JobpostController extends ActionController {
                                 $this->addFlashMessage(
                                     $error->getMessage(),
                                     'Error',
-                                    AbstractMessage::ERROR,
+                                    ContextualFeedbackSeverity::ERROR,
                                     false
                                 );
                             }
@@ -153,7 +154,7 @@ class JobpostController extends ActionController {
                             $this->addFlashMessage(
                                 $error['message'],
                                 'Error',
-                                AbstractMessage::ERROR,
+                                ContextualFeedbackSeverity::ERROR,
                                 false
                             );
                         }
@@ -202,7 +203,7 @@ class JobpostController extends ActionController {
                     $this->addFlashMessage(
                         '$assignedValues["jobposts"] is not an array!',
                         'ERROR',
-                        AbstractMessage::ERROR,
+                        ContextualFeedbackSeverity::ERROR,
                         false
                     );
                 }
@@ -239,20 +240,24 @@ class JobpostController extends ActionController {
             }
         }
 
-        return;
+        return $this->htmlResponse();
     }
 
     /**
      * action show
+     * if domain.tld/.../my_job_detail_url/job.json is given, then returns this job as json!
      *
-     * @param HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost
-     * @return void
+     * @param Jobpost
+     * @return ResponseInterface
      */
-    public function showAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null): void {
+    public function showAction(Jobpost $jobpost = null): ResponseInterface {
         if(!empty($jobpost)) {
-            $typoLinkCodec = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Service\TypoLinkCodecService::class);
+            $contactPointEmail = null;
+            $contactPointTelephone = null;
 
             if(empty($jobpost->getContactPointAddress())) {
+                $typoLinkCodec = GeneralUtility::makeInstance(\TYPO3\CMS\Core\LinkHandling\TypoLinkCodecService::class);
+
                 if (!empty($jobpost->getContactPointEmail())) {
                     $contactPointEmailArray = $typoLinkCodec->decode($jobpost->getContactPointEmail());
                     $emailLinkHandler = GeneralUtility::makeInstance(\TYPO3\CMS\Core\LinkHandling\EmailLinkHandler::class);
@@ -270,6 +275,20 @@ class JobpostController extends ActionController {
                 $contactPointTelephone = $contactPointAddress->getPhone();
             }
 
+            if($GLOBALS['TSFE']->type === 587951) {
+                $jobPostArray = $this->formatJobToArray($jobpost);
+                $jsonOutput = [
+                    'view' => 'detail',
+                    'jobpost' => $jobPostArray,
+                    'contactPoint' => [
+                        'contactPointEmail' => $contactPointEmail,
+                        'contactPointTelephone' => $contactPointTelephone
+                    ]
+                ];
+
+                return $this->jsonResponse(\json_encode($jsonOutput));
+            }
+
             $this->view->assignMultiple([
                 'view' => 'detail',
                 'jobpost' => $jobpost,
@@ -279,5 +298,44 @@ class JobpostController extends ActionController {
                 ]
             ]);
         }
+
+        return $this->htmlResponse();
+    }
+
+    /**
+     * formatJobToArray
+     * Maps a Job object to array
+     *
+     * @param  Jobpost $jobpost
+     * @return array
+     */
+    function formatJobToArray(Jobpost $jobpost): array {
+        $result = [];
+        $job = $this->jobpostRepository->getJobArray($jobpost->getUid());
+
+        if(isset($job['job_locations']) && $job['job_locations'] !== '0') {
+            $job['job_locations'] = $this->jobpostRepository->getJobLocationsArray($job['job_locations']);
+        }
+
+        if(isset($job['contact_point_address']) && $job['contact_point_address'] !== 0) {
+            $job['contact_point_address'] = $this->jobpostRepository->getContactPointAddress($job['contact_point_address']);
+        }
+
+        if(isset($job['images']) && $job['images'] !== 0) {
+            $fileRepository = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\FileRepository::class);
+            $jobImages = $fileRepository->findByRelation('tx_hhsimplejobposts_domain_model_jobpost', 'images', $jobpost->getUid());
+
+            if(!empty($jobImages)) {
+                $images = [];
+
+                foreach ($jobImages as $key => $image) {
+                    $images[$key] = $image->toArray();
+                }
+
+                $job['images'] = $images;
+            }
+        }
+
+        return $job;
     }
 }
