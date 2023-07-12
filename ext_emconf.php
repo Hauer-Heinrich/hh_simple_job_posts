@@ -22,7 +22,8 @@ $EM_CONF['hh_simple_job_posts'] = [
     'version' => '1.2.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.5.99',
+            'typo3' => '12.4.0-12.4.99',
+            'fluid_styled_content' => '',
             'tt_address' => ''
         ],
         'conflicts' => [],
