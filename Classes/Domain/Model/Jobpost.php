@@ -217,6 +217,14 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $images;
 
     /**
+     * downloads
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $downloads;
+
+    /**
      * ogTitle
      *
      * @var string
@@ -279,6 +287,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function __construct() {
         $this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->downloads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->ogImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->jobLocations = $this->jobLocations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -918,6 +927,45 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imagesFileToRemove): void {
         $this->images->detach($imagesFileToRemove);
+    }
+
+    /**
+     * Returns the downloads
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $downloads
+     */
+    public function getDownloads() {
+        return $this->downloads;
+    }
+
+    /**
+     * Sets the downloads
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $downloads
+     * @return void
+     */
+    public function setDownloads(\TYPO3\CMS\Extbase\Domain\Model\FileReference $downloads): void {
+        $this->downloads = $downloads;
+    }
+
+    /**
+     * Adds a downloads
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $downloads
+     * @return void
+     */
+    public function addDownloads(\TYPO3\CMS\Extbase\Domain\Model\FileReference $downloads): void {
+        $this->downloads->attach($downloads);
+    }
+
+    /**
+     * Removes a downloads
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $downloadsFileToRemove The download to be removed
+     * @return void
+     */
+    public function removeDownloads(\TYPO3\CMS\Extbase\Domain\Model\FileReference $downloadsFileToRemove): void {
+        $this->downloads->detach($downloadsFileToRemove);
     }
 
     /**

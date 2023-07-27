@@ -336,6 +336,21 @@ class JobpostController extends ActionController {
             }
         }
 
+        if(isset($job['downloads']) && $job['downloads'] !== 0) {
+            $fileRepository = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\FileRepository::class);
+            $jobDownloads = $fileRepository->findByRelation('tx_hhsimplejobposts_domain_model_jobpost', 'downloads', $jobpost->getUid());
+
+            if(!empty($jobDownloads)) {
+                $downloads = [];
+
+                foreach ($jobDownloads as $key => $download) {
+                    $downloads[$key] = $download->toArray();
+                }
+
+                $job['downloads'] = $downloads;
+            }
+        }
+
         return $job;
     }
 }

@@ -29,6 +29,9 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.images" resname="tx_hhsimplejobposts_domain_model_jobpost.images">
                 <source>Job images</source>
             </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.downloads" resname="tx_hhsimplejobposts_domain_model_jobpost.downloads">
+                <source>Job downloads</source>
+            </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.title" resname="tx_hhsimplejobposts_domain_model_jobpost.title">
                 <source>Title</source>
             </trans-unit>

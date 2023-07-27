@@ -26,6 +26,7 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     contact_point_address int(11) unsigned DEFAULT '0',
 
     images int(11) unsigned DEFAULT '0',
+    downloads int(11) unsigned DEFAULT '0',
 
     slug varchar(2048),
     categories int(11) unsigned DEFAULT '0' NOT NULL,

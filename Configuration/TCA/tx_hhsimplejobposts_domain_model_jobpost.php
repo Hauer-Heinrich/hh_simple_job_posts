@@ -68,6 +68,7 @@ return [
                     --palette--;Used if no "Contact Address" is given;contactPoint,
                 --div--;Media,
                     images,
+                    downloads,
                 --div--;SEO,
                     --palette--;;opengraph,
                     --palette--;;twittercards,
@@ -603,6 +604,14 @@ return [
             'config' => [
                 'type' => 'file',
                 'allowed' => ['jpeg', 'jpg', 'png', 'gif', 'svg'],
+            ],
+        ],
+        'downloads' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.downloads',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-media-types,'
             ],
         ],
 
