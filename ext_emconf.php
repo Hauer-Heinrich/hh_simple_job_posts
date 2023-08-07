@@ -31,4 +31,9 @@ $EM_CONF['hh_simple_job_posts'] = [
             'hh_seo' => ''
         ],
     ],
+    'autoload' => [
+        'psr-4' => [
+            'HauerHeinrich\\HhSimpleJobPosts\\' => 'Classes'
+        ],
+    ],
 ];
