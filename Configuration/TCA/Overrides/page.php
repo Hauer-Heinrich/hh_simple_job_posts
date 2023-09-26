@@ -12,4 +12,11 @@ call_user_func(function() {
         'Configuration/TsConfig/AllPage.typoscript',
         'Simple Job Posts Page TS'
     );
+
+    // additional / extra config for: jobposts
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/TsConfig/jobpost-only.tsconfig',
+        'Additional / extra config for: jobposts'
+    );
 });

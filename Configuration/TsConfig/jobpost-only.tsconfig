@@ -1,0 +1,6 @@
+mod {
+    web_list {
+        allowedNewTables = tx_hhsimplejobposts_domain_model_jobpost
+        hideTables = tt_content
+    }
+}
