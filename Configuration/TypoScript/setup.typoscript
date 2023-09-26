@@ -61,4 +61,4 @@ jobDetailJsonView {
     }
 }
 
-<INCLUDE_TYPOSCRIPT: source="DIR: ./Templates" extensions="typoscript">
+@import 'EXT:hh_simple_job_posts/Configuration/TypoScript/Templates/*.typoscript'

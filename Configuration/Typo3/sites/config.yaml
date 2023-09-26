@@ -1,5 +1,9 @@
 # DEPRICATED see new location EXT:hh_simple_job_posts/sites/config.yaml
 routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    map:
+      job.json: 587951
   JobPluginDetail:
     type: Extbase
     extension: HhSimpleJobPosts
@@ -21,16 +25,10 @@ routeEnhancers:
     plugin: jobslist
     defaultController: 'Jobpost::list'
     routes:
-      - routePath: '/{job_slug}'
-        _controller: 'Jobpost::show'
-        _arguments:
-          job_slug: jobpost
       - routePath: '/detail/{job_slug}'
         _controller: 'Jobpost::switch'
         _arguments:
           job_slug: jobpost
-      - routePath: '/'
-        _controller: 'Jobpost::list'
     aspects:
       job_slug:
         type: PersistedAliasMapper

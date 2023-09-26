@@ -1,2 +1,2 @@
 ### Include all PageTS files
-<INCLUDE_TYPOSCRIPT: source="DIR:EXT:hh_simple_job_posts/Configuration/TsConfig/Page" extensions="typoscript">
+@import 'EXT:hh_simple_job_posts/Configuration/TsConfig/Page/*.tsconfig'

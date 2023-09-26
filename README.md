@@ -16,6 +16,44 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 - for addresses at this 2 folder it is required that the field 'tx_extbase_type' is set to 'ttAddress_location'!
 - create a folder at the TYPO3 backend tree in which jobs are stored.
 
+### Job-list and Job-detail on the same page
+
+### Disable all other content on this site/page if detail view of job-posts is given
+In this Example you should replace "MainContent" with your own one!
+TypoScript example:
+```
+[traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobslist/jobpost') > 0]
+    ### In our current opinion better solution:
+    ### Create a new colPos for your TYPO3 backendlayout
+    ### and show this colpos only if the detail view of job-posts is given
+    ### Example if you have in your main typoscript theme config something like the following 2 lines
+
+    ### page.10.variables.MainContent =< styles.content.get
+    ### page.10.variables.MainContent.select.where = colPos = 1
+
+    ### then add this "[traverse ...] from above with this next 3 lines in it
+    # page.10.variables.MainContent >
+    # page.10.variables.MainContent =< styles.content.get
+    # page.10.variables.MainContent.select.where = colPos = 100
+
+    ### alternative: most used way like for EXT:news
+    # lib.leftcontent = USER
+    # lib.leftcontent {
+    #     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    #     pluginName = Jobslist
+    #     extensionName = HhSimpleJobPosts
+    #     vendorName = HauerHeinrich
+    #     controller = Jobpost
+    #     action = show
+
+    #     view < plugin.tx_hhsimplejobposts.view
+    #     persistence < plugin.tx_hhsimplejobposts.persistence
+    #     settings < plugin.tx_hhsimplejobposts.settings
+    # }
+    # page.10.variables.MainContent =< lib.leftcontent
+[global]
+```
+
 ### Features
 - automatically generates config for sitemap (EXT:seo)
 - compatible with EXT:hh_seo
