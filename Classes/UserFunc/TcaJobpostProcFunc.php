@@ -35,7 +35,7 @@ class TcaJobpostProcFunc {
         $rows = $this->getContactPoints($storagePidContactPointAddresses);
 
         foreach ($rows as $row) {
-            if($row['tx_extbase_type'] === 'ttAddress_location') {
+            if($row['tx_extbase_type'] === 'place') {
                 $itemList[] = [$row['company'].' ('.$row['city'] . ' - id: ' . $row['uid'].')', $row['uid']];
                 continue;
             }
@@ -93,7 +93,7 @@ class TcaJobpostProcFunc {
 
         if(!empty($locations)) {
             foreach ($locations as $key => $location) {
-                if($location['tx_extbase_type'] === 'ttAddress_location') {
+                if($location['tx_extbase_type'] === 'place') {
                     $itemLabel = $location['company'] . " (" . $location['city'] . " Uid: " . \strval($location['uid']) . ")";
                     $configuration['items'][] = [$itemLabel, $location['uid']];
                 }
