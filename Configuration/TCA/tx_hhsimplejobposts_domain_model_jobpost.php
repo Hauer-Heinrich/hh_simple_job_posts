@@ -455,7 +455,7 @@ return [
                 'maxitems' => 1,
             ],
         ],
-        'job_location' => [
+        'job_location' => [ // TODO: Deprecated moved to job_locations below
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.job_location',
             'config' => [
@@ -465,6 +465,7 @@ return [
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'readOnly' => 1,
             ],
         ],
         'job_locations' => [

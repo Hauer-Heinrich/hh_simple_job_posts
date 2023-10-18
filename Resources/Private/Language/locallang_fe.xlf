@@ -32,8 +32,8 @@
                 <source>Hiring organization</source>
             </trans-unit>
 
-            <trans-unit id="detail.jobLocation">
-                <source>Job location</source>
+            <trans-unit id="detail.jobLocations">
+                <source>Job locations</source>
             </trans-unit>
 
         </body>
