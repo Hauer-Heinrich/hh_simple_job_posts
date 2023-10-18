@@ -3,11 +3,12 @@ routeEnhancers:
     type: PageType
     map:
       job.json: 587951
-  JobPluginDetail:
+
+  JobPluginList:
     type: Extbase
     extension: HhSimpleJobPosts
-    plugin: jobsdetail
-    defaultController: 'Jobpost::switch'
+    plugin: Jobslist
+    defaultController: 'Jobpost::list'
     routes:
       - routePath: '/{job_slug}'
         _controller: 'Jobpost::switch'
@@ -18,22 +19,17 @@ routeEnhancers:
         type: PersistedAliasMapper
         tableName: tx_hhsimplejobposts_domain_model_jobpost
         routeFieldName: slug
-  JobPluginList:
+
+  JobPluginDetail:
     type: Extbase
     extension: HhSimpleJobPosts
-    plugin: jobslist
-    defaultController: 'Jobpost::list'
+    plugin: Jobsdetail
+    defaultController: 'Jobpost::show'
     routes:
       - routePath: '/{job_slug}'
-        _controller: 'Jobpost::show'
-        _arguments:
-          job_slug: jobpost
-      - routePath: '/detail/{job_slug}'
         _controller: 'Jobpost::switch'
         _arguments:
           job_slug: jobpost
-      - routePath: '/'
-        _controller: 'Jobpost::list'
     aspects:
       job_slug:
         type: PersistedAliasMapper

@@ -15,21 +15,12 @@
                 <f:if condition="{jobpost.jobLocations} || {jobpost.jobLocation.city} || {jobpost.hiringOrganization.city}">
                     <p>
                         <f:if condition="{jobpost.jobLocations}">
-                            <f:then>
-                                <f:for each="{jobpost.jobLocations}" as="location" iteration="i">
-                                    <f:if condition="{location.city}">
-                                        <f:then><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {location.city} <br /></f:then>
-                                        <f:else><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {jobpost.hiringOrganization.city} <br /></f:else>
-                                    </f:if>
-                                </f:for>
-                            </f:then>
-                            <f:else>
-                                <f:comment>Deprecated</f:comment>
-                                <f:if condition="{jobpost.jobLocation.city}">
-                                    <f:then><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {jobpost.jobLocation.city}</f:then>
-                                    <f:else><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {jobpost.hiringOrganization.city}</f:else>
+                            <f:for each="{jobpost.jobLocations}" as="location" iteration="i">
+                                <f:if condition="{location.city}">
+                                    <f:then><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {location.city} <br /></f:then>
+                                    <f:else><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:list.location.uppercase" /> {jobpost.hiringOrganization.city} <br /></f:else>
                                 </f:if>
-                            </f:else>
+                            </f:for>
                         </f:if>
                     </p>
                 </f:if>

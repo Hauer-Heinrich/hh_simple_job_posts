@@ -1,0 +1,91 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ttaddr="http://typo3.org/ns/FriendsOfTYPO3/TtAddress/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:asset.script identifier="jobPosts" additionalAttributes="{type: 'application/ld+json'}">
+    {<f:comment></f:comment>
+        "@context" : "https://schema.org/",
+        "@type" : "JobPosting",
+        "title" : "{jobpost.title}",
+        "description" : "{jobpost.description -> f:format.html()}",
+        "datePosted" : "{datePosted}",
+        "validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",
+        "employmentType": [
+            <f:for each='{jobpost.employmentTypeArray}' as='type' iteration='i'>"{type}"<f:if condition='{i.isLast}'><f:then></f:then><f:else>,</f:else></f:if></f:for>
+        ],
+
+        <f:if condition="{jobpost.hiringOrganization.company}">
+            "hiringOrganization" : {<f:comment></f:comment>
+                "@type" : "Organization",
+                "name" : "{jobpost.hiringOrganization.company}",
+                "sameAs" : "{jobpost.hiringOrganization.www}",
+                "logo" : "<f:if condition='{jobpost.hiringOrganization.image}'>{f:uri.image(src: '{jobpost.hiringOrganization.image.0.uid}', treatIdAsReference: 1)}</f:if>"
+            },
+        </f:if>
+
+        <f:if condition="{jobpost.baseSalaryValue} > 0">
+            "baseSalary": {<f:comment></f:comment>
+                "@type": "MonetaryAmount",
+                "currency": "{jobpost.baseSalaryCurrency}",
+                "value": {
+                    "@type": "QuantitativeValue",
+                    <f:if condition="{jobpost.baseSalaryValue} > 0 && {jobpost.baseSalaryValueMax} > 0">
+                        <f:then>
+                            "minValue": {jobpost.baseSalaryValue},
+                            "maxValue": {jobpost.baseSalaryValueMax},
+                        </f:then>
+                        <f:else>
+                            "value": {jobpost.baseSalaryValue},
+                        </f:else>
+                    </f:if>
+                    "unitText": "{jobpost.baseSalaryUnitText}"
+                }
+            },
+        </f:if>
+
+        "applicationContact": {<f:comment></f:comment>
+            "@type": "ContactPoint",
+            "email": "{contactPoint.contactPointEmail}",
+            "telephone": "{contactPoint.contactPointTelephone}"
+        },
+
+        <f:if condition="{jobpost.educationRequirements}">
+            "educationRequirements": "{jobpost.educationRequirements -> f:format.html()}",
+        </f:if>
+        <f:if condition="{jobpost.experienceRequirements}">
+            "experienceRequirements": "{jobpost.experienceRequirements -> f:format.html()}",
+        </f:if>
+        <f:if condition="{jobpost.skills}">
+            "skills": "{jobpost.skills -> f:format.html()}",
+        </f:if>
+        <f:if condition="{jobpost.weprovide}">
+            "jobBenefits": "{jobpost.weprovide -> f:format.html()}",
+        </f:if>
+
+        <f:if condition="{jobpost.workHours}">
+            "workHours": "{jobpost.workHours}",
+        </f:if>
+
+        <f:if condition="{jobpost.jobLocation.company}">
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",<f:comment></f:comment>
+                    "streetAddress": "{jobpost.jobLocation.address}",
+                    "addressLocality": "{jobpost.jobLocation.city}",
+                    "postalCode": "{jobpost.jobLocation.zip}",
+                    "addressRegion": "{jobpost.jobLocation.region}",
+                    "addressCountry": "{jobpost.jobLocation.country}"
+                }
+            },
+        </f:if>
+
+        "identifier": {
+            "@type": "PropertyValue",
+            "name": "joboffer",
+            <f:comment></f:comment>"value": "{jobpost.uid}-{jobpost.hiringOrganization.company}"
+        }
+    }
+</f:asset.script>
+
+</html>

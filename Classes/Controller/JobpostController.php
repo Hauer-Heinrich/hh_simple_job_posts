@@ -14,7 +14,6 @@ use \TYPO3\CMS\Core\Log\LogLevel;
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost;
 use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
@@ -62,8 +61,8 @@ class JobpostController extends ActionController {
      * @return ResponseInterface
      */
     public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null): ResponseInterface {
-        // $showDetailView = intval($this->settings['showDetailView']);
-        if (empty($jobpost)) {
+        $queryParams = $this->request->getQueryParams();
+        if (empty($jobpost) && empty($queryParams['tx_hhsimplejobposts_jobslist']['jobpost'])) {
             return (new ForwardResponse('list'));
         }
 
@@ -251,6 +250,11 @@ class JobpostController extends ActionController {
      * @return ResponseInterface
      */
     public function showAction(Jobpost $jobpost = null): ResponseInterface {
+        $queryParams = $this->request->getQueryParams();
+        if(empty($jobpost) && isset($queryParams['tx_hhsimplejobposts_jobslist']['jobpost']) && \is_numeric($queryParams['tx_hhsimplejobposts_jobslist']['jobpost'])) {
+            $jobpost = $this->jobpostRepository->findByUid(intval($queryParams['tx_hhsimplejobposts_jobslist']['jobpost']));
+        }
+
         if(!empty($jobpost)) {
             $contactPointEmail = null;
             $contactPointTelephone = null;
