@@ -9,7 +9,6 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### Installation
 ... like any other TYPO3 extension
 
-#### Optional
 - create a folder at the TYPO3 backend tree in which addresses of hiring-organisations are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidOrganizations])
 - create a folder at the TYPO3 backend tree in which addresses of contact-point-addresses are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidContactPointAddresses])
 - both folders can be the same
@@ -17,10 +16,9 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 - create a folder at the TYPO3 backend tree in which jobs are stored.
 
 ### Job-list and Job-detail on the same page
-
 ### Disable all other content on this site/page if detail view of job-posts is given
 In this Example you should replace "MainContent" with your own one!
-TypoScript example:
+TypoScript example (https://github.com/Hauer-Heinrich/hh_simple_job_posts/blob/master/Configuration/TypoScript/example.typoscript):
 ```
 [traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobslist/jobpost') > 0]
     ### In our current opinion better solution:
