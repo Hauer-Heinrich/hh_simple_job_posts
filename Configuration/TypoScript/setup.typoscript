@@ -8,7 +8,7 @@ plugin.tx_hhsimplejobposts {
             0 = EXT:hh_simple_job_posts/Resources/Private/Partials/
             10 = {$plugin.tx_hhsimplejobposts.view.partialRootPath}
         }
-        layoutRootPath {
+        layoutRootPaths {
             0 = EXT:hh_simple_job_posts/Resources/Private/Layouts/
             10 = {$plugin.tx_hhsimplejobposts.view.layoutRootPath}
         }
