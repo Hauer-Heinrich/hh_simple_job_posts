@@ -13,7 +13,6 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     work_hours varchar(255) DEFAULT '' NOT NULL,
 
     hiring_organization int(11) unsigned DEFAULT '0',
-    job_location int(11) unsigned DEFAULT '0',
     job_locations text NOT NULL,
 
     base_salary_currency varchar(255) DEFAULT '' NOT NULL,
@@ -24,6 +23,7 @@ CREATE TABLE tx_hhsimplejobposts_domain_model_jobpost (
     contact_point_email varchar(255) DEFAULT '' NOT NULL,
     contact_point_telephone varchar(255) DEFAULT '' NOT NULL,
     contact_point_address int(11) unsigned DEFAULT '0',
+    contact_point_addresses text NOT NULL,
 
     images int(11) unsigned DEFAULT '0',
     downloads int(11) unsigned DEFAULT '0',

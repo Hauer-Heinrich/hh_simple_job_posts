@@ -57,7 +57,6 @@ return [
                 employment_type,
                 work_hours,
                 hiring_organization,
-                job_location,
                 job_locations,
                 slug,
                 categories,
@@ -65,6 +64,7 @@ return [
                     --palette--;;salary,
                 --div--;LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.div.contact_point,
                     contact_point_address,
+                    contact_point_addresses,
                     --palette--;Used if no "Contact Address" is given;contactPoint,
                 --div--;Media,
                     images,
@@ -447,25 +447,10 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                // 'foreign_table' => 'tt_address',
-                // 'foreign_table_where' => 'AND tt_address.pid = '.intval($storagePidOrganizations),
                 'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ],
-        ],
-        'job_location' => [ // TODO: Deprecated moved to job_locations below
-            'exclude' => true,
-            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.job_location',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'itemsProcFunc' => 'HauerHeinrich\\HhSimpleJobPosts\\UserFunc\\TcaJobpostProcFunc->companyAddressItems',
-                'default' => 0,
-                'minitems' => 0,
-                'maxitems' => 1,
-                'readOnly' => 1,
             ],
         ],
         'job_locations' => [
@@ -547,7 +532,7 @@ return [
         ],
 
         'contact_point_email' => [
-            'displayCond' => 'FIELD:contact_point_address:=:0',
+            'displayCond' => 'FIELD:contact_point_addresses:=:0',
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_email',
             'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_email.description',
@@ -562,11 +547,11 @@ return [
                             'blindLinkOptions' => 'file, folder, page, spec, telephone, url'
                         ]
                     ]
-                ]
+                ],
             ],
         ],
         'contact_point_telephone' => [
-            'displayCond' => 'FIELD:contact_point_address:=:0',
+            'displayCond' => 'FIELD:contact_point_addresses:=:0',
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone',
             'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone.description',
@@ -586,7 +571,7 @@ return [
                 ]
             ],
         ],
-        'contact_point_address' => [
+        'contact_point_address' => [ // TODO: @deprecated - moved to contact_point_addresses below
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_address',
             'config' => [
@@ -596,6 +581,34 @@ return [
                 'default' => 0,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'readOnly' => 1,
+            ],
+        ],
+
+        'contact_point_addresses' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_addresses',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'itemsProcFunc' => 'HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaJobpostProcFunc->getContactPointAddressesTcaItems',
+                'default' => 0,
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'multiple' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => true,
+                    ],
+                    'addRecord' => [
+                        'disabled' => true,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
             ],
         ],
 

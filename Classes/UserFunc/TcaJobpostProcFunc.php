@@ -21,16 +21,26 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 class TcaJobpostProcFunc {
 
     /**
+     * pluginConfiguration
+     * TypoScript plugin configuration
+     *
+     * @var array
+     */
+    protected array $pluginConfiguration = [];
+
+    public function __construct(protected readonly ConfigurationManager $configurationManager) {
+        $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $this->pluginConfiguration = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']) ? $extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.'] : [];
+    }
+
+    /**
      * contactAddressItems
      *
      * @param array $config
      * @return array
      */
     public function contactAddressItems(array $config): array {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $storagePidContactPointAddresses = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidContactPointAddresses']) : 0;        $itemList = [];
-
+        $storagePidContactPointAddresses = isset($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) ? intval($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) : 0;
         $itemList = [];
         $rows = $this->getContactPoints($storagePidContactPointAddresses);
 
@@ -62,15 +72,14 @@ class TcaJobpostProcFunc {
      * @return array
      */
     public function companyAddressItems(array $config): array {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) : 0;
-
+        $storagePidOrganizations = isset($this->pluginConfiguration['persistence.']['storagePidOrganizations']) ? intval($this->pluginConfiguration['persistence.']['storagePidOrganizations']) : 0;
         $itemList = [];
         $rows = $this->getCompanies($storagePidOrganizations);
+
         foreach ($rows as $row) {
             $itemList[] = [$row['company'].' ('.$row['city'].')', $row['uid']];
         }
+
         $itemList[] = ['not selected', 0];
         $config['items'] = $itemList;
 
@@ -85,10 +94,7 @@ class TcaJobpostProcFunc {
      * @internal
      */
     public function getJobLocationsTcaItems(array &$configuration): void {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $storagePidOrganizations = isset($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) ? intval($extbaseFrameworkConfiguration['plugin.']['tx_hhsimplejobposts.']['persistence.']['storagePidOrganizations']) : 0;
-
+        $storagePidOrganizations = isset($this->pluginConfiguration['persistence.']['storagePidOrganizations']) ? intval($this->pluginConfiguration['persistence.']['storagePidOrganizations']) : 0;
         $locations = $this->getContactPoints($storagePidOrganizations);
 
         if(!empty($locations)) {
@@ -117,7 +123,7 @@ class TcaJobpostProcFunc {
         }
 
         $queryBuilder
-            ->select('uid', 'name', 'first_name', 'last_name', 'company', 'city', 'tx_extbase_type')
+            ->select('uid', 'name', 'first_name', 'last_name', 'email', 'company', 'city', 'tx_extbase_type')
             ->from('tt_address');
         if(!empty($whereExpressions)) {
             $queryBuilder->where(...$whereExpressions);
@@ -151,5 +157,26 @@ class TcaJobpostProcFunc {
         $results = $queryBuilder->executeQuery()->fetchAllAssociative();
 
         return $results;
+    }
+
+    /**
+     * getJobLocationsTcaItems
+     *
+     * @param array $configuration Current field configuration
+     * @throws \UnexpectedValueException
+     * @internal
+     */
+    public function getContactPointAddressesTcaItems(array &$configuration): void {
+        $storagePidContactPointAddresses = isset($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) ? intval($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) : 0;
+        $contactPointAddresses = $this->getContactPoints($storagePidContactPointAddresses);
+
+        if(!empty($contactPointAddresses)) {
+            foreach ($contactPointAddresses as $address) {
+                if($address['tx_extbase_type'] !== 'place') {
+                    $itemLabel = $address['first_name'] . " " . $address['last_name'] . " (" . $address['email'] . ")";
+                    $configuration['items'][] = [$itemLabel, $address['uid']];
+                }
+            }
+        }
     }
 }

@@ -146,13 +146,6 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $hiringOrganization = null;
 
     /**
-     * jobLocation
-     *
-     * @var \FriendsOfTYPO3\TtAddress\Domain\Model\Address
-     */
-    protected $jobLocation = null;
-
-    /**
      * jobLocations
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address>
@@ -207,6 +200,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @var \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      */
     protected $contactPointAddress = null;
+
+    /**
+     * contactPointAddresses
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address>
+     */
+    protected $contactPointAddresses = null;
 
     /**
      * images
@@ -291,6 +291,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->ogImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->jobLocations = $this->jobLocations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->contactPointAddresses = $this->contactPointAddresses ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -700,25 +701,6 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
     /**
-     * Returns the jobLocation
-     *
-     * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address
-     */
-    public function getJobLocation(): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address {
-        return $this->jobLocation;
-    }
-
-    /**
-     * Sets the jobLocation
-     *
-     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation
-     * @return void
-     */
-    public function setJobLocation(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation): void {
-        $this->jobLocation = $jobLocation;
-    }
-
-    /**
      * Adds a Address
      *
      * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $jobLocation
@@ -874,6 +856,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Returns the contactPointAddress
      *
+     * @deprecated
      * @return \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
      */
     public function getContactPointAddress(): ?\FriendsOfTYPO3\TtAddress\Domain\Model\Address {
@@ -883,11 +866,52 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     /**
      * Sets the contactPointAddress
      *
+     * @deprecated
      * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
      * @return void
      */
     public function setContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress): void {
         $this->contactPointAddress = $contactPointAddress;
+    }
+
+
+    /**
+     * Adds a Address
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress
+     * @return void
+     */
+    public function addContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddress): void {
+        $this->contactPointAddresses->attach($contactPointAddress);
+    }
+
+    /**
+     * Removes a Address
+     *
+     * @param \FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddressToRemove The Address to be removed
+     * @return void
+     */
+    public function removeContactPointAddress(\FriendsOfTYPO3\TtAddress\Domain\Model\Address $contactPointAddressToRemove): void {
+        $this->contactPointAddresses->detach($contactPointAddressToRemove);
+    }
+
+    /**
+     * Returns the jobLocations
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address>
+     */
+    public function getContactPointAddresses(): \TYPO3\CMS\Extbase\Persistence\ObjectStorage {
+        return $this->contactPointAddresses;
+    }
+
+    /**
+     * Sets the contactPointAddresses
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\TtAddress\Domain\Model\Address> $contactPointAddresses
+     * @return void
+     */
+    public function setContactPointAddresses(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $contactPointAddresses): void {
+        $this->contactPointAddresses = $contactPointAddresses;
     }
 
     /**

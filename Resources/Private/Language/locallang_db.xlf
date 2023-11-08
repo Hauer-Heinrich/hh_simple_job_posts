@@ -68,9 +68,6 @@
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization" resname="tx_hhsimplejobposts_domain_model_jobpost.hiring_organization">
                 <source>Hiring Organization</source>
             </trans-unit>
-            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_location" resname="tx_hhsimplejobposts_domain_model_jobpost.job_location">
-                <source>Job location (DEPRICATED!)</source>
-            </trans-unit>
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.job_locations" resname="tx_hhsimplejobposts_domain_model_jobpost.job_locations">
                 <source>Job locations</source>
             </trans-unit>
@@ -126,6 +123,10 @@
 
             <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_address">
                 <source>Contact Address (person)</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.contact_point_addresses">
+                <source>Contact Addresses (persons)</source>
             </trans-unit>
 
         </body>

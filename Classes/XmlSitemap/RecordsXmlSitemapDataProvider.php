@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 /*
@@ -18,20 +17,19 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhSimpleJobPosts\XmlSitemap;
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\QueryHelper;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
+use \Psr\Http\Message\ServerRequestInterface;
+use \TYPO3\CMS\Core\Context\Context;
+use \TYPO3\CMS\Core\Database\ConnectionPool;
+use \TYPO3\CMS\Core\Database\Query\QueryHelper;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use \TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
 
 /**
  * XmlSiteDataProvider will provide information for the XML sitemap for a specific database table
- * @internal this class is not part of TYPO3's Core API.
+ * @internal
  */
-class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXmlSitemapDataProvider
-{
+class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXmlSitemapDataProvider {
     /**
      * @param ServerRequestInterface $request
      * @param string $key
@@ -39,8 +37,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
      * @param ContentObjectRenderer|null $cObj
      * @throws MissingConfigurationException
      */
-    public function __construct(ServerRequestInterface $request, string $key, array $config = [], ContentObjectRenderer $cObj = null)
-    {
+    public function __construct(ServerRequestInterface $request, string $key, array $config = [], ContentObjectRenderer $cObj = null) {
         parent::__construct($request, $key, $config, $cObj);
 
         $this->generateItems();
@@ -49,8 +46,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
     /**
      * @throws MissingConfigurationException
      */
-    public function generateItems(): void
-    {
+    public function generateItems(): void {
         $table = $this->config['table'];
 
         if (empty($table)) {
@@ -68,8 +64,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
                 $queryBuilderPlugin->expr()->eq('CType', $queryBuilderPlugin->createNamedParameter('list')),
                 $queryBuilderPlugin->expr()->eq('list_type', $queryBuilderPlugin->createNamedParameter('hhsimplejobposts_jobslist'))
             )
-            ->execute()
-            ->fetchAll();
+            ->executeQuery()->fetchAllAssociative();
 
         if (!empty($pluginsSettings)) {
             foreach ($pluginsSettings as $plugin) {
@@ -137,8 +132,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
                 }
 
                 $rows = $queryBuilder->orderBy($sortField)
-                    ->execute()
-                    ->fetchAll();
+                    ->executeQuery()->fetchAllAssociative();
 
                 foreach ($rows as $row) {
                     $item = [
@@ -159,8 +153,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
      * @param array $data
      * @return array
      */
-    protected function defineUrl(array $data): array
-    {
+    protected function defineUrl(array $data): array {
         $pageId = $this->config['url']['pageId'] ?? $GLOBALS['TSFE']->id;
         $additionalParams = [];
 
@@ -190,8 +183,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
      * @param array $data
      * @return array
      */
-    protected function getUrlFieldParameterMap(array $additionalParams, array $data): array
-    {
+    protected function getUrlFieldParameterMap(array $additionalParams, array $data): array {
         if (!empty($this->config['url']['fieldToParameterMap']) &&
             \is_array($this->config['url']['fieldToParameterMap'])) {
             foreach ($this->config['url']['fieldToParameterMap'] as $field => $urlPart) {
@@ -206,8 +198,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
      * @param array $additionalParams
      * @return array
      */
-    protected function getUrlAdditionalParams(array $additionalParams): array
-    {
+    protected function getUrlAdditionalParams(array $additionalParams): array {
         if (!empty($this->config['url']['additionalGetParameters']) &&
             is_array($this->config['url']['additionalGetParameters'])) {
             foreach ($this->config['url']['additionalGetParameters'] as $extension => $extensionConfig) {
@@ -224,9 +215,9 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
      * @return int
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
-    protected function getLanguageId(): int
-    {
+    protected function getLanguageId(): int {
         $context = GeneralUtility::makeInstance(Context::class);
+
         return (int)$context->getPropertyFromAspect('language', 'id');
     }
 }

@@ -8,6 +8,9 @@ services:
     resource: '../Classes/*'
     #exclude: '../Classes/Domain/Model/*'
 
+  HauerHeinrich\HhSimpleJobPosts\UserFunc\TcaJobpostProcFunc:
+    public: true
+
   HauerHeinrich\HhSimpleJobPosts\Http\TalentstormRequester:
     public: true
 

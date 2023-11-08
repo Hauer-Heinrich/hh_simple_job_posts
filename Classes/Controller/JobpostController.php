@@ -321,8 +321,13 @@ class JobpostController extends ActionController {
             $job['job_locations'] = $this->jobpostRepository->getJobLocationsArray($job['job_locations']);
         }
 
+        // TODO: @deprecated
         if(isset($job['contact_point_address']) && $job['contact_point_address'] !== 0) {
             $job['contact_point_address'] = $this->jobpostRepository->getContactPointAddress($job['contact_point_address']);
+        }
+
+        if(isset($job['contact_point_addresses']) && $job['contact_point_addresses'] !== 0) {
+            $job['contact_point_addresses'] = $this->jobpostRepository->getContactPointAddresses($job['contact_point_addresses']);
         }
 
         if(isset($job['images']) && $job['images'] !== 0) {

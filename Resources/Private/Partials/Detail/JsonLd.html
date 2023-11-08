@@ -43,11 +43,29 @@
             },
         </f:if>
 
-        "applicationContact": {<f:comment></f:comment>
-            "@type": "ContactPoint",
-            "email": "{contactPoint.contactPointEmail}",
-            "telephone": "{contactPoint.contactPointTelephone}"
-        },
+        <f:if condition="{jobpost.contactPointAddresses}">
+            <f:then>
+                "contactPoint": [<f:comment></f:comment>
+                <f:for each="{jobpost.contactPointAddresses}" as="contactAddress" iteration="i_contactAddress">
+                    {
+                        "@type": "ContactPoint",
+                        <f:if condition="{contactAddress.phone}">"telephone": "{contactAddress.phone}",</f:if>
+                        <f:if condition="{contactAddress.position}">"contactType": "{contactAddress.position}",</f:if>
+                        <f:if condition="{contactAddress.email}">"email": "{contactAddress.email}"</f:if>
+                    }<f:if condition="{i_contactAddress.isLast}"><f:else>,</f:else></f:if>
+                </f:for>
+                ],
+            </f:then>
+            <f:else>
+                <f:if condition="{contactPoint.contactPointEmail} || {contactPoint.contactPointTelephone}">
+                    "contactPoint": [{<f:comment></f:comment>
+                        "@type": "ContactPoint",
+                        "email": "{contactPoint.contactPointEmail}",
+                        "telephone": "{contactPoint.contactPointTelephone}"
+                    }],
+                </f:if>
+            </f:else>
+        </f:if>
 
         <f:if condition="{jobpost.educationRequirements}">
             "educationRequirements": "{jobpost.educationRequirements -> f:format.html()}",
@@ -66,18 +84,22 @@
             "workHours": "{jobpost.workHours}",
         </f:if>
 
-        <f:if condition="{jobpost.jobLocation.company}">
-            "jobLocation": {
-                "@type": "Place",
-                "address": {
-                    "@type": "PostalAddress",<f:comment></f:comment>
-                    "streetAddress": "{jobpost.jobLocation.address}",
-                    "addressLocality": "{jobpost.jobLocation.city}",
-                    "postalCode": "{jobpost.jobLocation.zip}",
-                    "addressRegion": "{jobpost.jobLocation.region}",
-                    "addressCountry": "{jobpost.jobLocation.country}"
-                }
-            },
+        <f:if condition="{jobpost.jobLocations}">
+            "jobLocation": [
+                <f:for each="{jobpost.jobLocations}" as="location" iteration="i_location">
+                    {
+                        "@type": "Place",
+                        "address": {
+                            "@type": "PostalAddress",<f:comment></f:comment>
+                            "addressLocality": "{location.city}",
+                            "postalCode": "{location.zip}",
+                            <f:if condition="{location.region}">"addressRegion": "{location.region}",</f:if>
+                            <f:if condition="{location.country}">"addressCountry": "{location.country}",</f:if>
+                            "streetAddress": "{location.address}"
+                        }
+                    }<f:if condition="{i_location.isLast}"><f:else>,</f:else></f:if>
+                </f:for>
+            ],
         </f:if>
 
         "identifier": {
