@@ -106,7 +106,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
             );
 
-        return $queryBuilder->executeQuery()->fetchAllAssociative();;
+        return $queryBuilder->executeStatement();
     }
 
     function getJobArray(int $jobUid) {

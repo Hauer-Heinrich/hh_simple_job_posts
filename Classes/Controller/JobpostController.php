@@ -210,7 +210,7 @@ class JobpostController extends ActionController {
 
             $jobsPidList = [];
             // set ordering of result jobslist
-            if($this->settings['orderJobsDefaultToApi']) {
+            if(\intval($this->settings['orderJobsDefaultToApi']) === 1) {
                 // Default jobs
                 if (!empty($this->settings['jobsStorage'])) {
                     array_push($jobsPidList, intval($this->settings['jobsStorage']));
@@ -221,7 +221,7 @@ class JobpostController extends ActionController {
                 }
             } else {
                 // Jobs from event / API
-                if (!empty($assignedValues['jobsStorageApi'])) {
+                if (!empty(intval($assignedValues['jobsStorageApi']))) {
                     array_push($jobsPidList, intval($assignedValues['jobsStorageApi']));
                 }
                 // Default jobs
