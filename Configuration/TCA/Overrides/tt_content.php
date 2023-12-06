@@ -11,6 +11,11 @@ call_user_func(function() {
     $extensionNameLower = strtolower($extensionName);
 
     // List
+    // ExtensionUtility::registerPlugin(
+    //     'HhSimpleJobPosts',
+    //     'Jobslist',
+    //     'Jobs List'
+    // );
     $pluginName = 'jobslist';
     $pluginSignature = $extensionNameLower . '_' . strtolower($pluginName);
 
@@ -27,4 +32,10 @@ call_user_func(function() {
         'FILE:EXT:' . $extensionKey . '/Configuration/FlexForms/' . $pluginSignature . '.xml'
     );
     // ---------------
+
+    ExtensionUtility::registerPlugin(
+        'HhSimpleJobPosts',
+        'Jobsdetail',
+        'Jobs Detail'
+    );
 });

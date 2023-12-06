@@ -19,7 +19,10 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,description,maintasks,profile,weprovide,others',
-        'iconfile' => 'EXT:hh_simple_job_posts/Resources/Public/Icons/tx_hhsimplejobposts_domain_model_jobpost.gif'
+        'iconfile' => 'EXT:hh_simple_job_posts/Resources/Public/Icons/tx_hhsimplejobposts_domain_model_jobpost.gif',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'palettes' => [
         'salary' => [
