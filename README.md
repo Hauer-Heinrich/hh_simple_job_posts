@@ -52,6 +52,26 @@ TypoScript example (https://github.com/Hauer-Heinrich/hh_simple_job_posts/blob/m
 [global]
 ```
 
+### Translations via TypoScript
+```
+### Example:
+plugin.tx_hhsimplejobposts {
+    _LOCAL_LANG {
+        de {
+            detail.maintasks = Deine Aufgaben
+            detail.profile = Dein Profil
+            detail.skills = Deine Skills
+            detail.weprovide = Das erwartet dich bei uns
+            detail.hiringOrganization = Oder per Post an:
+            detail.phone.before = Tel.:
+            detail.contact_point_email.before = Ihre Anfrage/Bewerbung senden Sie bitte an:
+            detail.contact_point_telephone.before = Tel.:
+            detail.contact_point_telephone.after =
+        }
+    }
+}
+```
+
 ### Features
 - automatically generates config for sitemap (EXT:seo)
 - compatible with EXT:hh_seo

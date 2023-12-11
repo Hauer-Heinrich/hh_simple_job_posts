@@ -45,12 +45,14 @@
 
                 <f:if condition="{location.phone}">
                     <span itemprop="telephone">
+                        <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.location.phone.before" />
                         <a href="tel:{location.phone->ttaddr:removeSpaces()}">{location.phone}</a>
                     </span>
                 </f:if>
 
                 <f:if condition="{location.email}">
                     <span itemprop="email">
+                        <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.location.email.before" />
                         <f:link.email email="{location.email}">{location.email}</f:link.email>
                     </span>
                 </f:if>

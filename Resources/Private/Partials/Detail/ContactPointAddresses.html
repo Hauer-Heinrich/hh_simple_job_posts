@@ -18,7 +18,8 @@
                                 {contactPointAddress.position}<br />
                             </f:if>
                             <f:if condition="{contactPointAddress.phone}">
-                                Tel.: <a href="tel:{contactPointAddress.phone -> ttaddr:removeSpaces()}">{contactPointAddress.phone}</a><br />
+                                <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.phone.before" />
+                                <a href="tel:{contactPointAddress.phone -> ttaddr:removeSpaces()}">{contactPointAddress.phone}</a><br />
                             </f:if>
                             <f:link.email email="{contactPointAddress.email}"></f:link.email>
                         </p>
@@ -31,13 +32,15 @@
         <f:if condition="{contactPointEmail} || {contactPointTelephone}">
             <div class="frame frame-default contactpoint">
                 <f:if condition="{contactPointEmail}">
-                    <p>Ihre Bewerbung schicken Sie bitte an:
+                    <p><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.contact_point_email.before" />
                         <f:link.email email="{contactPointEmail}"></f:link.email>
                     </p>
                 </f:if>
                 <f:if condition="{contactPointTelephone}">
                     <p>
-                        Sollten Sie noch Fragen haben, können Sie uns außerdem unter <a href="tel:{contactPointTelephone -> ttaddr:removeSpaces()}">{contactPointTelephone}</a> erreichen.
+                        <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.contact_point_telephone.before" />
+                        <a href="tel:{contactPointTelephone -> ttaddr:removeSpaces()}">{contactPointTelephone}</a>
+                        <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.contact_point_telephone.after" />
                     </p>
                 </f:if>
             </div>

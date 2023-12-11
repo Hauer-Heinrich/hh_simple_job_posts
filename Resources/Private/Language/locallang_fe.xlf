@@ -28,12 +28,43 @@
                 <source>Contact Point</source>
             </trans-unit>
 
+            <trans-unit id="detail.phone.before">
+                <source>Phone</source>
+            </trans-unit>
+
             <trans-unit id="detail.hiringOrganization">
                 <source>Hiring organization</source>
             </trans-unit>
 
             <trans-unit id="detail.jobLocations">
                 <source>Job locations</source>
+            </trans-unit>
+
+            <trans-unit id="detail.contact_point_email.before">
+                <source>Please send your application to:</source>
+            </trans-unit>
+
+            <trans-unit id="detail.contact_point_telephone.before">
+                <source>If you have any further questions, you can also contact us at</source>
+            </trans-unit>
+            <trans-unit id="detail.contact_point_telephone.after">
+                <source>.</source>
+            </trans-unit>
+
+            <trans-unit id="detail.hiring_organization.phone.before">
+                <source>Phone</source>
+            </trans-unit>
+
+            <trans-unit id="detail.hiring_organization.email.before">
+                <source></source>
+            </trans-unit>
+
+            <trans-unit id="detail.location.phone.before">
+                <source>Phone</source>
+            </trans-unit>
+
+            <trans-unit id="detail.location.email.before">
+                <source></source>
             </trans-unit>
 
         </body>

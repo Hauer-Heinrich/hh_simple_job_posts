@@ -42,12 +42,14 @@
 
         <f:if condition="{hiringOrganization.phone}">
             <span itemprop="telephone">
+                <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.hiring_organization.phone.before" />
                 <a href="tel:{hiringOrganization.phone->ttaddr:removeSpaces()}">{hiringOrganization.phone}</a>
             </span>
         </f:if>
 
         <f:if condition="{hiringOrganization.email}">
             <span itemprop="email">
+                <f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.hiring_organization.email.before" />
                 <f:link.email email="{hiringOrganization.email}">{hiringOrganization.email}</f:link.email>
             </span>
         </f:if>
