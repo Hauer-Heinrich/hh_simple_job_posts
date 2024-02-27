@@ -61,16 +61,20 @@ final class JobLocationUpgradeWizard implements UpgradeWizardInterface {
      * @return bool Whether an update is required (TRUE) or not (FALSE)
      */
     public function updateNecessary(): bool {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
-        $whereExpressions = [];
+        try {
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+            $whereExpressions = [];
 
-        $whereExpressions[] = $queryBuilder->expr()->gt('job_location', 0);
+            $whereExpressions[] = $queryBuilder->expr()->gt('job_location', 0);
 
-        $queryBuilder
-            ->select('uid', 'job_location')
-            ->from('tx_hhsimplejobposts_domain_model_jobpost');
-        $queryBuilder->where(...$whereExpressions);
-        $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+            $queryBuilder
+                ->select('uid', 'job_location')
+                ->from('tx_hhsimplejobposts_domain_model_jobpost');
+            $queryBuilder->where(...$whereExpressions);
+            $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+        } catch (\Throwable $th) {
+            return false;
+        }
 
         if(!empty($results)) {
             return true;
