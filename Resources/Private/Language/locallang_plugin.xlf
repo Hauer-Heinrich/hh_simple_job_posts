@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+
+            <trans-unit id="single_records" xml:space="preserve">
+                <source>Single jobs</source>
+            </trans-unit>
+            <trans-unit id="group_selection" xml:space="preserve">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="includeSubcategories" xml:space="preserve">
+                <source>Include subcategories</source>
+            </trans-unit>
+            <trans-unit id="combination" xml:space="preserve">
+            <source>Combination</source>
+            </trans-unit>
+            <trans-unit id="combination.and" xml:space="preserve">
+            <source>AND</source>
+            </trans-unit>
+            <trans-unit id="combination.or" xml:space="preserve">
+                <source>OR</source>
+            </trans-unit>
+
+            <trans-unit id="sortBy" xml:space="preserve">
+                <source>Sort By</source>
+            </trans-unit>
+            <trans-unit id="sortBy.singleSelection" xml:space="preserve">
+                <source>Order of single jobs</source>
+            </trans-unit>
+            <trans-unit id="sortBy.default" xml:space="preserve" approved="yes">
+                <source>default</source>
+            </trans-unit>
+            <trans-unit id="sortBy.category" xml:space="preserve" approved="yes">
+                <source>categories</source>
+            </trans-unit>
+
+            <trans-unit id="sortBy.sorting" xml:space="preserve" approved="yes">
+                <source>Order of jobs</source>
+            </trans-unit>
+            <trans-unit id="sortOrder" xml:space="preserve">
+                <source>Sort Order</source>
+            </trans-unit>
+            <trans-unit id="sortOrder.ascending" xml:space="preserve">
+                <source>Ascending</source>
+            </trans-unit>
+            <trans-unit id="sortOrder.descending" xml:space="preserve">
+                <source>Descending</source>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

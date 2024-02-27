@@ -14,6 +14,7 @@ use \TYPO3\CMS\Core\Log\LogLevel;
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost;
 use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\JobpostRepository;
+use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository;
 
 /**
  * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
@@ -36,9 +37,15 @@ class JobpostController extends ActionController {
      */
     protected JobpostRepository $jobpostRepository;
 
-    public function __construct(\TYPO3\CMS\Core\Log\LogManager $logger, JobpostRepository $jobpostRepository) {
+    /**
+     * categoryRepository
+     */
+    protected CategoryRepository $categoryRepository;
+
+    public function __construct(\TYPO3\CMS\Core\Log\LogManager $logger, JobpostRepository $jobpostRepository, CategoryRepository $categoryRepository) {
         $this->logger = $logger->getLogger(__CLASS__);
         $this->jobpostRepository = $jobpostRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -82,6 +89,12 @@ class JobpostController extends ActionController {
      * @return ResponseInterface
      */
     public function listAction(): ResponseInterface {
+        $singleJobsUids = $this->settings['singleRecords'];
+        $sortBy = $this->settings['sortBy'];
+        $sortOrder = $this->settings['sortOrder'];
+        $categoriesString = $this->settings['groups'];
+        $categoryCombination = $this->settings['groupsCombination'];
+
         $this->view->assignMultiple([
             'view' => 'list'
         ]);
@@ -91,7 +104,50 @@ class JobpostController extends ActionController {
 
             // default way - jobs created at the TYPO3 Backend - no API is used
             if($this->settings['useExternalApi'] === 'default') {
-                $jobposts = $this->jobpostRepository->findByPid(intval($this->settings['jobsStorage']));
+                if(empty($singleJobsUids)) {
+                    if(empty($categoriesString)) {
+                        // TODO Sorting
+                        $jobposts = $this->jobpostRepository->findByPid(intval($this->settings['jobsStorage']));
+
+                        $this->view->assignMultiple([
+                            'jobposts' => $jobposts
+                        ]);
+
+                        return $this->htmlResponse();
+                    }
+
+                    if(!empty($categoriesString)) {
+                        $categoriesArray = explode(',', $categoriesString);
+
+                        switch ($sortBy) {
+                            case 'singleSelection':
+                                $sortBy = 'uid';
+                                break;
+                            default:
+                                break;
+                        }
+
+                        $jobposts = $this->jobpostRepository->findByCategories($categoriesArray, $categoryCombination, $sortBy, $sortOrder);
+                    }
+
+                    if($sortBy === 'categories') {
+                        $this->view->assignMultiple([
+                            'sortedBy' => $sortBy,
+                            'jobpostsByCategories' => $jobposts
+                        ]);
+
+                        return $this->htmlResponse();
+                    }
+
+                    $this->view->assignMultiple([
+                        'jobposts' => $jobposts
+                    ]);
+
+                    return $this->htmlResponse();
+                }
+
+                $singleJobsUidsArray = explode(',', $singleJobsUids);
+                $jobposts = $this->jobpostRepository->findAllByUids($singleJobsUidsArray, $sortBy, $sortOrder);
 
                 $this->view->assignMultiple([
                     'jobposts' => $jobposts
@@ -230,12 +286,25 @@ class JobpostController extends ActionController {
                 }
             }
 
-            if(!empty($jobsPidList)) {
+            if(empty($singleJobsUids) && !empty($jobsPidList)) {
                 $jobposts = $this->jobpostRepository->findAllByPids($jobsPidList);
 
                 $this->view->assignMultiple([
                     'jobposts' => $jobposts
                 ]);
+
+                return $this->htmlResponse();
+            }
+
+            if(!empty($singleJobsUids)) {
+                $singleJobsUidsArray = explode(',', $singleJobsUids);
+                $jobposts = $this->jobpostRepository->findAllByUids($singleJobsUidsArray);
+
+                $this->view->assignMultiple([
+                    'jobposts' => $jobposts
+                ]);
+
+                return $this->htmlResponse();
             }
         }
 

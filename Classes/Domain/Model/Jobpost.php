@@ -283,6 +283,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $applicationForm = '';
 
     /**
+     * category
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category>
+     */
+    protected $categories = null;
+
+    /**
      * Initialize categories and media relation
      */
     public function __construct() {
@@ -292,6 +299,7 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->twitterImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->jobLocations = $this->jobLocations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->contactPointAddresses = $this->contactPointAddresses ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -1181,5 +1189,44 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function setApplicationForm(string $url): void {
         $this->applicationForm = $url;
+    }
+
+    /**
+     * Returns the categories
+     *
+     * @return $categories
+     */
+    public function getCategories() {
+        return $this->categories;
+    }
+
+    /**
+     * Sets the category
+     *
+     * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category> $categories
+     * @return void
+     */
+    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
+        $this->categories = $categories;
+    }
+
+    /**
+     * Adds a category
+     *
+     * @param  \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category $category
+     * @return void
+     */
+    public function addCategory(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category $category) {
+        $this->categories->attach($category);
+    }
+
+    /**
+     * Removes a category
+     *
+     * @param  \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category $category
+     * @return void
+     */
+    public function removeCategory(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category $category) {
+        $this->categories->detach($category);
     }
 }

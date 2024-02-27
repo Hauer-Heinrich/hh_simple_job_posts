@@ -6,6 +6,8 @@ namespace HauerHeinrich\HhSimpleJobPosts\Domain\Repository;
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;
+use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /**
  * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.
@@ -15,7 +17,7 @@ use \TYPO3\CMS\Core\Database\ConnectionPool;
  *
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
-class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
     /**
      * addressRepository
@@ -25,10 +27,17 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     protected $addressRepository = null;
 
     /**
+     * categoryRepository
+     *
+     * @var \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository
+     */
+    protected $categoryRepository = null;
+
+    /**
      * @var array
      */
     protected $defaultOrderings = [
-        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'sorting' => QueryInterface::ORDER_ASCENDING
     ];
 
     /**
@@ -38,6 +47,15 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
      */
     public function injectAddressRepository(\FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository $addressRepository): void {
         $this->addressRepository = $addressRepository;
+    }
+
+    /**
+     * injectCategoryRepository
+     *
+     * @param \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository $categoryRepository
+     */
+    public function injectCategoryRepository(\HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository $categoryRepository): void {
+        $this->categoryRepository = $categoryRepository;
     }
 
     // Class Initialization (after all dependencies have been injected) (similar to __construct)
@@ -62,7 +80,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $this->addressRepository->findByUid($companyUid);
     }
 
-    public function findAllByPid(int $pid) {
+    public function findAllByPid(int $pid): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_hhsimplejobposts_domain_model_jobpost')->createQueryBuilder();
         $queryBuilder
             ->select('*')
@@ -74,7 +92,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $queryBuilder->execute()->fetchAll();
     }
 
-    public function findAllByPids(array $pids) {
+    public function findAllByPids(array $pids): QueryResult {
         // TODO: better implode - intExplode stuff
         // $pidList = implode(', ', $pids);
         // $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_hhsimplejobposts_domain_model_jobpost')->createQueryBuilder();
@@ -98,6 +116,111 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $query->execute();
     }
 
+    public function findAllByUids(array $singleJobsUidsArray, string $sortBy = 'uid', string $sortOrder = 'ASC'): array {
+        $query = $this->createQuery();
+        if(!empty($singleJobsUidsArray) && $sortBy === 'singleSelection') {
+            $result = [];
+            foreach ($singleJobsUidsArray as $uid) {
+                $item = $this->findByIdentifier($uid);
+                if ($item) {
+                    $result[] = $item;
+                }
+            }
+
+            // $queryParser = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser::class);
+            // DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getSQL());
+
+            return $result;
+        }
+
+        $query->matching(
+            $query->in('uid', $singleJobsUidsArray)
+        );
+
+        if($sortOrder === 'ASC') {
+            $query->setOrderings([$sortBy => QueryInterface::ORDER_ASCENDING]);
+        }
+        if($sortOrder === 'DESC') {
+            $query->setOrderings([$sortBy => QueryInterface::ORDER_DESCENDING]);
+        }
+
+        return $query->execute()->toArray();
+    }
+
+    public function findByCategories(array $categories, string $categoryCombination = 'AND', string $sortBy = 'uid', string $sortOrder = 'ASC'): array {
+        $result = [];
+        $constraints = [];
+        $query = $this->createQuery();
+
+        if(!empty($categories)) {
+            switch ($categoryCombination) {
+                case 'OR':
+                    foreach ($categories as $categoryUid) {
+                        $query->matching(
+                            $query->contains('categories', $categoryUid)
+                        );
+
+                        if($sortOrder === 'ASC') {
+                            $query->setOrderings([$sortBy => QueryInterface::ORDER_ASCENDING]);
+                        }
+                        if($sortOrder === 'DESC') {
+                            $query->setOrderings([$sortBy => QueryInterface::ORDER_DESCENDING]);
+                        }
+
+                        if($sortBy === 'categories') {
+                            $category = $this->categoryRepository->findByUid($categoryUid);
+                            $category->setRecords($query->execute()->toArray());
+                            $sortedByCategory[$categoryUid] = $category;
+                        } else {
+                            $jobsFromCategory = $query->execute()->toArray();
+                            foreach ($jobsFromCategory as $value) {
+                                $jobsByCategory[] = $value;
+                            }
+                        }
+                    }
+
+                    // summarized by category
+                    // returns e.g. [categoryUid => [category..., records => [job1, job2, ...] ], ...]
+                    if($sortBy === 'categories') {
+                        return $sortedByCategory;
+                    }
+
+                    // not summarized by category
+                    // returns e.g. [0 => job1, 1 => job2 ...]
+                    $sortByMethod = 'get'.ucfirst($sortBy);
+                    if($sortOrder === 'ASC') {
+                        usort($jobsByCategory, fn($a, $b) => $a->{$sortByMethod}() <=> $b->{$sortByMethod}());
+                    }
+                    if($sortOrder === 'DESC') {
+                        usort($jobsByCategory, fn($a, $b) => $b->{$sortByMethod}() <=> $a->{$sortByMethod}());
+                    }
+
+                    return $jobsByCategory;
+                    break;
+
+                default:
+                    foreach ($categories as $categoryUid) {
+                        $constraints[] = $query->contains('categories', $categoryUid);
+                    }
+                    $query->matching(
+                        $query->logicalAnd(...$constraints)
+                    );
+
+                    if($sortOrder === 'ASC') {
+                        $query->setOrderings([$sortBy => QueryInterface::ORDER_ASCENDING]);
+                    }
+                    if($sortOrder === 'DESC') {
+                        $query->setOrderings([$sortBy => QueryInterface::ORDER_DESCENDING]);
+                    }
+
+                    $result = $query->execute()->toArray();
+                    break;
+            }
+        }
+
+        return $result;
+    }
+
     public function deleteReally(int $uid) {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
         $queryBuilder
@@ -109,7 +232,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $queryBuilder->executeStatement();
     }
 
-    function getJobArray(int $jobUid) {
+    public function getJobArray(int $jobUid): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
         $queryBuilder
             ->select('*')
@@ -121,7 +244,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $queryBuilder->executeQuery()->fetchAssociative();
     }
 
-    function getJobLocationsArray(string $jobLocationsUidList) {
+    public function getJobLocationsArray(string $jobLocationsUidList): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
         $queryBuilder
             ->select('*')
@@ -133,7 +256,7 @@ class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
         return $queryBuilder->executeQuery()->fetchAllAssociative();
     }
 
-    function getContactPointAddress(int $addressUid) {
+    public function getContactPointAddress(int $addressUid): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
         $queryBuilder
             ->select('*')

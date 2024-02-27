@@ -20,6 +20,6 @@ mod {
                 }
             }
         }
-        show = *
+        show := addToList(hhsimplejobposts_jobslist,hhsimplejobposts_jobsdetail)
     }
 }
