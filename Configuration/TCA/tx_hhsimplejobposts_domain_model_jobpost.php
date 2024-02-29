@@ -29,7 +29,7 @@ return [
             'showitem' => 'base_salary_currency, base_salary_value, base_salary_value_max, base_salary_unit_text'
         ],
         'contactPoint' => [
-            'showitem' => 'contact_point_email, contact_point_telephone'
+            'showitem' => 'contact_point_email,contact_point_telephone'
         ],
         'opengraph' => [
             'label' => 'LLL:EXT:seo/Resources/Private/Language/locallang_tca.xlf:pages.palettes.opengraph',
@@ -565,20 +565,13 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone',
             'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.contact_point_telephone.description',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
+            'config' => [ // buggy like hell for phone links only
+                'type' => 'link',
                 'size' => 30,
                 'eval' => 'trim',
                 'default' => '',
                 'placeholder' => '+49 851 654 754 33',
-                'fieldControl' => [
-                    'linkPopup' => [
-                        'options' => [
-                            'blindLinkOptions' => 'file, folder, mail, page, spec, url'
-                        ]
-                    ]
-                ]
+                'allowedTypes' => ['telephone']
             ],
         ],
         'contact_point_address' => [ // TODO: @deprecated - moved to contact_point_addresses below
