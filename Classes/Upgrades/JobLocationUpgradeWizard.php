@@ -72,12 +72,12 @@ final class JobLocationUpgradeWizard implements UpgradeWizardInterface {
                 ->from('tx_hhsimplejobposts_domain_model_jobpost');
             $queryBuilder->where(...$whereExpressions);
             $results = $queryBuilder->executeQuery()->fetchAllAssociative();
-        } catch (\Throwable $th) {
-            return false;
-        }
 
-        if(!empty($results)) {
-            return true;
+            if(!empty($results)) {
+                return true;
+            }
+        } catch (\Throwable $th) {
+            // database column 'job_location' doesn't exists
         }
 
         return false;
