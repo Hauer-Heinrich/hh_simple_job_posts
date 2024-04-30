@@ -67,6 +67,31 @@
                 <source></source>
             </trans-unit>
 
+            <trans-unit id="employmentType.full_time">
+                <source>full time</source>
+            </trans-unit>
+            <trans-unit id="employmentType.part_time">
+                <source>part time</source>
+            </trans-unit>
+            <trans-unit id="employmentType.contractor">
+                <source>contractor</source>
+            </trans-unit>
+            <trans-unit id="employmentType.temporary">
+                <source>temporary</source>
+            </trans-unit>
+            <trans-unit id="employmentType.intern">
+                <source>intern</source>
+            </trans-unit>
+            <trans-unit id="employmentType.volunteer">
+                <source>volunteer</source>
+            </trans-unit>
+            <trans-unit id="employmentType.per_diem">
+                <source>per diem</source>
+            </trans-unit>
+            <trans-unit id="employmentType.other">
+                <source>other</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
