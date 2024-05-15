@@ -198,6 +198,70 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
                     return $jobsByCategory;
                     break;
 
+                case 'NOTOR':
+                    foreach ($categories as $categoryUid) {
+                        $query->matching(
+                            $query->logicalNot(
+                                $query->contains('categories', $categoryUid)
+                            )
+                        );
+
+                        if($sortOrder === 'ASC') {
+                            $query->setOrderings([$sortBy => QueryInterface::ORDER_ASCENDING]);
+                        }
+                        if($sortOrder === 'DESC') {
+                            $query->setOrderings([$sortBy => QueryInterface::ORDER_DESCENDING]);
+                        }
+
+                        if($sortBy === 'categories') {
+                            $category = $this->categoryRepository->findByUid($categoryUid);
+                            $category->setRecords($query->execute()->toArray());
+                            $sortedByCategory[$categoryUid] = $category;
+                        } else {
+                            $jobsFromCategory = $query->execute()->toArray();
+                            foreach ($jobsFromCategory as $value) {
+                                $jobsByCategory[] = $value;
+                            }
+                        }
+                    }
+
+                    // summarized by category
+                    // returns e.g. [categoryUid => [category..., records => [job1, job2, ...] ], ...]
+                    if($sortBy === 'categories') {
+                        return $sortedByCategory;
+                    }
+
+                    // not summarized by category
+                    // returns e.g. [0 => job1, 1 => job2 ...]
+                    $sortByMethod = 'get'.ucfirst($sortBy);
+                    if($sortOrder === 'ASC') {
+                        usort($jobsByCategory, fn($a, $b) => $a->{$sortByMethod}() <=> $b->{$sortByMethod}());
+                    }
+                    if($sortOrder === 'DESC') {
+                        usort($jobsByCategory, fn($a, $b) => $b->{$sortByMethod}() <=> $a->{$sortByMethod}());
+                    }
+
+                    return $jobsByCategory;
+                    break;
+
+                case 'NOTAND':
+                    foreach ($categories as $categoryUid) {
+                        $constraints[] = $query->contains('categories', $categoryUid);
+                    }
+                    $query->matching(
+                        $query->logicalNot(...$constraints)
+                    );
+
+                    if($sortOrder === 'ASC') {
+                        $query->setOrderings([$sortBy => QueryInterface::ORDER_ASCENDING]);
+                    }
+                    if($sortOrder === 'DESC') {
+                        $query->setOrderings([$sortBy => QueryInterface::ORDER_DESCENDING]);
+                    }
+
+                    $result = $query->execute()->toArray();
+                    break;
+
                 default:
                     foreach ($categories as $categoryUid) {
                         $constraints[] = $query->contains('categories', $categoryUid);

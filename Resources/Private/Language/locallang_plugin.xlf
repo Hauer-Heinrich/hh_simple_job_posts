@@ -22,6 +22,12 @@
             <trans-unit id="combination.or" xml:space="preserve">
                 <source>OR</source>
             </trans-unit>
+            <trans-unit id="combination.notand" xml:space="preserve">
+                <source>NOT AND</source>
+            </trans-unit>
+            <trans-unit id="combination.notor" xml:space="preserve">
+                <source>NOT OR</source>
+            </trans-unit>
 
             <trans-unit id="sortBy" xml:space="preserve">
                 <source>Sort By</source>

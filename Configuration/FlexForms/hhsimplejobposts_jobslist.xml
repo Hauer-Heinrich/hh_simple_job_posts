@@ -158,6 +158,18 @@
                                         </numIndex>
                                         <numIndex index="1">OR</numIndex>
                                     </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf:combination.notand
+                                        </numIndex>
+                                        <numIndex index="1">NOTAND</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">
+                                            LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf:combination.notor
+                                        </numIndex>
+                                        <numIndex index="1">NOTOR</numIndex>
+                                    </numIndex>
                                 </items>
                                 <default>0</default>
                             </config>
