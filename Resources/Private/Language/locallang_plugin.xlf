@@ -14,10 +14,10 @@
                 <source>Include subcategories</source>
             </trans-unit>
             <trans-unit id="combination" xml:space="preserve">
-            <source>Combination</source>
+                <source>Combination</source>
             </trans-unit>
             <trans-unit id="combination.and" xml:space="preserve">
-            <source>AND</source>
+                <source>AND</source>
             </trans-unit>
             <trans-unit id="combination.or" xml:space="preserve">
                 <source>OR</source>
