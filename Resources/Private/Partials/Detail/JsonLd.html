@@ -7,7 +7,7 @@
         "@context" : "https://schema.org/",
         "@type" : "JobPosting",
         "title" : "{jobpost.title}",
-        "description" : "{jobpost.description -> f:format.html()}",
+        "description" : {jobpost.escapedRteFields.description},
         "datePosted" : "{datePosted}",
         "validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",
         "employmentType": [
@@ -68,16 +68,16 @@
         </f:if>
 
         <f:if condition="{jobpost.educationRequirements}">
-            "educationRequirements": "{jobpost.educationRequirements -> f:format.html()}",
+            "educationRequirements": {jobpost.escapedRteFields.educationRequirements},
         </f:if>
         <f:if condition="{jobpost.experienceRequirements}">
-            "experienceRequirements": "{jobpost.experienceRequirements -> f:format.html()}",
+            "experienceRequirements": {jobpost.escapedRteFields.experienceRequirements},
         </f:if>
         <f:if condition="{jobpost.skills}">
-            "skills": "{jobpost.skills -> f:format.html()}",
+            "skills": {jobpost.escapedRteFields.skills},
         </f:if>
         <f:if condition="{jobpost.weprovide}">
-            "jobBenefits": "{jobpost.weprovide -> f:format.html()}",
+            "jobBenefits": {jobpost.escapedRteFields.weprovide},
         </f:if>
 
         <f:if condition="{jobpost.workHours}">

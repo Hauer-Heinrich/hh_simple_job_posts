@@ -1229,4 +1229,34 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     public function removeCategory(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Category $category) {
         $this->categories->detach($category);
     }
+
+    /**
+     * json_encode RTE-fields for usage at json-ld / meta-tags and so on
+     * e. g. escapes double-quotes
+     *
+     * @return array
+     */
+    public function getEscapedRteFields(): array {
+        $result = [];
+
+        $job = [];
+        $job['shortDescription'] = $this->getDescription();
+        $job['description'] = $this->getShortDescription();
+        $job['maintasks'] = $this->getMaintasks();
+        $job['profile'] = $this->getProfile();
+        $job['educationRequirements'] = $this->getEducationRequirements();
+        $job['experienceRequirements'] = $this->getExperienceRequirements();
+        $job['skills'] = $this->getSkills();
+        $job['weprovide'] = $this->getWeprovide();
+        $job['others'] = $this->getOthers();
+
+        // Strip all html-attributes and double quotes
+        // $result = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/si",'<$1$2>', $job);
+
+        foreach ($job as $key => $value) {
+            $result[$key] = \json_encode($value);
+        }
+
+        return $result;
+    }
 }
