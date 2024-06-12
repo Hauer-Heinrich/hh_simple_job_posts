@@ -67,6 +67,10 @@
             </f:else>
         </f:if>
 
+        <f:comment>
+            educationRequirements and experienceRequirements
+            google criticizes the two fields - enum-error - but according to schema.org this syntax is correct and we stick to the definition.
+        </f:comment>
         <f:if condition="{jobpost.educationRequirements}">
             "educationRequirements": {jobpost.escapedRteFields.educationRequirements},
         </f:if>
