@@ -78,6 +78,9 @@ plugin.tx_hhsimplejobposts {
 - shippes default config for nice-urls see example: Configuration/Typo3/sites/config.yaml
 - provides psr-14 events
 
+#### prepare fields for json e. g. json-ld / schema.org
+RTE fields are available in the Fluid template as “jobpost.escapedRteFields” for example “{jobpost.escapedRteFields.description}”.
+
 ### Available events
 When register to an event you can always access the class where the event is fired. For additional items see column "Access to" in the table below.
 
