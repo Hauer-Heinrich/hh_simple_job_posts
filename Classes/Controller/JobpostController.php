@@ -324,6 +324,14 @@ class JobpostController extends ActionController {
             $jobpost = $this->jobpostRepository->findByUid(intval($queryParams['tx_hhsimplejobposts_jobslist']['jobpost']));
         }
 
+        $jobPostStorageString = isset($this->settings['jobsStorage']) ? $this->settings['jobsStorage'] : '';
+        if(!empty($jobPostStorageString)) {
+            $jobPostStorageArray = \explode(',', $jobPostStorageString);
+            if(!in_array($jobpost->getPid(), $jobPostStorageArray)) {
+                $jobpost = [];
+            }
+        }
+
         if(!empty($jobpost)) {
             $contactPointEmail = null;
             $contactPointTelephone = null;

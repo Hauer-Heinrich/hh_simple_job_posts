@@ -55,6 +55,23 @@
                 <source>Descending</source>
             </trans-unit>
 
+            <trans-unit id="settings.layout" xml:space="preserve">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="settings.jobsStorage" xml:space="preserve">
+                <source>Define the pages/sysfolders which hold the job records (optional)</source>
+            </trans-unit>
+            <trans-unit id="settings.jobsStorage.description" xml:space="preserve">
+                <source>If set, the system checks whether the job is located in the selected storage locations when it is called up!</source>
+            </trans-unit>
+            <trans-unit id="settings.jobsListView" xml:space="preserve">
+                <source>Select the page which is used to return to on detail view</source>
+            </trans-unit>
+            <trans-unit id="settings.jobsDetailView" xml:space="preserve">
+                <source>PageId for single job display</source>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

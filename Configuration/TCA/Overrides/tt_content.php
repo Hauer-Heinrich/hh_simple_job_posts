@@ -33,9 +33,18 @@ call_user_func(function() {
     );
     // ---------------
 
+    $pluginName2 = 'jobsdetail';
+    $pluginSignature2 = $extensionNameLower . '_' . strtolower($pluginName2);
     ExtensionUtility::registerPlugin(
         'HhSimpleJobPosts',
-        'Jobsdetail',
+        $pluginName2,
         'Jobs Detail'
+    );
+
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature2] = 'select_key,recursive,pages';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature2] = 'pi_flexform';
+    ExtensionManagementUtility::addPiFlexFormValue(
+        $pluginSignature2,
+        'FILE:EXT:' . $extensionKey . '/Configuration/FlexForms/' . $pluginSignature2 . '.xml'
     );
 });

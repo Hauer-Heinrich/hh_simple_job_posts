@@ -9,6 +9,7 @@
                 <el>
                     <!-- <settings.companiesStorage>
                         <TCEforms>
+                            <exclude>1</exclude>
                             <label>
                                 Wo sind die Companies gespeichert?
                             </label>
@@ -32,7 +33,7 @@
                     <settings.layout>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Layout</label>
+                            <label>LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf:settings.layout</label>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -48,6 +49,7 @@
 
                     <settings.useExternalApi>
                         <TCEforms>
+                            <exclude>1</exclude>
                             <label>
                                 Use external API?
                             </label>
@@ -67,6 +69,7 @@
 
                     <settings.orderJobsDefaultToApi>
                         <TCEforms>
+                            <exclude>1</exclude>
                             <label>Show default jobs before API-jobs (order)?</label>
                             <description>Default: first show jobs from API then jobs from TYPO3 backend (default-jobs).</description>
                             <displayCond>FIELD:settings.useExternalApi:!=:default</displayCond>
@@ -228,6 +231,7 @@
 
                     <settings.jobsStorageApi>
                         <TCEforms>
+                            <exclude>1</exclude>
                             <label>
                                 Wo sind / sollen die Jobs aus der API gespeichert werden?
                             </label>
@@ -250,9 +254,10 @@
                     </settings.jobsStorageApi>
 
                     <settings.jobsStorage>
+                        <exclude>1</exclude>
                         <TCEforms>
                             <label>
-                                Wo sind die Jobs (default) gespeichert?
+                                LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf:settings.jobsStorage
                             </label>
                             <config>
                                 <type>group</type>
@@ -273,6 +278,7 @@
 
                     <!-- <settings.companiesDetailView>
                         <TCEforms>
+                            <exclude>1</exclude>
                             <label>Company Detail Page</label>
                             <config>
                                 <type>group</type>
@@ -288,7 +294,8 @@
 
                     <settings.jobsDetailView>
                         <TCEforms>
-                            <label>Jobs Detail Page (optional)</label>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_plugin.xlf:settings.jobsDetailView</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
