@@ -20,7 +20,8 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 In this Example you should replace "MainContent" with your own one!
 TypoScript example (https://github.com/Hauer-Heinrich/hh_simple_job_posts/blob/master/Configuration/TypoScript/example.typoscript):
 ```
-[traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobslist/jobpost') > 0]
+[request && (traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobslist/jobpost') > 0 || traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobsdetail/jobpost') > 0)]
+
     ### In our current opinion better solution:
     ### Create a new colPos for your TYPO3 backendlayout
     ### and show this colpos only if the detail view of job-posts is given
