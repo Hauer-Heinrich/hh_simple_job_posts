@@ -89,11 +89,11 @@ class JobpostController extends ActionController {
      * @return ResponseInterface
      */
     public function listAction(): ResponseInterface {
-        $singleJobsUids = $this->settings['singleRecords'];
-        $sortBy = $this->settings['sortBy'];
-        $sortOrder = $this->settings['sortOrder'];
-        $categoriesString = $this->settings['groups'];
-        $categoryCombination = $this->settings['groupsCombination'];
+        $singleJobsUids = isset($this->settings['singleRecords']) ? $this->settings['singleRecords'] : 0;
+        $sortBy = isset($this->settings['sortBy']) ? $this->settings['sortBy'] : 'uid';
+        $sortOrder = isset($this->settings['sortOrder']) ? $this->settings['sortOrder'] : 'ASC';
+        $categoriesString = isset($this->settings['groups']) ? $this->settings['groups'] : 0;
+        $categoryCombination = isset($this->settings['groupsCombination']) ? : 'AND';
 
         $this->view->assignMultiple([
             'view' => 'list'
