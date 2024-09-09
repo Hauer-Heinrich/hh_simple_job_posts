@@ -391,7 +391,6 @@ class JobpostController extends ActionController {
      * @return array
      */
     function formatJobToArray(Jobpost $jobpost): array {
-        $result = [];
         $job = $this->jobpostRepository->getJobArray($jobpost->getUid());
 
         if(isset($job['job_locations']) && $job['job_locations'] !== '0') {
@@ -404,7 +403,13 @@ class JobpostController extends ActionController {
         }
 
         if(isset($job['contact_point_addresses']) && $job['contact_point_addresses'] !== 0) {
-            $job['contact_point_addresses'] = $this->jobpostRepository->getContactPointAddresses($job['contact_point_addresses']);
+            $contactPointAdresses = [];
+            $contactPointAdressesUids = GeneralUtility::intExplode(',', $job['contact_point_addresses']);
+            foreach ($contactPointAdressesUids as $addressUid) {
+                $contactPointAdresses[] = $this->jobpostRepository->getContactPointAddress($addressUid);
+            }
+
+            $job['contact_point_addresses'] = $contactPointAdresses;
         }
 
         if(isset($job['images']) && $job['images'] !== 0) {
