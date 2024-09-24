@@ -93,7 +93,7 @@ class JobpostController extends ActionController {
         $sortBy = isset($this->settings['sortBy']) ? $this->settings['sortBy'] : 'uid';
         $sortOrder = isset($this->settings['sortOrder']) ? $this->settings['sortOrder'] : 'ASC';
         $categoriesString = isset($this->settings['groups']) ? $this->settings['groups'] : 0;
-        $categoryCombination = isset($this->settings['groupsCombination']) ? : 'AND';
+        $categoryCombination = isset($this->settings['groupsCombination']) ? $this->settings['groupsCombination'] : 'AND';
 
         $this->view->assignMultiple([
             'view' => 'list'
