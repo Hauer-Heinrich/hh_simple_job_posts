@@ -1259,4 +1259,15 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
         return $result;
     }
+
+    /**
+     * get full description accordion to google:
+     * (including job responsibilities, qualifications, skills, working hours, education requirements, and experience requirements)
+     * https://developers.google.com/search/docs/appearance/structured-data/job-posting?hl=de#job-posting-definition
+     *
+     * @return string
+     */
+    public function getDescriptionForGoogle(): string {
+        return $this->getDescription() . $this->getMaintasks() . $this->getEducationRequirements() . $this->getExperienceRequirements() . $this->getSkills() . $this->getWorkHours();
+    }
 }
