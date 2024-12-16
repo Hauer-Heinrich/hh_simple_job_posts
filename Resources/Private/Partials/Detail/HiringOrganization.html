@@ -5,6 +5,11 @@
 <f:if condition="{hiringOrganization}">
     <div class="frame frame-default hiringOrganization" itemscope itemtype="https://schema.org/LocalBusiness">
         <h5><f:translate key="LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_fe.xlf:detail.hiringOrganization" /></h5>
+        <f:if condition='{hiringOrganization.image}'>
+            <div class="ce-image">
+                <f:image src="{hiringOrganization.image.0.uid}" treatIdAsReference="1" />
+            </div>
+        </f:if>
         <f:if condition="{hiringOrganization.www}">
             <f:then>
                 <a itemprop="url" href="{hiringOrganization.www}">
