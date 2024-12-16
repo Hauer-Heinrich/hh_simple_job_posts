@@ -9,17 +9,17 @@
         "title" : "{jobpost.title}",
         "description" : "{jobpost.descriptionForGoogle}",
         "datePosted" : "{datePosted}",
-        "validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",
+        <f:if condition="{jobpost.endtime}">"validThrough" : "{f:format.date(date: '{jobpost.endtime}', format: 'Y-m-d')}",</f:if>
         "employmentType": [
             <f:for each='{jobpost.employmentTypeArray}' as='type' iteration='i'>"{type}"<f:if condition='{i.isLast}'><f:then></f:then><f:else>,</f:else></f:if></f:for>
         ],
 
         <f:if condition="{jobpost.hiringOrganization.company}">
             "hiringOrganization" : {<f:comment></f:comment>
-                "@type" : "Organization",
                 "name" : "{jobpost.hiringOrganization.company}",
-                "sameAs" : "{jobpost.hiringOrganization.www}",
-                "logo" : "<f:if condition='{jobpost.hiringOrganization.image}'>{f:uri.image(src: '{jobpost.hiringOrganization.image.0.uid}', treatIdAsReference: 1)}</f:if>"
+                <f:if condition="{jobpost.hiringOrganization.www}">"sameAs" : "{jobpost.hiringOrganization.www}",</f:if>
+                <f:if condition='{jobpost.hiringOrganization.image}'>"logo" : "{f:uri.image(src: '{jobpost.hiringOrganization.image.0.uid}', treatIdAsReference: 1, absolute: 1)}",</f:if>
+                "@type" : "Organization"
             },
         </f:if>
 
