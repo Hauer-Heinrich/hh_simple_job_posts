@@ -45,7 +45,7 @@
 
         <f:if condition="{jobpost.contactPointAddresses}">
             <f:then>
-                "contactPoint": [<f:comment></f:comment>
+                "applicationContact": [<f:comment></f:comment>
                 <f:for each="{jobpost.contactPointAddresses}" as="contactAddress" iteration="i_contactAddress">
                     {
                         "@type": "ContactPoint",
