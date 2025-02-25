@@ -21,7 +21,7 @@
             "url": "https://www.paypal.com/paypalme/hauerheinrich"
         }
     ],
-    "version": "4.2.1",
+    "version": "5.0.0",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS", "jobs", "Extension"],
     "replace": {
@@ -29,13 +29,13 @@
         "typo3-ter/hh-simple-job-posts": "self.version"
     },
     "require": {
-        "typo3/cms-core": "^12.2.0",
-        "typo3/cms-extbase": "^12.2.0",
-        "typo3/cms-fluid": "^12.2.0",
-        "typo3/cms-frontend": "^12.2.0",
-        "typo3/cms-fluid-styled-content": "^12.2.0",
-        "friendsoftypo3/tt-address": "^7.0.0 || ^8.0.0 || ^9.0.0",
-        "hauerheinrich/hh-tt-address-places": "^2.0.0"
+        "typo3/cms-core": "^13.4.0",
+        "typo3/cms-extbase": "^13.4.0",
+        "typo3/cms-fluid": "^13.4.0",
+        "typo3/cms-frontend": "^13.4.0",
+        "typo3/cms-fluid-styled-content": "^13.4.0",
+        "friendsoftypo3/tt-address": "^9.0.0",
+        "hauerheinrich/hh-tt-address-places": "^4.0.0"
     },
     "autoload": {
         "psr-4": {

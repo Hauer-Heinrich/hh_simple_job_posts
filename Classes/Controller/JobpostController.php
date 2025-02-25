@@ -57,7 +57,7 @@ class JobpostController extends ActionController {
 
         $this->view->assignMultiple([
             'settings' => $this->settings,
-            'data' => $this->configurationManager->getContentObject()->data
+            'data' => $this->request->getAttribute('currentContentObject')->data
         ]);
     }
 
@@ -84,9 +84,6 @@ class JobpostController extends ActionController {
 
     /**
      * action list
-     *
-     * @param HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost
-     * @return ResponseInterface
      */
     public function listAction(): ResponseInterface {
         $singleJobsUids = isset($this->settings['singleRecords']) ? $this->settings['singleRecords'] : 0;
@@ -356,7 +353,7 @@ class JobpostController extends ActionController {
                 $contactPointTelephone = $contactPointAddress->getPhone();
             }
 
-            if($GLOBALS['TSFE']->type === 587951) {
+            if(isset($this->request->getQueryParams()['type']) && $this->request->getQueryParams()['type'] === 587951) {
                 $jobPostArray = $this->formatJobToArray($jobpost);
                 $jsonOutput = [
                     'view' => 'detail',
@@ -386,9 +383,6 @@ class JobpostController extends ActionController {
     /**
      * formatJobToArray
      * Maps a Job object to array
-     *
-     * @param  Jobpost $jobpost
-     * @return array
      */
     function formatJobToArray(Jobpost $jobpost): array {
         $job = $this->jobpostRepository->getJobArray($jobpost->getUid());

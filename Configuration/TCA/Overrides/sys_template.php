@@ -3,10 +3,10 @@ defined('TYPO3') || die();
 
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-call_user_func(function() {
+call_user_func(function(string $extensionKey) {
     ExtensionManagementUtility::addStaticFile(
-        'hh_simple_job_posts',
+        $extensionKey,
         'Configuration/TypoScript',
         'Job posts - simple'
     );
-});
+}, 'hh_simple_job_posts');

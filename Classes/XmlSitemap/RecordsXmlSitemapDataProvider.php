@@ -19,8 +19,10 @@ namespace HauerHeinrich\HhSimpleJobPosts\XmlSitemap;
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \Psr\Http\Message\ServerRequestInterface;
 use \TYPO3\CMS\Core\Context\Context;
+use \TYPO3\CMS\Core\Database\Connection;
 use \TYPO3\CMS\Core\Database\ConnectionPool;
 use \TYPO3\CMS\Core\Database\Query\QueryHelper;
+use \TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use \TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
@@ -30,6 +32,9 @@ use \TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
  * @internal
  */
 class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXmlSitemapDataProvider {
+
+    protected PageRepository $pageRepository;
+
     /**
      * @param ServerRequestInterface $request
      * @param string $key
@@ -40,6 +45,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
     public function __construct(ServerRequestInterface $request, string $key, array $config = [], ContentObjectRenderer $cObj = null) {
         parent::__construct($request, $key, $config, $cObj);
 
+        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $this->generateItems();
     }
 
@@ -61,8 +67,7 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
         $pluginsSettings = $queryBuilderPlugin->select('uid', 'pi_flexform')
             ->from('tt_content')
             ->where(
-                $queryBuilderPlugin->expr()->eq('CType', $queryBuilderPlugin->createNamedParameter('list')),
-                $queryBuilderPlugin->expr()->eq('list_type', $queryBuilderPlugin->createNamedParameter('hhsimplejobposts_jobslist'))
+                $queryBuilderPlugin->expr()->eq('CType', $queryBuilderPlugin->createNamedParameter('hhsimplejobposts_jobslist'))
             )
             ->executeQuery()->fetchAllAssociative();
 
@@ -103,19 +108,10 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
                 }
 
                 if (!empty($pids)) {
-                    $recursiveLevel = isset($this->config['recursive']) ? (int)$this->config['recursive'] : 0;
-                    if ($recursiveLevel) {
-                        $newList = [];
-                        foreach ($pids as $pid) {
-                            $list = $this->cObj->getTreeList($pid, $recursiveLevel);
-                            if ($list) {
-                                $newList = array_merge($newList, explode(',', $list));
-                            }
-                        }
-                        $pids = array_merge($pids, $newList);
-                    }
+                    $recursiveLevel = (int)($this->config['recursive'] ?? 0);
+                    $pids = $this->pageRepository->getPageIdsRecursive($pids, $recursiveLevel);
 
-                    $constraints[] = $queryBuilder->expr()->in('pid', $pids);
+                    $constraints[] = $queryBuilder->expr()->in('pid', $queryBuilder->createNamedParameter($pids, Connection::PARAM_INT_ARRAY));
                 }
 
                 if (!empty($this->config['additionalWhere'])) {

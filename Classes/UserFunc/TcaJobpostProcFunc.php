@@ -23,8 +23,6 @@ class TcaJobpostProcFunc {
     /**
      * pluginConfiguration
      * TypoScript plugin configuration
-     *
-     * @var array
      */
     protected array $pluginConfiguration = [];
 
@@ -35,9 +33,6 @@ class TcaJobpostProcFunc {
 
     /**
      * contactAddressItems
-     *
-     * @param array $config
-     * @return array
      */
     public function contactAddressItems(array $config): array {
         $storagePidContactPointAddresses = isset($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) ? intval($this->pluginConfiguration['persistence.']['storagePidContactPointAddresses']) : 0;
@@ -67,9 +62,6 @@ class TcaJobpostProcFunc {
 
     /**
      * companyAddressItems
-     *
-     * @param array $config
-     * @return array
      */
     public function companyAddressItems(array $config): array {
         $storagePidOrganizations = isset($this->pluginConfiguration['persistence.']['storagePidOrganizations']) ? intval($this->pluginConfiguration['persistence.']['storagePidOrganizations']) : 0;
@@ -110,9 +102,6 @@ class TcaJobpostProcFunc {
     /**
      * getContactPoints
      * Gets addresses from tt_address - if pid = 0 then all Address are returned
-     *
-     * @param integer $pid
-     * @return array
      */
     public function getContactPoints(int $pid = 0): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tt_address');
@@ -136,9 +125,6 @@ class TcaJobpostProcFunc {
     /**
      * getCompanies
      * Gets addresses from tt_address - if pid = 0 then all Address are returned
-     *
-     * @param integer $pid
-     * @return array
      */
     public function getCompanies(int $pid = 0): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tt_address');

@@ -1,13 +1,15 @@
 mod {
-    wizards.newContentElement.wizardItems.plugins {
+    wizards.newContentElement.wizardItems.ext-hhsimplejobposts {
+        header = LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_mod.xlf:contentelement.wizard.title
+        after = plugins,default,menu
+        before = special
         elements {
             jobslist {
                 iconIdentifier = hh_simple_job_posts-plugin-jobslist
                 title = LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hh_simple_job_posts_jobslist.name
                 description = LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hh_simple_job_posts_jobslist.description
                 tt_content_defValues {
-                    CType = list
-                    list_type = hhsimplejobposts_jobslist
+                    CType = hhsimplejobposts_jobslist
                 }
             }
             jobsdetail {
@@ -15,11 +17,10 @@ mod {
                 title = LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hh_simple_job_posts_jobsdetail.name
                 description = LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hh_simple_job_posts_jobsdetail.description
                 tt_content_defValues {
-                    CType = list
-                    list_type = hhsimplejobposts_jobsdetail
+                    CType = hhsimplejobposts_jobsdetail
                 }
             }
         }
-        show := addToList(hhsimplejobposts_jobslist,hhsimplejobposts_jobsdetail)
     }
+    show = *
 }

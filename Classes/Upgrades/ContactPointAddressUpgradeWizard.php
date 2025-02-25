@@ -11,7 +11,6 @@ use \TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use \TYPO3\CMS\Install\Updates\ChattyInterface;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 #[UpgradeWizard('hhSimpleJobPosts_contactPointAddressUpgradeWizard')]
 final class ContactPointAddressUpgradeWizard implements UpgradeWizardInterface, ChattyInterface {

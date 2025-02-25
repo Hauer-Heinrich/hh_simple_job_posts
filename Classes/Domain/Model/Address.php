@@ -13,28 +13,12 @@ namespace HauerHeinrich\HhSimpleJobPosts\Domain\Model;
  */
 class Address extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address {
 
-    /**
-     * extbaseType
-     *
-     * @var string
-     */
-    protected $extbaseType = '';
+    protected string $extbaseType = '';
 
-    /**
-     * Returns the extbaseType
-     *
-     * @return string extbaseType
-     */
     public function getExtbaseType(): string {
         return $this->extbaseType;
     }
 
-    /**
-     * Sets the extbaseType
-     *
-     * @param string $extbaseType
-     * @return void
-     */
     public function setTxExtbaseType(string $extbaseType): void {
         $this->extbaseType = $extbaseType;
     }

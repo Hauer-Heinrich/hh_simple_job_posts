@@ -3,13 +3,11 @@ defined('TYPO3') || die();
 
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-call_user_func(function() {
-    $extensionKey = 'hh_simple_job_posts';
-
+call_user_func(function(string $extensionKey) {
     // make PageTsConfig selectable
     ExtensionManagementUtility::registerPageTSConfigFile(
         $extensionKey,
-        'Configuration/TsConfig/AllPage.typoscript',
+        'Configuration/TsConfig/AllPage.tsconfig',
         'Simple Job Posts Page TS'
     );
 
@@ -19,4 +17,4 @@ call_user_func(function() {
         'Configuration/TsConfig/jobpost-only.tsconfig',
         'Additional / extra config for: jobposts'
     );
-});
+}, 'hh_simple_job_posts');

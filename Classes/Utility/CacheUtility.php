@@ -17,10 +17,7 @@ use \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
 final class CacheUtility {
 
-    private FrontendInterface $cache;
-
-    public function __construct(FrontendInterface $cache) {
-        $this->cache = $cache;
+    public function __construct(private FrontendInterface $cache) {
     }
 
     /**

@@ -1,3 +1,43 @@
+### Example usage for the EXT:seo xml sitemap configuration
+plugin.tx_seo {
+    config {
+        xmlSitemap {
+            sitemaps {
+                jobs {
+                    provider = HauerHeinrich\HhSimpleJobPosts\XmlSitemap\RecordsXmlSitemapDataProvider
+                    config {
+                        table = tx_hhsimplejobposts_domain_model_jobpost
+                        sortField = sorting
+                        lastModifiedField = tstamp
+                        recursive = 1
+                        ### Speicherort der Beiträge
+                        pid = {$plugin.tx_hhsimplejobposts.persistence.storagePid}
+                        url {
+                            ### PageID of the detail-pape
+                            # pageId = TODO:
+                            fieldToParameterMap {
+                                uid = tx_hhsimplejobposts_jobslist[jobpost]
+                            }
+                            additionalGetParameters {
+                                tx_hhsimplejobposts_jobslist.controller = Jobpost
+                                tx_hhsimplejobposts_jobslist.action = show
+                            }
+                            useCacheHash = 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+### Show only detail view of the job if list- and detail-view are on the same page
+### replace "MainContent" with your TypoScript page.10.variable for yout content section, e. g. something like:
+### page.10.variables {
+###     MainContent =< styles.content.get
+###     MainContent.select.where = colPos = 1
+### }
+### and replace the "colPos" to your own colPos ID
 [request && (traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobslist/jobpost') > 0 || traverse(request.getQueryParams(), 'tx_hhsimplejobposts_jobsdetail/jobpost') > 0)]
     page.10.variables.MainContent >
     page.10.variables.MainContent =< styles.content.get

@@ -15,7 +15,8 @@ call_user_func(function() {
         // non-cacheable actions
         [
             JobpostController::class => ''
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -27,20 +28,8 @@ call_user_func(function() {
         // non-cacheable actions
         [
             JobpostController::class => ''
-        ]
-    );
-
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-    $iconRegistry->registerIcon(
-        'hh_simple_job_posts-plugin-jobslist',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        ['source' => 'EXT:hh_simple_job_posts/Resources/Public/Icons/user_plugin_jobslist.svg']
-    );
-
-    $iconRegistry->registerIcon(
-        'hh_simple_job_posts-plugin-jobsdetail',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        ['source' => 'EXT:hh_simple_job_posts/Resources/Public/Icons/user_plugin_jobsdetail.svg']
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['hhsimplejobposts_jobsfromapi'] ??= [];

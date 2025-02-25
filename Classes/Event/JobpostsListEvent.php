@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Event;
 
@@ -15,8 +16,6 @@ use \TYPO3\CMS\Extbase\Mvc\Request;
  */
 final class JobpostsListEvent {
 
-    private JobpostController $jobpostController;
-
     /**
      * originalPluginSettings
      */
@@ -24,25 +23,15 @@ final class JobpostsListEvent {
 
     private array $assignedValues;
 
-    private Request $request;
-
-    public function __construct(JobpostController $jobpostController, array $settings, array $assignedValues, Request $request) {
-        $this->jobpostController = $jobpostController;
+    public function __construct(private Request $request, private JobpostController $jobpostController, array $settings, array $assignedValues) {
         $this->settings = $settings;
         $this->assignedValues = $assignedValues;
-        $this->request = $request;
     }
 
-    /**
-     * Get the tag controller
-     */
     public function getJobpostController(): JobpostController {
         return $this->jobpostController;
     }
 
-    /**
-     * Set the tag controller
-     */
     public function setJobpostController(JobpostController $jobpostController): self {
         $this->jobpostController = $jobpostController;
 
@@ -56,25 +45,16 @@ final class JobpostsListEvent {
         return $this->settings;
     }
 
-    /**
-     * Get the assignedValues
-     */
     public function getAssignedValues(): array {
         return $this->assignedValues;
     }
 
-    /**
-     * Set the assignedValues
-     */
     public function setAssignedValues(array $assignedValues): self {
         $this->assignedValues = $assignedValues;
 
         return $this;
     }
 
-    /**
-     * Get the request
-     */
     public function getRequest(): Request {
         return $this->request;
     }

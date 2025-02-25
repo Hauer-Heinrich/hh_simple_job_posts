@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Repository;
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
+use \FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -19,43 +21,18 @@ use \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
  */
 final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-    /**
-     * addressRepository
-     *
-     * @var \FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository
-     */
-    protected $addressRepository = null;
+    protected const TABLENAME = 'tx_hhsimplejobposts_domain_model_jobpost';
 
-    /**
-     * categoryRepository
-     *
-     * @var \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository
-     */
-    protected $categoryRepository = null;
-
-    /**
-     * @var array
-     */
     protected $defaultOrderings = [
         'sorting' => QueryInterface::ORDER_ASCENDING
     ];
 
-    /**
-     * injectAddressRepository
-     *
-     * @param \FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository $addressRepository
-     */
-    public function injectAddressRepository(\FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository $addressRepository): void {
-        $this->addressRepository = $addressRepository;
-    }
-
-    /**
-     * injectCategoryRepository
-     *
-     * @param \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(\HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository $categoryRepository): void {
-        $this->categoryRepository = $categoryRepository;
+    public function __construct(
+        private readonly ConnectionPool $connectionPool,
+        protected AddressRepository $addressRepository,
+        protected CategoryRepository $categoryRepository
+    ) {
+        parent::__construct();
     }
 
     // Class Initialization (after all dependencies have been injected) (similar to __construct)
@@ -81,10 +58,10 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     }
 
     public function findAllByPid(int $pid): array {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_hhsimplejobposts_domain_model_jobpost')->createQueryBuilder();
+        $queryBuilder = $this->connectionPool->getConnectionForTable(self::TABLENAME)->createQueryBuilder();
         $queryBuilder
             ->select('*')
-            ->from('tx_hhsimplejobposts_domain_model_jobpost')
+            ->from(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pid, \PDO::PARAM_INT))
             );
@@ -95,10 +72,10 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     public function findAllByPids(array $pids): QueryResult {
         // TODO: better implode - intExplode stuff
         // $pidList = implode(', ', $pids);
-        // $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_hhsimplejobposts_domain_model_jobpost')->createQueryBuilder();
+        // $queryBuilder = $this->connectionPool->getConnectionForTable(self::TABLENAME)->createQueryBuilder();
         // $queryBuilder
         //     ->select('*')
-        //     ->from('tx_hhsimplejobposts_domain_model_jobpost')
+        //     ->from(self::TABLENAME)
         //     ->where(
         //         $queryBuilder->expr()->in('pid', $queryBuilder->createNamedParameter(
         //             GeneralUtility::intExplode(',', $pidList, true),
@@ -286,9 +263,9 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     }
 
     public function deleteReally(int $uid) {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
         $queryBuilder
-            ->delete('tx_hhsimplejobposts_domain_model_jobpost')
+            ->delete(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT))
             );
@@ -297,10 +274,10 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     }
 
     public function getJobArray(int $jobUid): array {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
         $queryBuilder
             ->select('*')
-            ->from('tx_hhsimplejobposts_domain_model_jobpost')
+            ->from(self::TABLENAME)
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($jobUid, \PDO::PARAM_INT))
             );
@@ -314,7 +291,7 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     }
 
     public function getJobLocationsArray(string $jobLocationsUidList): array {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
         $queryBuilder
             ->select('*')
             ->from('tt_address')
@@ -326,7 +303,7 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
     }
 
     public function getContactPointAddress(int $addressUid): array {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhsimplejobposts_domain_model_jobpost');
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLENAME);
         $queryBuilder
             ->select('*')
             ->from('tt_address')

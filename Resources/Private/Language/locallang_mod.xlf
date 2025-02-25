@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_simple_job_posts/Resources/Private/Language/locallang" date="2021-02-11T16:03:22Z" product-name="hh_simple_job_posts">
+        <header/>
+        <body>
+            <trans-unit id="contentelement.wizard.title" resname="contentelement.wizard.title">
+                <source>Jobs</source>
+            </trans-unit>
+
+            <trans-unit id="contentelement.jobslist.title" resname="contentelement.jobslist.title">
+                <source>Jobs listing</source>
+            </trans-unit>
+
+            <trans-unit id="contentelement.jobsdetail.title" resname="contentelement.jobsdetail.title">
+                <source>Jobs detail</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

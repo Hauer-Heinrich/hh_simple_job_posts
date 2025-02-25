@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,17 +16,14 @@
 
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Model;
 
-use \TYPO3\CMS\Extbase\Annotation as Extbase;
 use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
 class Category extends AbstractEntity {
+
     protected string $title = '';
-
     protected string $description = '';
-
     protected $parent;
-
     protected array $records;
 
     public function getTitle(): string {
