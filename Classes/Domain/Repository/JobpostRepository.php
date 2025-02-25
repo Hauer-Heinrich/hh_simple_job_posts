@@ -89,7 +89,7 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
                 $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pid, \PDO::PARAM_INT))
             );
 
-        return $queryBuilder->execute()->fetchAll();
+        return $queryBuilder->executeQuery()->fetchAllAssociative();
     }
 
     public function findAllByPids(array $pids): QueryResult {
@@ -305,7 +305,12 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($jobUid, \PDO::PARAM_INT))
             );
 
-        return $queryBuilder->executeQuery()->fetchAssociative();
+        $result = $queryBuilder->executeQuery()->fetchAssociative();
+        if(is_array($result)) {
+            return $result;
+        }
+
+        return [];
     }
 
     public function getJobLocationsArray(string $jobLocationsUidList): array {
@@ -329,6 +334,11 @@ final class JobpostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository 
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($addressUid, \PDO::PARAM_INT))
             );
 
-        return $queryBuilder->executeQuery()->fetchAssociative();
+        $result = $queryBuilder->executeQuery()->fetchAssociative();
+        if(is_array($result)) {
+            return $result;
+        }
+
+        return [];
     }
 }
