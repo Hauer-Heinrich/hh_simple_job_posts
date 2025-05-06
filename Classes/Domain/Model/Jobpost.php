@@ -24,8 +24,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected int $apiUid;
     protected ?\DateTime $crdate;
     protected ?\DateTime $tstamp;
-    protected ?\DateTime $starttime;
-    protected ?\DateTime $endtime;
+
+    /** @var ?\DateTime */
+    protected $starttime;
+
+    /** @var ?\DateTime */
+    protected $endtime;
+
     protected string $slug = '';
 
     #[Validate(['validator' => \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator::class])]
