@@ -60,5 +60,3 @@ jobDetailJsonView {
         controller = Jobpost
     }
 }
-
-@import 'EXT:hh_simple_job_posts/Configuration/TypoScript/Templates/*.typoscript'
