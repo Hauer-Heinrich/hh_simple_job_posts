@@ -33,4 +33,14 @@ call_user_func(function() {
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['hhsimplejobposts_jobsfromapi'] ??= [];
+
+    // HOOKs
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\HauerHeinrich\HhSimpleJobPosts\FormDataProvider\ModifyTcaProvider::class] = [
+        'depends' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class
+        ],
+        'before' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems::class
+        ]
+    ];
 });

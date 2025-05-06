@@ -17,4 +17,10 @@ call_user_func(function(string $extensionKey) {
         'Configuration/TsConfig/jobpost-only.tsconfig',
         'Additional / extra config for: jobposts'
     );
+
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/TsConfig/jobpost-googlejobs.tsconfig',
+        'Additional / extra config for: jobposts google jobs'
+    );
 }, 'hh_simple_job_posts');

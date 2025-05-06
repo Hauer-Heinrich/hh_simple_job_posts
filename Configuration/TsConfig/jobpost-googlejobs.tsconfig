@@ -1,0 +1,5 @@
+tx_hhsimplejobposts_domain_model_jobpost {
+    settings {
+        setGoogleJobsRequiredFields = 1
+    }
+}

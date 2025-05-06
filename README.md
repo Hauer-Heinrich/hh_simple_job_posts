@@ -1,6 +1,7 @@
 # hh_simple_job_posts
 hh_simple_job_posts is a TYPO3 extension.
-Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google jobs) and (if you have EXT:hh_seo loaded) meta-tags.
+Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google jobs) and if you have EXT:hh_seo loaded meta-tags.
+Uses EXT:hh_tt_address_places.
 
 ### optional
 
@@ -9,11 +10,24 @@ Lists and shows job posts / job offers incl. schema.org stuff (e. g. for google 
 ### Installation
 ... like any other TYPO3 extension
 
-- create a folder at the TYPO3 backend tree in which addresses of hiring-organisations are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidOrganizations])
-- create a folder at the TYPO3 backend tree in which addresses of contact-point-addresses are stored. Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidContactPointAddresses])
-- both folders can be the same
-- for addresses at this 2 folder it is required that the field 'tx_extbase_type' is set to 'place'!
-- create a folder at the TYPO3 backend tree in which jobs are stored.
+- create a folder at the TYPO3 backend tree in which addresses of hiring-organisations are stored.\
+  Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidOrganizations])\
+  Optional: add PageTs from EXT:"hh_tt_address_places - Allow only Places".
+  ##### ATTENTION:
+    - Make sure that the field "company" is not disabled!
+    - It is required that the field 'tx_extbase_type' is set to 'place'! This is done automatically if you have added the PageTs to this folder:
+    "hh_tt_address_places - Allow only Places".
+
+- create a folder at the TYPO3 backend tree in which addresses of contact-point-addresses are stored.\
+  Then set the UID of this folder at the TYPO3 constants editor ([plugin.tx_hhsimplejobposts.persistence.storagePidContactPointAddresses])\
+  Optional: add PageTs from EXT:"hh_tt_address_places - Allow only people".
+
+- create a folder at the TYPO3 backend tree in which jobs are stored.\
+  Optional: add PageTs from EXT:hh_simple_job_posts "Additional / extra config for: jobposts".
+  Optional: e. g. if you want see your jobs at Google-Jobs then you must meet the requirements of Google\
+    - Sets requierd fields for Google add PageTs from EXT:hh_dimple_job_posts "Additional / extra config for: jobposts google jobs"
+
+- Optional: for nice URLs you can use the example at EXT:hh_simple_job_posts/sites/config.yaml
 
 ### Job-list and Job-detail on the same page
 ### Disable all other content on this site/page if detail view of job-posts is given
