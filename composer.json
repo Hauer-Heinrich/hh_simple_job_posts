@@ -21,7 +21,7 @@
             "url": "https://www.paypal.com/paypalme/hauerheinrich"
         }
     ],
-    "version": "5.0.2",
+    "version": "5.1.0",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS", "jobs", "Extension"],
     "replace": {
