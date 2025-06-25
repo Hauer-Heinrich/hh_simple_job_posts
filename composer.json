@@ -35,7 +35,7 @@
         "typo3/cms-frontend": "13.4.0-13.4.99",
         "typo3/cms-fluid-styled-content": "13.4.0-13.4.99",
         "friendsoftypo3/tt-address": "^9.0.0",
-        "hauerheinrich/hh-tt-address-places": "^4.1.0"
+        "hauerheinrich/hh-tt-address-places": "^4.2.1"
     },
     "autoload": {
         "psr-4": {

@@ -23,7 +23,7 @@ $EM_CONF['hh_simple_job_posts'] = [
             'typo3' => '13.4.0-13.4.99',
             'fluid_styled_content' => '13.4.0-13.4.99',
             'tt_address' => '^9.0.0',
-            'hh_tt_address_places' => '^4.1.0'
+            'hh_tt_address_places' => '^4.2.1'
         ],
         'conflicts' => [],
         'suggests' => [
