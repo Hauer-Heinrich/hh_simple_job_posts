@@ -143,6 +143,9 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
                 }
             }
         }
+
+        // Delete duplicate items
+        $this->arrayUniqueByUid($this->items);
     }
 
     /**
@@ -215,5 +218,25 @@ class RecordsXmlSitemapDataProvider extends \TYPO3\CMS\Seo\XmlSitemap\AbstractXm
         $context = GeneralUtility::makeInstance(Context::class);
 
         return (int)$context->getPropertyFromAspect('language', 'id');
+    }
+
+    /**
+     * deletes duplicate items by uid
+     *
+     * @param  array $items
+     * @return array
+     */
+    protected function arrayUniqueByUid(array &$items): void {
+        $seen = [];
+
+        foreach ($items as $key => $item) {
+            $uid = $item['data']['uid'] ?? null;
+
+            if (isset($seen[$uid])) {
+                unset($items[$key]);
+            } else {
+                $seen[$uid] = true;
+            }
+        }
     }
 }
