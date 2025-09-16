@@ -129,6 +129,13 @@
                 <source>Contact Addresses (persons)</source>
             </trans-unit>
 
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.additional_json_data">
+                <source>Additional JSON data</source>
+            </trans-unit>
+            <trans-unit id="tx_hhsimplejobposts_domain_model_jobpost.additional_json_data.description">
+                <source>e. g. used for additional data from external api like talentstorm.</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -613,5 +613,12 @@ return [
                 ]
             ]
         ],
+        'additional_json_data' => [
+            'label' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.additional_json_data',
+            'description' => 'LLL:EXT:hh_simple_job_posts/Resources/Private/Language/locallang_db.xlf:tx_hhsimplejobposts_domain_model_jobpost.additional_json_data.description',
+            'config' => [
+                'type' => 'json',
+            ],
+        ],
     ],
 ];
