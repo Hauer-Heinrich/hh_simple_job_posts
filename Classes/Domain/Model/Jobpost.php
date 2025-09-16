@@ -290,6 +290,13 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     protected $categories = null;
 
     /**
+     * additionalJsonData
+     *
+     * @var string
+     */
+    protected $additionalJsonData = '';
+
+    /**
      * Initialize categories and media relation
      */
     public function __construct() {
@@ -1269,5 +1276,30 @@ class Jobpost extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     public function getDescriptionForGoogle(): string {
         return $this->getDescription() . $this->getMaintasks() . $this->getEducationRequirements() . $this->getExperienceRequirements() . $this->getSkills() . $this->getWorkHours();
+    }
+
+    public function setAdditionalJsonData(string|array $data): void {
+        $this->additionalJsonData = \json_encode($data);
+    }
+
+    public function getAdditionalJsonData(): string {
+        return $this->additionalJsonData;
+    }
+
+    public function getAdditionalJsonDataArray(): array {
+        if(empty($this->additionalJsonData)) {
+            return [];
+        }
+
+        $json = \json_decode($this->additionalJsonData, true);
+        if(\is_string($json)) {
+            return \json_decode($json, true);
+        }
+
+        if(\is_array($json)) {
+            return $json;
+        }
+
+        return ['error' => 'Something went wrong with json_decode()!'];
     }
 }
