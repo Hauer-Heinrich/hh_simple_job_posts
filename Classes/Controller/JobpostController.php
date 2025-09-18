@@ -253,14 +253,14 @@ class JobpostController extends ActionController {
                             [ $this->settings['useExternalApi'], 'pid' => $assignedValues['jobsStorageApi'] ],
                             \intval($assignedValues['apiCacheDuration'])
                         );
+                    } else {
+                        $this->addFlashMessage(
+                            '$assignedValues["jobposts"] is not an array!',
+                            'ERROR',
+                            ContextualFeedbackSeverity::ERROR,
+                            false
+                        );
                     }
-
-                    $this->addFlashMessage(
-                        '$assignedValues["jobposts"] is not an array!',
-                        'ERROR',
-                        ContextualFeedbackSeverity::ERROR,
-                        false
-                    );
                 }
             }
 
