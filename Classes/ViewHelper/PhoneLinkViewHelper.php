@@ -34,7 +34,7 @@ class PhoneLinkViewHelper extends AbstractViewHelper {
      */
     protected $escapeOutput = false;
 
-    public function initializeArguments() {
+    public function initializeArguments(): void {
         $this->registerArgument('parameter', 'string', 'String from BE link wizard phone.', true);
     }
 
