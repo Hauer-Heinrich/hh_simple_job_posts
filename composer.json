@@ -45,7 +45,11 @@
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/Web",
-            "extension-key": "hh_simple_job_posts"
+            "extension-key": "hh_simple_job_posts",
+            "version": "5.2.1",
+            "Package": {
+                "providesPackages": {}
+            }
         }
     }
 }
