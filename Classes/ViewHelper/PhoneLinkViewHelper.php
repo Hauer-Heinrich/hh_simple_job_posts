@@ -39,6 +39,13 @@ class PhoneLinkViewHelper extends AbstractViewHelper {
     }
 
     /**
+     * @return string
+     */
+    public function render(): string {
+        return self::renderStatic($this->arguments, $this->buildRenderChildrenClosure(), $this->renderingContext);
+    }
+
+    /**
      *
      * @param array $arguments
      * @param \Closure $renderChildrenClosure

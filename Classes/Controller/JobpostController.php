@@ -104,7 +104,8 @@ class JobpostController extends ActionController {
                 if(empty($singleJobsUids)) {
                     if(empty($categoriesString)) {
                         // TODO Sorting
-                        $jobposts = $this->jobpostRepository->findByPid(intval($this->settings['jobsStorage']));
+                        $pid = intval($this->settings['jobsStorage']);
+                        $jobposts = $this->jobpostRepository->findBy(['pid' => $pid]);
 
                         $this->view->assignMultiple([
                             'jobposts' => $jobposts

@@ -2,6 +2,7 @@
     "name": "hauerheinrich/hh-simple-job-posts",
     "type": "typo3-cms-extension",
     "description": "Adds plugins for list / show job postings with meta-data and schema.org stuff. Uses tt_address for job-contacts and job-location.",
+    "version": "6.0.0",
     "authors": [
         {
             "name": "Christian Hackl",
@@ -28,13 +29,13 @@
         "typo3-ter/hh-simple-job-posts": "self.version"
     },
     "require": {
-        "typo3/cms-core": "13.4.0-13.4.99",
-        "typo3/cms-extbase": "13.4.0-13.4.99",
-        "typo3/cms-fluid": "13.4.0-13.4.99",
-        "typo3/cms-frontend": "13.4.0-13.4.99",
-        "typo3/cms-fluid-styled-content": "13.4.0-13.4.99",
-        "friendsoftypo3/tt-address": "^9.0.0",
-        "hauerheinrich/hh-tt-address-places": "^4.2.1"
+        "typo3/cms-core": "13.4.0-14.3.99",
+        "typo3/cms-extbase": "13.4.0-14.3.99",
+        "typo3/cms-fluid": "13.4.0-14.3.99",
+        "typo3/cms-frontend": "13.4.0-14.3.99",
+        "typo3/cms-fluid-styled-content": "13.4.0-14.3.99",
+        "friendsoftypo3/tt-address": "^10.0.0",
+        "hauerheinrich/hh-tt-address-places": "^5.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +47,7 @@
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/Web",
             "extension-key": "hh_simple_job_posts",
-            "version": "5.2.1",
+            "version": "6.0.0",
             "Package": {
                 "providesPackages": {}
             }
