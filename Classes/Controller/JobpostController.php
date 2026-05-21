@@ -67,7 +67,7 @@ class JobpostController extends ActionController {
      * @param \HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost
      * @return ResponseInterface
      */
-    public function switchAction(\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null): ResponseInterface {
+    public function switchAction(?\HauerHeinrich\HhSimpleJobPosts\Domain\Model\Jobpost $jobpost = null): ResponseInterface {
         $queryParams = $this->request->getQueryParams();
         if (empty($jobpost) && empty($queryParams['tx_hhsimplejobposts_jobslist']['jobpost'])) {
             return (new ForwardResponse('list'));
@@ -316,7 +316,7 @@ class JobpostController extends ActionController {
      * @param Jobpost
      * @return ResponseInterface
      */
-    public function showAction(Jobpost $jobpost = null): ResponseInterface {
+    public function showAction(?Jobpost $jobpost = null): ResponseInterface {
         $queryParams = $this->request->getQueryParams();
         if(empty($jobpost) && isset($queryParams['tx_hhsimplejobposts_jobslist']['jobpost']) && \is_numeric($queryParams['tx_hhsimplejobposts_jobslist']['jobpost'])) {
             $jobpost = $this->jobpostRepository->findByUid(intval($queryParams['tx_hhsimplejobposts_jobslist']['jobpost']));
