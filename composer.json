@@ -1,11 +1,13 @@
 {
-    "name": "hauerheinrich/hh-simple-job-posts",
     "type": "typo3-cms-extension",
+    "name": "hauerheinrich/hh-simple-job-posts",
     "description": "Adds plugins for list / show job postings with meta-data and schema.org stuff. Uses tt_address for job-contacts and job-location.",
+    "keywords": ["TYPO3 CMS", "jobs", "Extension"],
+    "homepage": "https://www.hauer-heinrich.de",
+    "license": ["GPL-2.0-or-later"],
     "authors": [
         {
             "name": "Christian Hackl",
-            "email": "chackl@hauer-heinrich.de",
             "homepage": "http://www.hauer-heinrich.de",
             "role": "Developer"
         }
@@ -21,12 +23,6 @@
             "url": "https://www.paypal.com/paypalme/hauerheinrich"
         }
     ],
-    "license": ["GPL-2.0-or-later"],
-    "keywords": ["TYPO3 CMS", "jobs", "Extension"],
-    "replace": {
-        "hauer-heinrich/hh_simple_job_posts": "self.version",
-        "typo3-ter/hh-simple-job-posts": "self.version"
-    },
     "require": {
         "typo3/cms-core": "^13.4.0 || ^14.3.0",
         "typo3/cms-extbase": "^13.4.0 || ^14.3.0",
@@ -46,10 +42,28 @@
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/Web",
             "extension-key": "hh_simple_job_posts",
-            "version": "6.0.1",
+            "version": "6.1.0",
             "Package": {
                 "providesPackages": {}
             }
         }
+    },
+    "archive": {
+        "exclude": [
+            "/.git/",
+            "/.github/",
+            "/.idea/",
+            "/.editorconfig",
+            "/.gitattributes",
+            "/.gitignore",
+            "/.bundle.config.json",
+            "/.bundle.config.json.example",
+            "/.bundle.mjs",
+            "/package.json",
+            "/package-lock.json",
+            "/*.code-workspace",
+            "**/node_modules/",
+            "**/*.zip"
+        ]
     }
 }
