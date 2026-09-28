@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Repository;
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**

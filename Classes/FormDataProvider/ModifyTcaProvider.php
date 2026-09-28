@@ -36,8 +36,7 @@ class ModifyTcaProvider implements FormDataProviderInterface {
         return $result;
     }
 
-    protected function getPagesTSconfig(int $pageId): array
-    {
+    protected function getPagesTSconfig(int $pageId): array {
         return GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Utility\BackendUtility::class)
             ->getPagesTSconfig($pageId);
     }

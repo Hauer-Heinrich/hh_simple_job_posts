@@ -12,7 +12,6 @@ namespace HauerHeinrich\HhSimpleJobPosts\Utility;
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
 final class CacheUtility {

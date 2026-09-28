@@ -12,7 +12,6 @@ namespace HauerHeinrich\HhSimpleJobPosts\UserFunc;
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManager;

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Domain\Repository;
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-
 use \FriendsOfTYPO3\TtAddress\Domain\Repository\AddressRepository;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Database\ConnectionPool;

@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\XmlSitemap;
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \Psr\Http\Message\ServerRequestInterface;
 use \TYPO3\CMS\Core\Context\Context;
 use \TYPO3\CMS\Core\Database\Connection;

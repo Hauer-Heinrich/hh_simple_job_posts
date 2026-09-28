@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhSimpleJobPosts\Event;
 
-use \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController;
 use \TYPO3\CMS\Extbase\Mvc\Request;
+use \HauerHeinrich\HhSimpleJobPosts\Controller\JobpostController;
 
 /**
  * This file is part of the "hh_simple_job_posts" Extension for TYPO3 CMS.

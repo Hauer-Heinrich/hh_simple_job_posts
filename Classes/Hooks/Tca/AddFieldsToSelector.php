@@ -9,12 +9,8 @@ namespace HauerHeinrich\HhSimpleJobPosts\Hooks\Tca;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\Localization\LanguageService;
 
-/**
- * Class AddFieldsToSelector
- */
 class AddFieldsToSelector {
 
     /** @var LanguageService */

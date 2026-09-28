@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhSimpleJobPosts\Controller;
 
 use \Psr\Http\Message\ResponseInterface;
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use \TYPO3\CMS\Extbase\Http\ForwardResponse;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,9 +24,6 @@ use \HauerHeinrich\HhSimpleJobPosts\Domain\Repository\CategoryRepository;
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
 
-/**
- * JobpostController
- */
 class JobpostController extends ActionController {
 
     protected Logger $logger;
