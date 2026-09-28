@@ -14,10 +14,8 @@ namespace HauerHeinrich\HhSimpleJobPosts\ViewHelper;
  * The TYPO3 project - inspiring people to share!
  */
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Core\LinkHandling\TypoLinkCodecService;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -38,22 +36,9 @@ class PhoneLinkViewHelper extends AbstractViewHelper {
         $this->registerArgument('parameter', 'string', 'String from BE link wizard phone.', true);
     }
 
-    /**
-     * @return string
-     */
     public function render(): string {
-        return self::renderStatic($this->arguments, $this->buildRenderChildrenClosure(), $this->renderingContext);
-    }
+        $parameter = $this->arguments['parameter'] ?? '';
 
-    /**
-     *
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
-     */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string {
-        $parameter = $arguments['parameter'] ?? '';
         if($parameter !== '') {
             $typoLinkCodec = GeneralUtility::makeInstance(TypoLinkCodecService::class);
             $typoLinkConfiguration = $typoLinkCodec->decode($parameter);

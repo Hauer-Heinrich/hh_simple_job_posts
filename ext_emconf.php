@@ -17,13 +17,13 @@ $EM_CONF['hh_simple_job_posts'] = [
     'state' => 'stable',
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '6.1.0',
+    'version' => '6.2.0',
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-14.3.99',
             'fluid_styled_content' => '13.4.0-14.3.99',
-            'tt_address' => '^9.0.0',
-            'hh_tt_address_places' => '^4.2.1'
+            'tt_address' => '^10.0.1',
+            'hh_tt_address_places' => '^5.3.0'
         ],
         'conflicts' => [],
         'suggests' => [
