@@ -149,3 +149,6 @@ class YourListener {
 
 ### Todos
 - improve readme
+
+#### Preview images:
+![example picture from backend](.github/images/jobpost-1.jpg?raw=true "jobpost")
